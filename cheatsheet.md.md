@@ -1180,7 +1180,8 @@ Preserves Original History:
 
 The original commits from both branches remain unchanged. This approach keeps a clear record of when changes were made on each branch.
 
-Rebase:
+###### Rebase:
+
 Linearizes History:
 
 Rebase is used to linearize the commit history. It moves or combines a sequence of commits to a new base commit.
@@ -1190,7 +1191,8 @@ No Merge Commits:
 Unlike merge, rebase doesn't create additional merge commits.
 It can result in a cleaner, more linear history.
 When to Choose Each Approach:
-Merge:
+
+###### Merge:
 
 Use merge when you want to preserve the original commit history, especially when collaborating with others.
 Good for feature branches and when you want to maintain a clear record of branch integration points.
@@ -1201,9 +1203,93 @@ Useful for feature branches before merging into a shared branch to avoid unneces
 Switch vs. Checkout:
 git switch is a more modern and user-friendly command introduced in recent versions of Git. It is designed specifically for branch switching. If you're using a version of Git that supports git switch, you can replace git checkout with git switch:
 
-Switching Branch:
+###### Switching Branch:
+
 git switch template-tutorial
 Both commands essentially do the same thing in this context, but git switch provides a clearer and more explicit syntax for branch-related operations. If your Git version supports it, feel free to use git switch instead of git checkout.
+
+# YAML PROTOCOL
+
+YAML (YAML Ain't Markup Language) is a human-readable data serialization format that is often used for configuration files and data exchange between languages with different data structures. In a YAML file, indentation is crucial, as it determines the structure of the data. Here are some details on writing YAML files:
+
+### 1. **Indentation:**
+
+- YAML uses indentation to represent the structure of the data. Spaces are recommended for indentation (not tabs), and the number of spaces is significant. Typically, two spaces or four spaces are used for each level of indentation.
+
+```yaml
+codekey1:
+  key2: value
+  key3:
+    - item1
+    - item2
+```
+
+### 2. **Key-Value Pairs:**
+
+- YAML uses a simple key-value format. Keys and values are separated by a colon, and the key-value pair is represented on a new line.
+
+```yaml
+codename: John Doe
+age: 30
+```
+
+### 3. **Lists:**
+
+- Lists are represented using a hyphen followed by a space (`- `). Lists can contain any combination of values, and each item is indented under the list key.
+
+```yaml
+codefruits:
+  - apple
+  - banana
+  - orange
+```
+
+### 4. **Dictionaries (Mappings):**
+
+- Dictionaries or mappings are represented using key-value pairs, and the key-value pairs are indented under the dictionary key.
+
+```yaml
+  name: John Doe
+  age: 30
+```
+
+### 5. **Strings:**
+
+- Strings can be written without quotes. However, quotes are used when a string contains special characters or reserved words.
+
+```yaml
+message: Hello, World!
+```
+
+### 6. **Multiline Strings:**
+
+- Multiline strings can be represented using the `|` or `>` characters. The `|` preserves newlines, while `>` folds newlines.
+
+```yaml
+codemultiline: |
+  This is a multiline
+  string in YAML.
+```
+
+### 7. **Comments:**
+
+- Comments start with the `#` character and continue to the end of the line.
+
+```yaml
+code# This is a comment
+key: value
+```
+
+### 8. **Anchors and Aliases:**
+
+- YAML supports anchors (`&`) and aliases (`*`) for creating references to the same data in multiple places.
+
+```yaml
+codefirst: &anchor_name John Doe
+second: *anchor_name
+```
+
+These are some basic conventions for writing YAML files. Ensure that you are consistent with indentation, use proper syntax for key-value pairs, lists, and dictionaries, and pay attention to the structure of your YAML documents. Many programming languages and tools use YAML, and understanding its syntax is beneficial for working with various configurations and data files.
 
 
 # WAGTAIL
