@@ -2122,30 +2122,145 @@ Steps:
 
 To create a Django API app and expose the data to your Wagtail project, you can follow these steps:
 
-### Step 1: Create Django API App (create a Django app from 0)
+### Step 1: Create Django API App ([create a Django app from 0)](#create-a-django-app-from-0)
 
 1. Open your terminal and navigate to the root directory of your Django project.
 
 2. Run the following command to create a new Django app for your API:
 
-   ```
-   bashCopy code
-   python manage.py startapp api
+   ```python
+   python manage.py startapp django_api_for_wagtail
    ```
 
-3. Inside the `api` app directory, create a `serializers.py` file.
+3. Install the Django REST framework to use it in your Django API app. Django REST framework is a powerful and flexible toolkit for building Web APIs in Django.
 
-4. In `serializers.py`, define a serializer for the data you want to expose. Here's an example:
+   You can install it using `pip`. Open your terminal and navigate to your project's root directory. Then, run the following command:
 
+   ```python
+   pip3 install djangorestframework
    ```
-   pythonCopy codefrom rest_framework import serializers
-   from blog.models import BlogPage
+
+4. After installing, you'll need to add `'rest_framework'` to the `INSTALLED_APPS` in your project's `settings.py`:
+
+   ```python
+   # myproject/settings.py
+   INSTALLED_APPS = [
+       # ...
+       'rest_framework',
+       # ...
+   ]
+   ```
+
+   Now that you have a separate app named `django_api_for_wagtail` for the purpose, let's create a data input example. Assuming you've created your `Nation` model within this app, here are the corrected steps:
+
+   ### Django API (Django Side):
+
+   #### models.py in `django_api_for_wagtail` app:
+
+   ```python
+   # django_api_for_wagtail/models.py
+   from django.db import models
    
-   class BlogPageSerializer(serializers.ModelSerializer):
+   class Nation(models.Model):
+       name = models.CharField(max_length=255, unique=True)
+       capital = models.CharField(max_length=255)
+   
+       def __str__(self):
+           return self.name
+   ```
+
+   #### serializers.py in `django_api_for_wagtail` app:
+
+   ```python
+   # django_api_for_wagtail/serializers.py
+   from rest_framework import serializers
+   from .models import Nation
+   
+   class NationSerializer(serializers.ModelSerializer):
        class Meta:
-           model = BlogPage
+           model = Nation
            fields = '__all__'
    ```
+
+   #### views.py in `django_api_for_wagtail` app:
+
+   ```python
+   #django_api_for_wagtail/views.py
+   from rest_framework import generics
+   from .models import Nation
+   from .serializers import NationSerializer
+   
+   class NationAPIView(generics.ListCreateAPIView):
+       queryset = Nation.objects.all()
+       serializer_class = NationSerializer
+   ```
+
+   #### urls.py in `django_api_for_wagtail` app:
+
+   ```python
+   # django_api_for_wagtail/urls.py
+   from django.urls import path
+   from .views import NationAPIView
+   
+   urlpatterns = [
+       path('nations/', NationAPIView.as_view(), name='nation-api'),
+       # Add more URL patterns as needed
+   ]
+   
+   
+   ```
+
+   #### admin.py in django_api_for_wagtail app:
+
+   Here's an example of how you should register the `Nation` model in the admin.py file:
+
+   ```python
+   # django_api_for_wagtail/admin.py
+   from django.contrib import admin
+   from .models import Nation
+   
+   @admin.register(Nation)
+   class NationAdmin(admin.ModelAdmin):
+       list_display = ('name', 'capital')
+   ```
+
+   #### urls.py in progetto_api project:
+   
+   To make Django recognize the URLs of your `django_api_for_wagtail` app, you need to include the URLs of your app in the `urls.py` file at the project level. You can do this using Django’s `include()` function, which allows you to reference other URL configurations.
+   
+   Here’s how you might update your `urls.py` file at the project level:Python
+   
+   
+   
+   ```python
+   from django.contrib import admin
+   from django.urls import include, path
+   
+   urlpatterns = [
+       path("admin/", admin.site.urls),
+       path("django_api_for_wagtail/", include('django_api_for_wagtail.urls')),
+   ]
+   ```
+
+### Test if the steps are correct
+
+```python
+python3 manage.py makemigrations
+```
+
+```python
+python3 manage.py migrate
+```
+
+If all is ok you can try:
+
+http://127.0.0.1:8000/django_api_for_wagtail/nations/ (frontend side - with json results)
+
+ http://127.0.0.1:8000/admin/django_api_for_wagtail/nation/ (backend side - with admin panel)
+
+In this way, I can verify the correct data entry on the backend side and the correct management in JSON on the frontend side. 
+
+
 
 ### Step 2: Create Views for API
 
@@ -2676,7 +2791,7 @@ urlpatterns = [
 
 # DJANGO
 
-## Create a Django App from 0
+## Create a Django App from 0 (from [Create Django API App](#create-django-api-app) )
 
 ### Step 1: Create a Virtual Environment (Optional but recommended)
 
@@ -2723,9 +2838,18 @@ python3 manage.py startapp django_api_for_wagtail
 
 ### Step 6: Configure Database
 
-Open the `myproject/settings.py` file and configure the database settings. By default, Django uses SQLite for development (if not already configured):
+Open the `myproject/settings.py` file and configure the app and the database settings. By default, Django uses SQLite for development (if not already configured):
 
 ```python
+# myproject/settings.py
+INSTALLED_APPS = [
+    # ...
+    'django_api_for_wagtail',
+    # ...
+]
+
+# .... #
+
 
 DATABASES = {
     'default': {
