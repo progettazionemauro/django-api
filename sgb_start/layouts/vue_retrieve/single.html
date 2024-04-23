@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <title>Vue.js Dynamic Data</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Random Users</h1>
+    <ul>
+      <li v-for="user in users" :key="user.login.uuid">
+        <img :src="user.picture.thumbnail" alt="User Thumbnail">
+        <span>[[user.name.first]] [[user.name.last]] [[user.gender]] [[user.name.title]]</span> <br>
+        <br> <span>[[user.email]]</span> <br>
+        <br><span>[[user.location.country]] [[user.location.state]]</span> 
+        <br>
+        <a :href="user.picture.medium" target="_blank">[[user.picture.medium]]  </a>
+        <br>
+
+      </li>
+    </ul>
+  </div>
+
+  <!-- Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Your Vue.js script -->
+  <script>
+    new Vue({
+    delimiters: ['[[', ']]'],
+      el: '#app',
+      data: {
+        users: [],
+        previousData: null
+      },
+      mounted() {
+        this.fetchUsers();
+        setInterval(this.checkForDataChanges, 5000); // Check every 10 seconds
+      },
+      methods: {
+        async fetchUsers() {
+          try {
+            const response = await axios.get('https://randomuser.me/api/?results=5');
+            this.users = response.data.results;
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        },
+        async checkForDataChanges() {
+          try {
+            const response = await axios.get('https://randomuser.me/api/?results=5');
+            const newData = response.data.results;
+
+            // Compare new data with previous data
+            if (JSON.stringify(newData) !== JSON.stringify(this.previousData)) {
+              // Data has changed, update UI
+              this.users = newData;
+              this.previousData = newData;
+            }
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

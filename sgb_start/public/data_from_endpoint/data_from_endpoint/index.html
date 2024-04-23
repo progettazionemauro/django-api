@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table from JSON</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+         
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    
+    
+    
+    
+    
+    <div class="container">
+        
+        <div class="row mb-3">
+            <div class="col">
+                <select id="searchName" class="form-select">
+                    <option value="">All Names</option>
+                </select>
+                <input type="text" id="inputName" class="form-control" placeholder="Search Name...">
+            </div>
+            <div class="col">
+                <select id="searchCapital" class="form-select">
+                    <option value="">All Capitals</option>
+                </select>
+                <input type="text" id="inputCapital" class="form-control" placeholder="Search Capital...">
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="myTable" class="table table-hover custom-table"> 
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Capital</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var table = document.getElementById('myTable');
+            var searchName = document.getElementById('searchName');
+            var inputName = document.getElementById('inputName');
+            var searchCapital = document.getElementById('searchCapital');
+            var inputCapital = document.getElementById('inputCapital');
+            
+            
+            var names = [];
+            var capitals = [];
+            var json = {};
+            
+            
+            if (!Array.isArray(json)) {
+                json = Object.values(json);
+            }
+            
+            json.forEach(function(item) {
+                names.push(item.name);
+                capitals.push(item.capital);
+            });
+            
+            names = [...new Set(names)]; 
+            capitals = [...new Set(capitals)]; 
+            
+            names.forEach(function(name) {
+                var option = document.createElement('option');
+                option.text = name;
+                option.value = name;
+                searchName.add(option);
+            });
+            
+            capitals.forEach(function(capital) {
+                var option = document.createElement('option');
+                option.text = capital;
+                option.value = capital;
+                searchCapital.add(option);
+            });
+            
+            
+            inputName.addEventListener('input', function () {
+                searchTable(0, inputName.value.toLowerCase());
+            });
+            
+            inputCapital.addEventListener('input', function () {
+                searchTable(1, inputCapital.value.toLowerCase());
+            });
+            
+            
+            searchName.addEventListener('change', function () {
+                searchTable(0, searchName.value.toLowerCase());
+            });
+            
+            searchCapital.addEventListener('change', function () {
+                searchTable(1, searchCapital.value.toLowerCase());
+            });
+            
+            function searchTable(columnIndex, filter) {
+                var rows = table.getElementsByTagName('tr');
+                for (var i = 0; i < rows.length; i++) {
+                    var row = rows[i];
+                    var cells = row.getElementsByTagName('td');
+                    if (cells.length > columnIndex) {
+                        var cell = cells[columnIndex];
+                        if (filter === "" || cell.innerText.toLowerCase().indexOf(filter) > -1) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
