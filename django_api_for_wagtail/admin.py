@@ -5,3 +5,4 @@ from .models import Nation
 @admin.register(Nation)
 class NationAdmin(admin.ModelAdmin):
     list_display = ('name', 'capital')
+    

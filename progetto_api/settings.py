@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     'django_api_for_wagtail',
+    'corsheaders',
 ]
+
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -49,6 +52,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:1313',
+    'http://127.0.0.1:8000',
 ]
 
 ROOT_URLCONF = "progetto_api.urls"
@@ -113,11 +122,19 @@ USE_I18N = True
 
 USE_TZ = True
 
+# If your Django server is running on a different port from your Hugo server and the port for your Hugo server changes randomly, you can still configure Django to allow cross-origin requests from any port. This approach might be less restrictive but should be used cautiously in production environments
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

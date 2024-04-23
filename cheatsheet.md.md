@@ -2268,8 +2268,8 @@ In this way, I can verify the correct data entry on the backend side and the cor
 
 2. Define a view for your API in `views.py`. For example:
 
-   ```
-   pythonCopy codefrom rest_framework import generics
+   ```python
+   from rest_framework import generics
    from blog.models import BlogPage
    from .serializers import BlogPageSerializer
    
@@ -2284,8 +2284,8 @@ In this way, I can verify the correct data entry on the backend side and the cor
 
 2. Define the URL patterns for your API in `urls.py`. For example:
 
-   ```
-   pythonCopy codefrom django.urls import path
+   ```python
+   from django.urls import path
    from .views import BlogPageAPIView
    
    urlpatterns = [
@@ -2300,8 +2300,8 @@ In this way, I can verify the correct data entry on the backend side and the cor
 
 2. Include the URLs of your API app in the project's URL configuration. Update the `urlpatterns`:
 
-   ```
-   pythonCopy codefrom django.contrib import admin
+   ```python
+   from django.contrib import admin
    from django.urls import path, include
    
    urlpatterns = [
@@ -2457,10 +2457,6 @@ To create a simple frontend to visualize the results from your Django API, you c
 
       Using `*args` and `**kwargs` allows a function or method to be more flexible and accommodate a varying number of arguments without explicitly specifying them in the function signature. This is particularly useful in cases where the number of arguments might change or when writing functions that need to work with a wide range of inputs.
 
-   4. 
-
-      1. 
-
    5. **`self.get_queryset()`**: This method is inherited from the `ListCreateAPIView` class of Django REST Framework. It retrieves the queryset of nations. The `get_queryset` method is responsible for returning the list of objects that will be used in the view.
 
    6. **`nations`**: This variable stores the queryset of nations obtained from `self.get_queryset()`.
@@ -2468,11 +2464,11 @@ To create a simple frontend to visualize the results from your Django API, you c
    7. **`render(request, 'nations_list.html', {'nations': nations})`**: The `render` function is a shortcut provided by Django for rendering an HTML template. It takes the following arguments:
 
       - `request`: The HTTP request object.
-      - `'nations_list.html'`: The name of the HTML template file to be rendered.
+   - `'nations_list.html'`: The name of the HTML template file to be rendered.
       - `{'nations': nations}`: A dictionary containing data to be passed to the template. In this case, it includes the list of nations obtained from the queryset.
 
    8. **`return render(...)`**: This line returns the rendered HTML content as an HTTP response. The rendered content will be the result of applying the data from the `nations` queryset to the 'nations_list.html' template.
-
+   
    In summary, the `list` method is responsible for retrieving a queryset of nations and rendering an HTML template ('nations_list.html') with the nations' data. The rendered HTML content is then returned as an HTTP response. This is a common pattern for providing a list view in a Django REST Framework API.
 
 4. #### Update your `urls.py` to include a URL pattern for rendering the nations list:
