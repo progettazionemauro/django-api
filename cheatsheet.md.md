@@ -11,19 +11,123 @@ I have my README.md inside my project. Here are a method to work with your READM
 
 - trovare la oporta occupata:
   - `lsof -i :8000`
+  
 - chiudere la porta occupata forzatamente:
   - `kill -9 32394(esempio)`
+  
 - vedere i comandi che iniziano per una determinata strina effettuati in precedenza:
   -  `history | grep "kill (esempio)"`
 
 - trovare la porta occupata:
   - `lsof -i :8000`
+  
 - chiudere la porta occupata forzatamente:
   - `kill -9 32394(esempio)`
+  
 - vedere i comandi che iniziano per una determinata strina effettuati in precedenza:
   -  `history | grep "kill (esempio)"`
+  
+- Azione Bash - Quello che segue è uno script molto importante che permette nell'ordine di 1) verificare se la porta 8000 (che viene utilizzata normalmente in fase di sviluppo) è occupata ed eventualmente chiuderla; 2) aprire Django 3) aprire hugo. Al momento sono presenti due file separati per una migliore comprensione:
+```bash
+- check_ports.sh
+
+  \#!/bin/bash
+
+  \# Check if any process is listening on port 8000
+
+  if lsof -i :8000 >/dev/null 2>&1; then
+
+  ​    echo "Port 8000 is in use."
+
+  ​    \# Get the PID of the process using port 8000
+
+  ​    pid=$(lsof -ti :8000)
+
+  ​    \# Kill the process
+
+  ​    echo "Killing process with PID $pid"
+
+  ​    kill -9 "$pid"
+
+  ​    echo "Process killed."
+
+  else
+
+  ​    echo "Port 8000 is not in use."
+
+  fi
+```
+
+
+
+
+
+
+- ```bash
+  run_project.sh
+  #!/bin/bash
+  
+  # Navigate to the Django project directory and run the server
+  # cd /progetto_api
+  python3 manage.py runserver &
+  
+  # Navigate to the Hugo project directory and run the server
+  cd ./sgb_start/
+  hugo server -D
+  
+
+Per cui lo script generare **APRIRE I DUE PROGRAMMI**  DJANGO E HUGO è il seguente (ADA PERFEZIONARE!!):
+
+```bash
+#!/bin/bash
+
+# Check if any process is listening on port 8000
+if lsof -i :8000 >/dev/null 2>&1; then
+    echo "Port 8000 is in use."
+
+    # Get the PID of the process using port 8000
+    pid=$(lsof -ti :8000)
+
+    # Kill the process
+    echo "Killing process with PID $pid"
+    kill -9 "$pid"
+
+    echo "Process killed."
+else
+    echo "Port 8000 is not in use."
+fi
+
+
+# Navigate to the Django project directory and run the server
+# cd /progetto_api
+python3 manage.py runserver &
+
+# Navigate to the Hugo project directory and run the server
+cd ./sgb_start/
+hugo server -D
+```
+
+Mentre il codice per chiudere i due programmi DJANGO e HUGO è il seguente (da perfezionare)!!!:
+
+```bash
+# Find Django PID and send SIGTERM signal
+django_pid=$(pidof python) && kill "$django_pid" && echo "Django process terminated"
+
+# Find Hugo PID and send SIGTERM signal
+hugo_pid=$(pidof hugo) && kill "$hugo_pid" && echo "Hugo process terminated"
+ps aux | grep "python manage.py runserver"; reset
+
+
+```
+
+
+
+
+
+
 
 # GIT & GITHUB
+
 Riferimenti [Mastering MarkDown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 ### Ricordarsi di aggiungere .gitgnore
 **- git add .gitignore**
