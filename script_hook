@@ -18,7 +18,7 @@ git add .
 git commit -m "Auto-commit before pulling latest version of cheatsheet.md"
 
 # Push the commit to the remote repository
-git push origin main
+git push origin main --force
 
 # Check if cheatsheet.md has been modified
 if ! file_modified "$CHEATSHEET_FILE"; then
