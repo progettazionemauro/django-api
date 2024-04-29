@@ -1,6 +1,8 @@
 [toc]
 
+
 # MARKUP HINTS
+Editato via stackedit
 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like 
 
 [Typora]: (https://typora.io/#feature)
@@ -3294,3 +3296,6 @@ You can now start building your Django app by creating models, views, and templa
 If you want to create a separate app for your API, follow the instructions provided in the previous response to create an `api` app and set up serializers, views, and URLs.
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3MzcwNjk3MzFdfQ==
+-->
