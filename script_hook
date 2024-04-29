@@ -8,8 +8,10 @@ file_modified() {
     git diff --quiet "$1" || return 1
 }
 
-# Reset the local branch to the state of the remote branch
+# Fetch the latest changes from the remote repository
 git fetch origin
+
+# Reset the local branch to the state of the remote branch
 git reset --hard origin/main
 
 # Add all changes to the staging area
