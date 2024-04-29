@@ -37,42 +37,7 @@
       <description></description>
     </item>
     <item>
-      <title>Prova_dopo_ind</title>
-      <link>http://localhost:1313/posts/prova_dopo_ind/</link>
-      <pubDate>Sun, 24 Mar 2024 09:05:50 +0100</pubDate>
-      <guid>http://localhost:1313/posts/prova_dopo_ind/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Mappa</title>
-      <link>http://localhost:1313/posts/mappa/</link>
-      <pubDate>Sat, 23 Mar 2024 19:48:33 +0100</pubDate>
-      <guid>http://localhost:1313/posts/mappa/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Il_mio_quauato_post</title>
-      <link>http://localhost:1313/posts/il_mio_quauato_post/</link>
-      <pubDate>Sat, 23 Mar 2024 07:09:37 +0100</pubDate>
-      <guid>http://localhost:1313/posts/il_mio_quauato_post/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Ilil_mio_quarto_post</title>
-      <link>http://localhost:1313/posts/dir/ilil_mio_quarto_post/</link>
-      <pubDate>Thu, 21 Mar 2024 19:33:01 +0100</pubDate>
-      <guid>http://localhost:1313/posts/dir/ilil_mio_quarto_post/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Il_mio_terzo_post</title>
-      <link>http://localhost:1313/posts/dir/il_mio_terzo_post/</link>
-      <pubDate>Thu, 21 Mar 2024 18:21:47 +0100</pubDate>
-      <guid>http://localhost:1313/posts/dir/il_mio_terzo_post/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Il_mio_primo_post</title>
+      <title>Installazione del Tema in Hugo</title>
       <link>http://localhost:1313/posts/il_mio_primo_post/</link>
       <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
       <guid>http://localhost:1313/posts/il_mio_primo_post/</guid>
@@ -86,11 +51,16 @@ git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod &amp;nd
 Finally set theme as PaperMod in your site config In config.</description>
     </item>
     <item>
-      <title>Il_mio_secondo_post</title>
-      <link>http://localhost:1313/posts/il_mio_secondo_post-/</link>
+      <title>Manuale di installazione</title>
+      <link>http://localhost:1313/posts/manuale_di_installazione/</link>
       <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
-      <guid>http://localhost:1313/posts/il_mio_secondo_post-/</guid>
-      <description>Cos’è Lorem Ipsum? Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.</description>
+      <guid>http://localhost:1313/posts/manuale_di_installazione/</guid>
+      <description>[toc]
+MARKUP HINTS I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
     </item>
     <item>
       <title>ABOUT</title>

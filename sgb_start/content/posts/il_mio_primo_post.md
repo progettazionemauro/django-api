@@ -1,5 +1,5 @@
 +++
-title = 'Il_mio_primo_post'
+title = 'Installazione del Tema in Hugo'
 date = 2024-03-18T10:30:18+01:00
 draft = true
 ShowToc= true
@@ -8,7 +8,7 @@ categories = ["adventure", "food", "technology", "sports", "fashion", "health", 
 [cover]
     image= "img/download.png"
     alt="Questa è un'immagine!"
-    caption="Questo è il titolo"
+    caption="Immagine"
 
 +++
 
