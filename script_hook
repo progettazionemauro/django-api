@@ -1,1 +1,24 @@
-progetto_api/.git/hooks/pre-push_stackbit
+#!/bin/bash
+
+# Path to the cheatsheet.md file
+CHEATSHEET_FILE="./cheatsheet.md.md"
+
+# Function to check if a file has been modified
+file_modified() {
+    git diff --quiet "$1" || return 1
+}
+
+# Add all changes to the staging area
+git add .
+
+# Commit all staged changes
+git commit -m "Auto-commit before pulling latest version of cheatsheet.md"
+
+# Push the commit to the remote repository
+git push origin main
+
+# Check if cheatsheet.md has been modified
+if ! file_modified "$CHEATSHEET_FILE"; then
+    # Pull the latest version of cheatsheet.md
+    git pull origin main --no-edit --no-rebase "$CHEATSHEET_FILE"
+fi
