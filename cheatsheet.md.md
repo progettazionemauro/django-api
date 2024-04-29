@@ -515,8 +515,29 @@ git command to see the last 3 commit with oneline :
 git log --oneline -n 3
 ```
 ## HOOKS
-### Hook per sincronizzare u
+### Hook per sincronizzare un file di testo da stckbit con l'intera directory proveniente dal local
+#!/bin/bash
 
+# Path to the cheatsheet.md file
+CHEATSHEET_FILE="./cheatsheet.md.md"
+
+# Function to check if a file has been modified
+file_modified() {
+    git diff --quiet "$1" || return 1
+}
+
+# Add all changes to the staging area
+git add .
+
+# Commit all staged changes
+git commit -m "Auto-commit before pulling latest version of cheatsheet.md"
+
+# Push the commit to the remote repository
+git push origin main
+
+# Check if cheatsheet.md has been modified
+
+    enter code here
 
 
 # WAGTAIL
@@ -3298,5 +3319,5 @@ If you want to create a separate app for your API, follow the instructions provi
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzI4MzUxNDgwLC0xNzM3MDY5NzMxXX0=
+eyJoaXN0b3J5IjpbMTYwNjQwOTE5MiwtMTczNzA2OTczMV19
 -->
