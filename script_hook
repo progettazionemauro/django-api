@@ -8,6 +8,9 @@ file_modified() {
     git diff --quiet "$1" || return 1
 }
 
+# Pull the latest changes from the remote repository
+git pull origin main
+
 # Add all changes to the staging area
 git add .
 
