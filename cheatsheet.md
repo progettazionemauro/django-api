@@ -515,7 +515,7 @@ git command to see the last 3 commit with oneline :
 git log --oneline -n 3
 ```
 ## HOOKS
-### Hook per sincronizzare un file di testo da stckbit con l'intera directory proveniente dal local
+### Hook per sincronizzare un file di testo da stckbit con l'intera directory proveniente dal local. Questo script è molto potente in quanto selettivamente recupera 
 
    ```bash
 #!/bin/bash
@@ -3360,7 +3360,7 @@ If you want to create a separate app for your API, follow the instructions provi
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUxMD
-U3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIs
-LTU5MTIwNTE4OV19
+eyJoaXN0b3J5IjpbLTE0MTM2MzI2MzgsMTY3NDU4OTA4LC0xMT
+MzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0
+LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
 -->
