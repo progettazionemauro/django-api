@@ -3360,7 +3360,7 @@ If you want to create a separate app for your API, follow the instructions provi
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MD
-I2MDk1NSw0MTUwMzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5
-XX0=
+eyJoaXN0b3J5IjpbMTkxNDEyMjY4NywtMTEzMzgzOTY4LDE1MT
+A1NzEwMDMsODgwMjYwOTU1LDQxNTAzMzEyNCwxMDg3NTg2MDIy
+LC01OTEyMDUxODldfQ==
 -->
