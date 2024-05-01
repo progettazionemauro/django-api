@@ -1,4 +1,5 @@
 #!/bin/bash
+# Mauro 1/5/24
 
 # Fetch latest changes (might not be necessary if done manually)
 git fetch origin

@@ -2,7 +2,7 @@
 
 
 # MARKUP HINTS
-By Mauro alle h.12:03
+By Mauro alle h.13:03
 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like 
 
 [Typora]: (https://typora.io/#feature)
