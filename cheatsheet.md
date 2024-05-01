@@ -2,7 +2,7 @@
 
 
 # MARKUP HINTS
-By Mauro alle h.13:11
+By Mauro alle h.13:16
 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like 
 
 [Typora]: (https://typora.io/#feature)
@@ -515,50 +515,30 @@ git command to see the last 3 commit with oneline :
 git log --oneline -n 3
 ```
 ## HOOKS
-### Hook per sincronizzare un file di testo da stckbit con l'intera directory proveniente dal local. Questo script è molto potente in quanto selettivamente recupera 
+### Hook per sincronizzare un file di testo da stckbit con l'intera directory proveniente dal local. Questo script è molto potente in quanto selettivamente recupera dal remote il file di interesse lo sovrascrive forzatamente nella locale e poi qualsiasi cambio in local sul file non viene considerato
 
    ```bash
+## Mauro 1/5/24 - h. 13:11
+
 #!/bin/bash
-
-  
-
-# Function to check if a file has been modified
-
-file_modified() {
-
-git  diff  --quiet  "$1"  ||  return  1
-
-}
 
   
 
 # Fetch latest changes from the remote repository
 
-git  fetch  origin
+git fetch origin
 
   
-
-# Check if there are changes in the remote cheatsheet.md
-
-if  !  file_modified  "cheatsheet.md"; then
 
 # Pull the latest version of cheatsheet.md from the remote and overwrite local changes
 
-git  pull  origin  main  --force
-
-fi
+git pull origin main --force
 
   
 
-# Prevent modifications to cheatsheet.md during commit
+# Remove any local changes to cheatsheet.md
 
-if [[ $(git diff --cached  --name-only  |  grep "cheatsheet.md") ]]; then
-
-echo  "Error: Modifying cheatsheet.md is not allowed during commit."
-
-exit  1
-
-fi
+git checkout -- cheatsheet.md
 
   
 
@@ -566,19 +546,19 @@ fi
 
 # Add all changes to the staging area
 
-git  add  .
+git add .
 
   
 
 # Commit all staged changes
 
-git  commit  -m  "Auto-commit before pushing changes"
+git commit -m "Auto-commit before pushing changes"
 
   
 
 # Push the commit to the remote repository
 
-git  push  origin  main
+git push origin main
 ```
 
 # WAGTAIL
@@ -3360,7 +3340,7 @@ If you want to create a separate app for your API, follow the instructions provi
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTM2MzI2MzgsMTY3NDU4OTA4LC0xMT
+eyJoaXN0b3J5IjpbLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMT
 MzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0
 LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
 -->
