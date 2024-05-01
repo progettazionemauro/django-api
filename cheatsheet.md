@@ -2,7 +2,7 @@
 
 
 # MARKUP HINTS
-By Mauro alle h.11:21
+By Mauro alle h.11:30
 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like 
 
 [Typora]: (https://typora.io/#feature)
@@ -522,12 +522,6 @@ git log --oneline -n 3
 
   
 
-# Path to the cheatsheet.md file
-
-CHEATSHEET_FILE="./cheatsheet.md.md"
-
-  
-
 # Function to check if a file has been modified
 
 file_modified() {
@@ -538,6 +532,38 @@ git  diff  --quiet  "$1"  ||  return  1
 
   
 
+# Fetch latest changes from the remote repository
+
+git  fetch  origin
+
+  
+
+# Check if there are changes in the remote cheatsheet.md
+
+if  !  file_modified  "cheatsheet.md"; then
+
+# Pull the latest version of cheatsheet.md from the remote and overwrite local changes
+
+git  pull  origin  main  --force
+
+fi
+
+  
+
+# Prevent modifications to cheatsheet.md during commit
+
+if [[ $(git diff --cached  --name-only  |  grep "cheatsheet.md") ]]; then
+
+echo  "Error: Modifying cheatsheet.md is not allowed during commit."
+
+exit  1
+
+fi
+
+  
+
+# Continue with the rest of the script
+
 # Add all changes to the staging area
 
 git  add  .
@@ -546,25 +572,13 @@ git  add  .
 
 # Commit all staged changes
 
-git  commit  -m  "Auto-commit before pulling latest version of cheatsheet.md"
+git  commit  -m  "Auto-commit before pushing changes"
 
   
 
 # Push the commit to the remote repository
 
 git  push  origin  main
-
-  
-
-# Check if cheatsheet.md has been modified
-
-if  !  file_modified  "$CHEATSHEET_FILE"; then
-
-# Pull the latest version of cheatsheet.md
-
-git  pull  origin  main  --no-edit  --no-rebase  "$CHEATSHEET_FILE"
-
-fi
 ```
 
 # WAGTAIL
@@ -3346,6 +3360,6 @@ If you want to create a separate app for your API, follow the instructions provi
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MT
-IwNTE4OV19
+eyJoaXN0b3J5IjpbODgwMjYwOTU1LDQxNTAzMzEyNCwxMDg3NT
+g2MDIyLC01OTEyMDUxODldfQ==
 -->
