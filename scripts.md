@@ -1,36 +1,21 @@
+## Mauro 1/5/24 - h. 13:11
 #!/bin/bash
-# Mauro 1/5/24
 
-# Fetch latest changes (might not be necessary if done manually)
+# Fetch latest changes from the remote repository
 git fetch origin
 
-# Checkout temporary branch (assuming it already exists)
-git checkout cheatsheet_edit &> /dev/null  # Suppress output
+# Pull the latest version of cheatsheet.md from the remote and overwrite local changes
+git pull origin main --force
 
-# Rebase temporary branch (assuming no conflicts)
-git rebase origin/main &> /dev/null  # Suppress output (errors might be missed)
+# Remove any local changes to cheatsheet.md
+git checkout -- cheatsheet.md
 
-# Add and commit changes to temporary branch (assuming Stackbit saved locally)
-git add cheatsheet.md &> /dev/null  # Suppress output
-git commit -m "Updated cheatsheet.md from Stackbit" &> /dev/null  # Suppress output
+# Continue with the rest of the script
+# Add all changes to the staging area
+git add .
 
-# Checkout main branch
-git checkout main &> /dev/null  # Suppress output
+# Commit all staged changes
+git commit -m "Auto-commit before pushing changes"
 
-# Pull latest version (might not be necessary if done manually)
-git pull origin main --no-edit --no-rebase cheatsheet.md.md &> /dev/null  # Suppress output
-
-# Stage all other local changes (excluding cheatsheet.md)
-git add .  # Excluding cheatsheet.md
-
-# If there are other local changes, prompt user for confirmation before pushing
-if [ $(git status --porcelain | wc -l) -gt 0 ]; then
-  echo "There are other local changes detected. Are you sure you want to push?"
-  select yn in "Yes" "No"; do
-    case $yn in
-      Yes ) git commit -m "Your commit message for other local changes" && git push origin main; break;;
-      No ) exit 0;;
-    esac
-  done
-fi
-
+# Push the commit to the remote repository
+git push origin main
