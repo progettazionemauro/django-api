@@ -17,7 +17,7 @@ git commit -m "Updated cheatsheet.md from Stackbit" &> /dev/null  # Suppress out
 git checkout main &> /dev/null  # Suppress output
 
 # Pull latest version (might not be necessary if done manually)
-git pull origin main --no-edit --no-rebase cheatsheet.md &> /dev/null  # Suppress output
+git pull origin main --no-edit --no-rebase cheatsheet.md.md &> /dev/null  # Suppress output
 
 # Stage all other local changes (excluding cheatsheet.md)
 git add .  # Excluding cheatsheet.md
