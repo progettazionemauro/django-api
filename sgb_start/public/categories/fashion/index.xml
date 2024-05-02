@@ -9,10 +9,24 @@
     <lastBuildDate>Mon, 18 Mar 2024 10:30:18 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/fashion/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Il_mio_primo_post</title>
+      <title>Installazione del Tema in Hugo</title>
       <link>http://localhost:1313/posts/il_mio_primo_post/</link>
       <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
       <guid>http://localhost:1313/posts/il_mio_primo_post/</guid>
+      <description>Installazione di un tema ed attivazione del sito
+Si fa riferimento al Papermod Theme
+In ubuntu istallare (This command will install the Go programming language using Snap with classic confinement)
+sudo snap install go --class
+Create a new Hugo site
+hugo new site MyFreshWebsite --format yaml # replace MyFreshWebsite with name of your website Clonare il tema come modulo Hugo:
+git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod &amp;ndash;depth=1
+Finally set theme as PaperMod in your site config In config.</description>
+    </item>
+    <item>
+      <title>Prova</title>
+      <link>http://localhost:1313/posts/il_mio_primo_post-copy/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/il_mio_primo_post-copy/</guid>
       <description>Installazione di un tema ed attivazione del sito
 Si fa riferimento al Papermod Theme
 In ubuntu istallare (This command will install the Go programming language using Snap with classic confinement)

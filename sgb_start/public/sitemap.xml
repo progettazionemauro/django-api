@@ -30,25 +30,7 @@
     <lastmod>2024-03-27T18:13:13+01:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-03-24T09:05:50+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/prova_dopo_ind/</loc>
-    <lastmod>2024-03-24T09:05:50+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/mappa/</loc>
-    <lastmod>2024-03-23T19:48:33+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/il_mio_quauato_post/</loc>
-    <lastmod>2024-03-23T07:09:37+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/dir/ilil_mio_quarto_post/</loc>
-    <lastmod>2024-03-21T19:33:01+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/dir/</loc>
-    <lastmod>2024-03-21T19:30:34+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/dir/il_mio_terzo_post/</loc>
-    <lastmod>2024-03-21T18:21:47+01:00</lastmod>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/adventure/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
@@ -89,16 +71,16 @@
     <loc>http://localhost:1313/categories/health/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/il_mio_primo_post/</loc>
-    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/il_mio_secondo_post-/</loc>
-    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/inspiration/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/il_mio_primo_post/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/categories/lifestyle/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/manuale_di_installazione/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/music/</loc>
@@ -108,6 +90,9 @@
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/photography/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/il_mio_primo_post-copy/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/science/</loc>
@@ -124,6 +109,8 @@
   </url><url>
     <loc>http://localhost:1313/tags/travel/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/il_mio_secondo_post/</loc>
   </url><url>
     <loc>http://localhost:1313/about_map/about/</loc>
   </url><url>
