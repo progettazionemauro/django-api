@@ -3467,7 +3467,7 @@ try:
 # This line retrieves the directory path of the current Python script (admin.py in this case) using __file__,
 
 # which is a special attribute in Python that represents the current file path.
-### admin.py
+### Django app: admin.py
     current_dir  =  os.path.dirname(__file__)
     
     script_path  =  os.path.abspath(os.path.join(current_dir, 'add_page.sh'))
@@ -3491,38 +3491,40 @@ try:
     
     actions  = [run_script]
 
-#### django (app) models.py
-from  django.db  import  models
+### Django app: models.py
 
-  
+    from  django.db  import  models
+    
+      
+    
+    class  Nation(models.Model):
+    
+    name  =  models.CharField(max_length=255, unique=True)
+    
+    capital  =  models.CharField(max_length=255)
+    
+      
+    
+    def  __str__(self):
+    
+    return  self.name
+    
+      
+    
+    class  CustomFeature(models.Model):
+    
+    name  =  models.CharField(max_length=255, unique=True)
+    
+    description  =  models.TextField()
+    
+      
+    
+    def  __str__(self):
+    
+    return  self.name
 
-class  Nation(models.Model):
-
-name  =  models.CharField(max_length=255, unique=True)
-
-capital  =  models.CharField(max_length=255)
-
-  
-
-def  __str__(self):
-
-return  self.name
-
-  
-
-class  CustomFeature(models.Model):
-
-name  =  models.CharField(max_length=255, unique=True)
-
-description  =  models.TextField()
-
-  
-
-def  __str__(self):
-
-return  self.name
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzM0OTY5ODAsLTE3ODI2OTQ0ODYsMT
+eyJoaXN0b3J5IjpbLTIwMzQwNDU1ODAsLTE3ODI2OTQ0ODYsMT
 Y3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5
 NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
 -->
