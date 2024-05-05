@@ -15,7 +15,9 @@ class CustomFeatureAdmin(admin.ModelAdmin):
 
     def run_script(self, request, queryset):
         try:
-            current_dir = os.path.dirname(__file__)
+            # This line retrieves the directory path of the current Python script (admin.py in this case) using __file__, 
+            # which is a special attribute in Python that represents the current file path.
+            current_dir = os.path.dirname(__file__) 
             script_path = os.path.abspath(os.path.join(current_dir, 'add_page.sh'))
             print("Absolute path to script:", script_path)  # Print out the absolute path
             subprocess.run([script_path], check=True)

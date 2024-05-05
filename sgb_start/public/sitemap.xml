@@ -74,7 +74,16 @@
     <loc>http://localhost:1313/tags/inspiration/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/il_mio_primo_post/</loc>
+    <loc>http://localhost:1313/posts/il_mio_secondo_post/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/post_number_1/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/post_number_2/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/post_number_3/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/lifestyle/</loc>
@@ -92,9 +101,6 @@
     <loc>http://localhost:1313/tags/photography/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/il_mio_primo_post-copy/</loc>
-    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/categories/science/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
@@ -109,8 +115,6 @@
   </url><url>
     <loc>http://localhost:1313/tags/travel/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/il_mio_secondo_post/</loc>
   </url><url>
     <loc>http://localhost:1313/about_map/about/</loc>
   </url><url>
