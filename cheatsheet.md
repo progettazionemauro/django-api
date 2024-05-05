@@ -3340,10 +3340,98 @@ If you want to create a separate app for your API, follow the instructions provi
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
 
-# ADVANCED BASH COMMANDS
-## Comando per generare pagi
+# ADVANCED BASH COMMANDS & DJANGO
+## Comando per generare pagine in Hugo
+
+ #!/bin/bash
+
+  
+
+# Define paths
+
+posts_dir="../sgb_start/content/posts"
+
+template_file="./../cheatsheet.md"  # Adjust this path to the location of your cheatsheet.md file
+
+  
+
+# Check if the posts directory exists
+
+if [ !  -d  "$posts_dir" ]; then
+
+echo  "Error: Hugo posts directory not found!"
+
+exit  1
+
+fi
+
+  
+
+# Check if the template file exists
+
+if [ !  -f  "$template_file" ]; then
+
+echo  "Error: Template file not found!"
+
+exit  1
+
+fi
+
+  
+
+# Define the new file name
+
+new_post_file="$posts_dir/il_mio_secondo_post.md"
+
+  
+
+# Check if the new post file already exists
+
+if [ -f  "$new_post_file" ]; then
+
+echo  "Error: il_mio_secondo_post.md already exists!"
+
+exit  1
+
+fi
+
+  
+
+# Extract front matter using sed
+
+front_matter=$(sed  -n '/^\+\+\+/,/^\+\+\+/p' "$posts_dir/il_mio_primo_post.md")
+
+  
+
+# Check if front matter is empty
+
+if [ -z  "$front_matter" ]; then
+
+echo  "Error: Front matter not found in il_mio_primo_post.md"
+
+exit  1
+
+fi
+
+  
+
+# Append the front matter to the new post file
+
+echo  "$front_matter"  >  "$new_post_file"
+
+  
+
+# Append the content of the template file to the new post file
+
+cat  "$template_file"  >>  "$new_post_file"
+
+  
+
+echo  "New post created successfully: $new_post_file"
+    
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3NDQwODkxMSwtMTc4MjY5NDQ4NiwxNj
-c0NTg5MDgsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1
-NSw0MTUwMzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5XX0=
+eyJoaXN0b3J5IjpbLTIxMjk0OTIxMzIsLTE3ODI2OTQ0ODYsMT
+Y3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5
+NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
 -->
