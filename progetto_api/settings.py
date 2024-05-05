@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_api_for_wagtail',
     'corsheaders',
-]
+    ]
 
 
 
