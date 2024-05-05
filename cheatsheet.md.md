@@ -3558,7 +3558,5 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcyNzQ4OTA0MywtMTc4MjY5NDQ4NiwxNj
-c0NTg5MDgsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1
-NSw0MTUwMzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5XX0=
+eyJoaXN0b3J5IjpbLTcyNzQ4OTA0M119
 -->
