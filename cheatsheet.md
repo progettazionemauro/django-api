@@ -3430,7 +3430,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     echo  "New post created successfully: $new_post_file"
         
 ### Implementazione del comando add_sheet.sh into Django (nella medesima app)
-###Django app: 
+### Django app: admin.py
 
     from  django.contrib  import  admin
     
@@ -3521,8 +3521,44 @@ That's it! You now have a basic Django project and app set up. Customize it base
     
     return  self.name
 
+### Addendum for test: pat
+
+    import  os
+    
+      
+    
+    def  run_script1():
+    
+    # Get the directory containing the current script file
+    
+    current_dir  =  os.path.dirname(__file__)
+    
+    # Construct the full path to the script
+    
+    script_path  =  os.path.abspath(os.path.join(current_dir, '..', '..', 'progetto_api', 'add_page.sh'))
+    
+    return  script_path
+    
+      
+    
+    def  runs_script2():
+    
+    current_dir  =  os.path.dirname(__file__)
+    
+    script_path2  =  os.path.abspath(os.path.join(current_dir, 'add_page.sh'))
+    
+    return  script_path2
+    
+      
+    
+    # Print the output directly in the terminal
+    
+    print(run_script1())
+    
+    print(runs_script2())
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk0MDYwNzQ1NywtMTc4MjY5NDQ4NiwxNj
-c0NTg5MDgsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1
-NSw0MTUwMzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5XX0=
+eyJoaXN0b3J5IjpbLTEwOTA5NDYwMjAsLTE3ODI2OTQ0ODYsMT
+Y3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5
+NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
 -->
