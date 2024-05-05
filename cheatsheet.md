@@ -3339,8 +3339,11 @@ You can now start building your Django app by creating models, views, and templa
 If you want to create a separate app for your API, follow the instructions provided in the previous response to create an `api` app and set up serializers, views, and URLs.
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
+
+# ADVANCED BASH COMMANDS
+## Comando per generare pagi
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMT
-MzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0
-LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
+eyJoaXN0b3J5IjpbMTY3NDQwODkxMSwtMTc4MjY5NDQ4NiwxNj
+c0NTg5MDgsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1
+NSw0MTUwMzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5XX0=
 -->
