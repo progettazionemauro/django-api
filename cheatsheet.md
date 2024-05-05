@@ -3430,66 +3430,64 @@ That's it! You now have a basic Django project and app set up. Customize it base
     echo  "New post created successfully: $new_post_file"
         
 ### Implementazione del comando add_sheet.sh into Django (nella medesima app)
-# django_api_for_wagtail/admin.py
+###Django app: 
 
-  
-
-from  django.contrib  import  admin
-
-from .models  import  Nation, CustomFeature
-
-import  os
-
-import  subprocess
-
-  
-
-@admin.register(Nation)
-
-class  NationAdmin(admin.ModelAdmin):
-
-list_display  = ('name', 'capital')
-
-  
-
-@admin.register(CustomFeature)
-
-class  CustomFeatureAdmin(admin.ModelAdmin):
-
-list_display  = ('name', 'description')
-
-  
-
-def  run_script(self, request, queryset):
-
-try:
-
-# This line retrieves the directory path of the current Python script (admin.py in this case) using __file__,
-
-# which is a special attribute in Python that represents the current file path.
-### Django app: admin.py
-    current_dir  =  os.path.dirname(__file__)
+    from  django.contrib  import  admin
     
-    script_path  =  os.path.abspath(os.path.join(current_dir, 'add_page.sh'))
+    from .models  import  Nation, CustomFeature
     
-    print("Absolute path to script:", script_path) # Print out the absolute path
+    import  os
     
-    subprocess.run([script_path], check=True)
-    
-    self.message_user(request, "Script executed successfully")
-    
-    except  Exception  as  e:
-    
-    self.message_user(request, f"Script execution failed: {e}", level='ERROR')
-    
-      
-      
-    
-    run_script.short_description =  "Run add_page.sh"
+    import  subprocess
     
       
     
-    actions  = [run_script]
+    @admin.register(Nation)
+    
+    class  NationAdmin(admin.ModelAdmin):
+    
+    list_display  = ('name', 'capital')
+    
+      
+    
+    @admin.register(CustomFeature)
+    
+    class  CustomFeatureAdmin(admin.ModelAdmin):
+    
+    list_display  = ('name', 'description')
+    
+      
+    
+    def  run_script(self, request, queryset):
+    
+    try:
+    
+    # This line retrieves the directory path of the current Python script (admin.py in this case) using __file__,
+    
+    # which is a special attribute in Python that represents the current file path.
+    ### Django app: admin.py
+        current_dir  =  os.path.dirname(__file__)
+        
+        script_path  =  os.path.abspath(os.path.join(current_dir, 'add_page.sh'))
+        
+        print("Absolute path to script:", script_path) # Print out the absolute path
+        
+        subprocess.run([script_path], check=True)
+        
+        self.message_user(request, "Script executed successfully")
+        
+        except  Exception  as  e:
+        
+        self.message_user(request, f"Script execution failed: {e}", level='ERROR')
+        
+          
+          
+        
+        run_script.short_description =  "Run add_page.sh"
+        
+          
+        
+        actions  = [run_script]
 
 ### Django app: models.py
 
@@ -3524,7 +3522,7 @@ try:
     return  self.name
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzQwNDU1ODAsLTE3ODI2OTQ0ODYsMT
-Y3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5
-NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
+eyJoaXN0b3J5IjpbLTk0MDYwNzQ1NywtMTc4MjY5NDQ4NiwxNj
+c0NTg5MDgsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1
+NSw0MTUwMzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5XX0=
 -->
