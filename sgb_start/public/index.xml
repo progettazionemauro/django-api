@@ -99,6 +99,30 @@ lsof -i :8000 chiudere la porta occupata forzatamente:
 kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
     </item>
     <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_5/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_5/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_6/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_6/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
       <title>Manuale di installazione</title>
       <link>http://localhost:1313/posts/manuale_di_installazione/</link>
       <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>

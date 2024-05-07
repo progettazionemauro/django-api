@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # Define paths
-posts_dir="../sgb_start/content/posts"
-template_file="./../cheatsheet.md"  # Adjust this path to the location of your cheatsheet.md file
+# posts_dir="../sgb_start/content/posts"
+posts_dir="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts"
+# template_file="./../cheatsheet.md"  # Adjust this path to the location of your cheatsheet.md file
+template_file="/home/mauro/Scrivania/dJANGO_apI/progetto_api/cheatsheet.md"
 
 # Check if the posts directory exists
 if [ ! -d "$posts_dir" ]; then
