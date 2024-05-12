@@ -1159,6 +1159,7 @@ Here's a breakdown of the process creation mechanism on Unix-based systems, focu
 
 This knowledge should provide a solid foundation for understanding process creation on Unix-based systems. You can explore further details in resources like the Unix man pages for `fork()`, `exec`, and related functions.
 
+
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
 1) python3 -m venv venv
@@ -3633,7 +3634,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MTY3MDgxMjUsLTYyNDc4Nzc4MiwxNT
+eyJoaXN0b3J5IjpbLTE3MjUxODUzNTUsLTYyNDc4Nzc4MiwxNT
 AxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2
 OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMy
 w4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIw
