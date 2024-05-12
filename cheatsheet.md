@@ -1111,6 +1111,8 @@ Think of how you might start a Python application from the command line. This is
 
 The process that starts another process is referred to as the  **parent**, and the new process is referred to as the  **child**. The parent and child processes run mostly independently. Sometimes the child inherits specific resources or contexts from the parentand nformation about processes is kept in a table. Each process keeps track of its parents, which allows the process hierarchy to be represented as a tree.
 
+### 
+
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
 1) python3 -m venv venv
@@ -3585,8 +3587,9 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMz
-g0NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4
-OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsND
-E1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
+eyJoaXN0b3J5IjpbNDMzODk5MTYzLC02MjQ3ODc3ODIsMTUwMT
+UwMTEwNCwtMTM4NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0
+NDg2LDE2NzQ1ODkwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMsOD
+gwMjYwOTU1LDQxNTAzMzEyNCwxMDg3NTg2MDIyLC01OTEyMDUx
+ODldfQ==
 -->
