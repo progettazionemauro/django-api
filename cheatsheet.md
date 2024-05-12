@@ -1454,6 +1454,32 @@ Those are the main exceptions that you’ll run into when using the Python  `sub
 
 However, if you have a more complex program, then you may want to handle errors more gracefully. For instance, you may need to call many processes over a long period of time. For this, you can use the  [`try`  …  `except`](https://realpython.com/python-exceptions/#the-try-and-except-block-handling-exceptions)  construct.
 
+### An Example of Exception Handling[](https://realpython.com/python-subprocess/#an-example-of-exception-handling "Permanent link")
+
+Here’s a code snippet that shows the main exceptions that you’ll want to handle when using  `subprocess`:
+
+```Python
+
+`import subprocess
+
+try:
+    subprocess.run(
+        ["python", "timer.py", "5"], timeout=10, check=True
+    )
+except FileNotFoundError as exc:
+    print(f"Process failed because the executable could not be found.\n{exc}")
+except subprocess.CalledProcessError as exc:
+    print(
+        f"Process failed because did not return a successful return code. "
+        f"Returned {exc.returncode}\n{exc}"
+    )
+except subprocess.TimeoutExpired as exc:
+    print(f"Process timed out.\n{exc}")` 
+```
+This snippet shows you an example of how you might handle the three main exceptions raised by the  `subprocess`  module.
+
+Now that you’ve used  `subprocess`  in its basic form and handled some exceptions, it’s time to get familiar with what it takes to interact with the shell.
+
 
 
 ####
@@ -3929,11 +3955,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAyNzYzMjM5NiwxNzQ2NzQxNTIsLTEyMT
-c2MTk5MzQsLTExOTk3MzUzMzksMjA0NDU5MTYxOSw2NTY2Mjg3
-NzMsLTEwODIxMDE2ODUsLTE4NTI2MDUyNzYsLTYyNDc4Nzc4Mi
-wxNTAxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0ODkwNDMsLTE3
-ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MT
-AwMyw4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5
-MTIwNTE4OV19
+eyJoaXN0b3J5IjpbMTk3OTg2OTQyMywyMDI3NjMyMzk2LDE3ND
+Y3NDE1MiwtMTIxNzYxOTkzNCwtMTE5OTczNTMzOSwyMDQ0NTkx
+NjE5LDY1NjYyODc3MywtMTA4MjEwMTY4NSwtMTg1MjYwNTI3Ni
+wtNjI0Nzg3NzgyLDE1MDE1MDExMDQsLTEzODQ0ODU2NjEsLTcy
+NzQ4OTA0MywtMTc4MjY5NDQ4NiwxNjc0NTg5MDgsLTExMzM4Mz
+k2OCwxNTEwNTcxMDAzLDg4MDI2MDk1NSw0MTUwMzMxMjQsMTA4
+NzU4NjAyMl19
 -->
