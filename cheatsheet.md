@@ -1281,9 +1281,36 @@ You may come across other functions like  [`call()`](https://docs.python.org/3/l
 
 There’s also a fair amount of redundancy in the  `subprocess`  module, meaning that there are various ways to achieve the same end goal. You won’t be exploring all variations in this tutorial. What you will find, though, are robust techniques that should keep you on the right path.
 
-## Basic Usage of the Python  `subprocess`  Module[](https://realpython.com/python-subprocess/#basic-usage-of-the-python-subprocess-module "Permanent link")
+## Basic Usage of the Python  `subprocess`  Module
 
 In this section, you’ll take a look at some of the most basic examples demonstrating the usage of the  `subprocess`  module. You’ll start by exploring a bare-bones command-line timer program with the  `run()`  function.
+
+## Basic Usage of the Python  `subprocess`  
+In this section, you’ll take a look at some of the most basic examples demonstrating the usage of the  `subprocess`  module. You’ll start by exploring a bare-bones command-line timer program with the  `run()`  function.
+
+### The Timer Example[](https://realpython.com/python-subprocess/#the-timer-example "Permanent link")
+
+To come to grips with the Python  `subprocess`  module, you’ll want a bare-bones program to run and experiment with. For this, you’ll use a program written in Python:
+
+Python
+
+`# timer.py
+
+from argparse import ArgumentParser
+from time import sleep
+
+parser = ArgumentParser()
+parser.add_argument("time", type=int)
+args = parser.parse_args()
+print(f"Starting timer of {args.time} seconds")
+for _ in range(args.time):
+    print(".", end="", flush=True)
+    sleep(1)
+print("Done!")` 
+
+The timer program uses  to accept an integer as an argument. The integer represents the number of seconds that the timer should wait until exiting, which the program uses  [`sleep()`](https://realpython.com/python-sleep/)  to achieve. It’ll play a small animation representing each passing second until it exits:
+
+It’s not much, but the key is that it serves as a cross-platform process that runs for a few seconds and which you can easily tinker with. You’ll be calling it with  `subprocess`  as if it were a separate executable.
 
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
@@ -3760,9 +3787,9 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcxNzYyNTQ1MSwtMTA4MjEwMTY4NSwtMT
-g1MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MDExMDQsLTEzODQ0
-ODU2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4NiwxNjc0NTg5MD
-gsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1NSw0MTUw
-MzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5XX0=
+eyJoaXN0b3J5IjpbNjU2NjI4NzczLC0xMDgyMTAxNjg1LC0xOD
+UyNjA1Mjc2LC02MjQ3ODc3ODIsMTUwMTUwMTEwNCwtMTM4NDQ4
+NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOC
+wtMTEzMzgzOTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQxNTAz
+MzEyNCwxMDg3NTg2MDIyLC01OTEyMDUxODldfQ==
 -->
