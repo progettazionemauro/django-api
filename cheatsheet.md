@@ -1931,6 +1931,373 @@ As you learned in the previous section, for Windows PowerShell, doing something 
 
 With most of the tools out the way, it’s now time to think about some practical applications for  `subprocess`.
 
+## Practical Ideas[](https://realpython.com/python-subprocess/#practical-ideas "Permanent link")
+
+When you have an issue that you want to solve with Python, sometimes the  `subprocess`  module is the easiest way to go, even though it may not be the most correct.
+
+Using  `subprocess`  is often tricky to get working across different platforms, and it has inherent  [dangers](https://realpython.com/python-subprocess/#a-security-warning). But even though it may involve some  [sloppy Python](https://www.youtube.com/watch?v=Jd8ulMb6_ls), using  `subprocess`  can be a very quick and efficient way to solve a problem.
+
+As mentioned, for most tasks you can imagine doing with  `subprocess`, there’s usually a library out there that’s dedicated to that specific task. The library will almost certainly use  `subprocess`, and the developers will have worked hard to make the code reliable and to cover all the corner cases that can make using  `subprocess`  difficult.
+
+So, even though dedicated libraries exist, it can often be simpler to just use  `subprocess`, especially if you’re in an environment where you need to limit your dependencies.
+
+In the following sections, you’ll be exploring a couple of practical ideas.
+
+### Creating a New Project: An Example[](https://realpython.com/python-subprocess/#creating-a-new-project-an-example "Permanent link")
+
+Say you often need to create new local projects, each complete with a  [virtual environment](https://realpython.com/python-virtual-environments-a-primer/)  and initialized as a  [Git repository](https://realpython.com/python-git-github-intro/). You could reach for the  [Cookiecutter](https://github.com/cookiecutter/cookiecutter)  library, which is dedicated to that task, and that wouldn’t be a bad idea.
+
+However, using Cookiecutter would mean learning Cookiecutter. Imagine you didn’t have much time, and your environment was extremely minimal anyway—all you could really count on was Git and Python. In these cases,  `subprocess`  can quickly set up your project for you:
+
+Python
+
+`# create_project.py
+
+from argparse import ArgumentParser
+from pathlib import Path
+import subprocess
+
+def create_new_project(name):
+    project_folder = Path.cwd().absolute() / name
+    project_folder.mkdir()
+    (project_folder / "README.md").touch()
+    with open(project_folder / ".gitignore", mode="w") as f:
+        f.write("\n".join(["venv", "__pycache__"]))
+    commands = [
+        [
+            "python",
+            "-m",
+            "venv",
+            f"{project_folder}/venv",
+        ],
+        ["git", "-C", project_folder, "init"],
+        ["git", "-C", project_folder, "add", "."],
+        ["git", "-C", project_folder, "commit", "-m", "Initial commit"],
+    ]
+    for command in commands:
+        try:
+            subprocess.run(command, check=True, timeout=60)
+        except FileNotFoundError as exc:
+            print(
+                f"Command {command} failed because the process "
+                f"could not be found.\n{exc}"
+            )
+        except subprocess.CalledProcessError as exc:
+            print(
+                f"Command {command} failed because the process "
+                f"did not return a successful return code.\n{exc}"
+            )
+        except subprocess.TimeoutExpired as exc:
+            print(f"Command {command} timed out.\n  {exc}")
+
+if __name__ == "__main__":
+    parser = ArgumentParser()
+    parser.add_argument("project_name", type=str)
+    args = parser.parse_args()
+    create_new_project(args.project_name)` 
+
+This is a command-line tool that you can call to start a project. It’ll take care of creating a  `README.md`  file and a  `.gitignore`  file, and then it’ll run a few commands to create a virtual environment, initialize a git repository, and perform your first commit. It’s even cross-platform, opting to use  `pathlib`  to create the files and folders, which abstracts away the operating system differences.
+
+Could this be done with Cookiecutter? Could you use  [GitPython](https://github.com/gitpython-developers/GitPython)  for the  `git`  part? Could you use the  `venv`  module to create the virtual environment? Yes to all. But if you just need something quick and dirty, using commands you already know, then just using  `subprocess`  can be a great option.
+
+### Changing Extended Attributes[](https://realpython.com/python-subprocess/#changing-extended-attributes "Permanent link")
+
+If you use Dropbox, you may not know that there’s a way to ignore files when syncing. For example, you can keep virtual environments in your project folder and use Dropbox to sync the code, but keep the virtual environment local.
+
+That said, it’s not as easy as adding a  `.dropboxignore`  file. Rather, it involves adding special attributes to files, which can be done from the command line. These attributes are different between UNIX-like systems and Windows:
+
+-   [Windows](https://realpython.com/python-subprocess/#windows-5)
+-   [Linux](https://realpython.com/python-subprocess/#linux-5)
+-   [macOS](https://realpython.com/python-subprocess/#macos-5)
+
+Shell
+
+`$ attr  -s  com.dropbox.ignored  -V  1  \
+  /home/yourname/Dropbox/YourFileName.pdf` 
+
+There are some UNIX-based projects, like  [dropboxignore](https://github.com/sp1thas/dropboxignore), that use shell scripts to make it easier to ignore files and folders. The code is relatively complex, and it won’t work on Windows.
+
+With the  `subprocess`  module, you can wrap the different shell commands quite easily to come up with your own utility:
+
+Python
+
+``# dropbox_ignore.py
+
+import platform
+from pathlib import Path
+from subprocess import run, DEVNULL
+
+def init_shell():
+    print("initializing shell")
+    system = platform.system()
+    print(f"{system} detected")
+    if system == "Linux":
+        return Bash_shell()
+    elif system == "Windows":
+        return Pwsh_shell()
+    elif system == "Darwin":
+        raise NotImplementedError
+
+class Pwsh_shell():
+    def __init__(self) -> None:
+        try:
+            run(["pwsh", "-V"], stdout=DEVNULL, stderr=DEVNULL)
+            self.shell = "pwsh"
+        except FileNotFoundError as exc:
+            print("Powershell Core not installed, falling back to PowerShell")
+            self.shell = "powershell"
+
+    @staticmethod
+    def _make_string_path_list(paths: list[Path]) -> str:
+        return "', '".join(str(path).replace("'", "`'") for path in paths)
+
+    def ignore_folders(self, paths: list[Path]) -> None:
+        path_list = self._make_string_path_list(paths)
+        command = (
+            f"Set-Content -Path '{path_list}' "
+            f"-Stream com.dropbox.ignored -Value 1"
+        )
+        run([self.shell, "-NoProfile", "-Command", command], check=True)
+        print("Done!")
+
+class Bash_shell():
+    @staticmethod
+    def _make_string_path_list(paths: list[Path]) -> str:
+        return "' '".join(str(path).replace("'", "\\'") for path in paths)
+
+    def ignore_folders(self, paths: list[Path]) -> None:
+        path_list = self._make_string_path_list(paths)
+        command = (
+            f"for f in '{path_list}'\n do\n "
+            f"attr -s com.dropbox.ignored -V 1 $f\ndone"
+        )
+        run(["bash", "-c", command], check=True)
+        print("Done!")`` 
+
+This is a simplified snippet from the author’s  [dotDropboxIgnore](https://github.com/iansedano/dot_dropbox_ignore)  repository. The  `init_shell()`  function detects the operating system with the  [`platform`](https://docs.python.org/3/library/platform.html)  module and returns an object that’s an abstraction around the system-specific shell. The code hasn’t implemented the behavior on macOS, so it raises a  `NotImplementedError`  if it detects it’s running on macOS.
+
+The shell object allows you to call an  `.ignore_folders()`  method with a list of  [`pathlib`](https://realpython.com/python-pathlib/)  [`Path`](https://docs.python.org/3/library/pathlib.html#pathlib.Path)  objects to set Dropbox to ignore those files.
+
+On the  `Pwsh_shell`  class, the constructor tests to see if PowerShell Core is available, and if not, will fall back to the older Windows PowerShell, which is installed by default on Windows 10.
+
+In the next section, you’ll review some of the other modules that might be interesting to keep in mind when deciding whether to use  `subprocess`.
+
+## Python Modules Associated With  `subprocess`[](https://realpython.com/python-subprocess/#python-modules-associated-with-subprocess "Permanent link")
+
+When deciding whether a certain task is a good fit for  `subprocess`, there are some associated modules that you may want to be aware of.
+
+Before  `subprocess`  existed, you could use  `os.system()`  to run commands. However, as with many things that  `os`  was used for before, standard library modules have come to replace  `os`, so it’s mostly used internally. There are hardly any use cases for using  `os`  yourself.
+
+There’s an  [official documentation page](https://docs.python.org/3/library/subprocess.html#replacing-older-functions-with-the-subprocess-module)  where you can examine some of the old ways to accomplish tasks with  `os`  and learn how you might do the same with  `subprocess`.
+
+It might be tempting to think that  `subprocess`  can be used for  [concurrency](https://realpython.com/python-concurrency/), and in simple cases, it can be. But, in line with the sloppy Python philosophy, it’s probably only going to be to hack something together quickly. If you want something more robust, then you’ll probably want to start looking at the  `multiprocessing`  module.
+
+Depending on the task that you’re attempting, you may be able to accomplish it with the  [`asyncio`](https://realpython.com/async-io-python/)  or  [`threading`](https://realpython.com/intro-to-python-threading/)  modules. If everything is written in Python, then these modules are likely your best bet.
+
+The  `asyncio`  module has a  [high-level API](https://docs.python.org/3/library/asyncio-subprocess.html)  to create and manage subprocesses too, so if you want more control over non-Python parallel processes, that might be one to check out.
+
+Now it’s time to get deep into  `subprocess`  and explore the underlying  `Popen`  class and its constructor.
+
+## The  `Popen`  Class[](https://realpython.com/python-subprocess/#the-popen-class "Permanent link")
+
+As mentioned, the underlying class for the whole  `subprocess`  module is the  `Popen`  class and the  `Popen()`  constructor. Each function in  `subprocess`  calls the  `Popen()`  constructor under the hood. Using the  `Popen()`  constructor gives you lots of control over the newly started subprocesses.
+
+As a quick summary,  `run()`  is basically the  `Popen()`  class constructor, some setup, and then a call to the  [`.communicate()`](https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate)  method on the newly initialized  `Popen`  object. The  `.communicate()`  method is a blocking method that returns the  `stdout`  and  `stderr`  data once the process has ended.
+
+The name of  `Popen`  comes from a similar  [UNIX command](https://man7.org/linux/man-pages/man3/popen.3.html)  that stands for  _pipe open_. The command creates a pipe and then starts a new process that invokes the shell. The  `subprocess`  module, though, doesn’t automatically invoke the shell.
+
+The  `run()`  function is a  **blocking function**, which means that interacting dynamically with a process isn’t possible with it. However, the  `Popen()`  constructor starts a new process and continues, leaving the process running in  _parallel_.
+
+The developer of the reaction game that you were hacking earlier has released a new version of their game, one in which you can’t cheat by loading  `stdin`  with newlines:
+
+Python
+
+`# reaction_game_v2.py
+
+from random import choice, random
+from string import ascii_lowercase
+from time import perf_counter, sleep
+
+print(
+    "A letter will appear on screen after a random amount of time,\n"
+    "when it appears, type the letter as fast as possible "
+    "and then press enter\n"
+)
+print("Press enter when you are ready")
+input()
+print("Ok, get ready!")
+sleep(random() * 5 + 2)
+target_letter = choice(ascii_lowercase)
+print(f"=====\n= {target_letter} =\n=====\n")
+
+start = perf_counter()
+while True:
+    if input() == target_letter:
+        break
+    else:
+        print("Nope! Try again.")
+end = perf_counter()
+
+print(f"You reacted in {(end  -  start)  *  1000:.0f} milliseconds!\nGoodbye!")` 
+
+Now the program will display a random character, and you need to press that exact character to have the game register your reaction time:
+
+What’s to be done? First, you’ll need to come to grips with using  `Popen()`  with basic commands, and then you’ll find another way to exploit the reaction game.
+
+### Using  `Popen()`[](https://realpython.com/python-subprocess/#using-popen "Permanent link")
+
+Using the  `Popen()`  constructor is very similar in appearance to using  `run()`. If there’s an argument that you can pass to  `run()`, then you’ll generally be able to pass it to  `Popen()`. The fundamental difference is that it’s not a  [blocking](https://en.wikipedia.org/wiki/Blocking_(computing))  call—rather than waiting until the process is finished, it’ll run the process in parallel. So you need to take this non-blocking nature into account if you want to read the new process’s output:
+
+Python
+
+`# popen_timer.py
+
+import subprocess
+from time import sleep
+
+with subprocess.Popen(
+    ["python", "timer.py", "5"], stdout=subprocess.PIPE
+) as process:
+
+    def poll_and_read():
+        print(f"Output from poll: {process.poll()}")
+        print(f"Output from stdout: {process.stdout.read1().decode('utf-8')}")
+
+    poll_and_read()
+    sleep(3)
+    poll_and_read()
+    sleep(3)
+    poll_and_read()` 
+
+This program calls the timer process in a  [context manager](https://realpython.com/python-with-statement/)  and assigns  `stdout`  to a pipe. Then it runs the  [`.poll()`](https://docs.python.org/3/library/subprocess.html#subprocess.Popen.poll)  method on the  `Popen`  object and reads its  `stdout`.
+
+The  `.poll()`  method is a basic method to check if a process is still running. If it is, then  `.poll()`  returns  `None`. Otherwise, it’ll return the process’s exit code.
+
+Then the program uses  [`.read1()`](https://docs.python.org/3/library/io.html#io.BufferedIOBase.read1)  to try and read as many bytes as are available at  `.stdout`.
+
+**Note:**  If you put the  `Popen`  object into  _text mode_  and then called  `.read()`  on  `.stdout`, the call to  `.read()`  would be  _blocking_  until it reached a newline. In this case, a newline would coincide with the end of the timer program. This behavior isn’t desired in this situation.
+
+To read as many bytes as are available at that time, disregarding newlines, you need to read with  `.read1()`. It’s important to note that  `.read1()`  is only available on byte streams, so you need to make sure to deal with encodings manually and not use  _text mode_.
+
+The output of this program first prints  `None`  because the process hasn’t yet finished. The program then prints what is available in  `stdout`  so far, which is the starting message and the first character of the animation.
+
+After three seconds, the timer hasn’t finished, so you get  `None`  again, along with two more characters of the animation. After another three seconds, the process has ended, so  `.poll()`  produces  `0`, and you get the final characters of the animation and  `Done!`:
+
+Text
+
+`Output from poll: None
+Output from stdout: Starting timer of 5 seconds
+.
+Output from poll: None
+Output from stdout: ..
+Output from poll: 0
+Output from stdout: ..Done!` 
+
+In this example, you’ve seen how the  `Popen()`  constructor works very differently from  `run()`. In most cases, you don’t need this kind of fine-grained control. That said, in the next sections, you’ll see how you can pipe one process into another, and how you can hack the new reaction game.
+
+### Connecting Two Processes Together With Pipes[](https://realpython.com/python-subprocess/#connecting-two-processes-together-with-pipes "Permanent link")
+
+As mentioned in a  [previous section](https://realpython.com/python-subprocess/#pipe-simulation-with-run), if you need to connect processes together with pipes, you need to use the  `Popen()`  constructor. This is mainly because  `run()`  is a blocking call, so by the time the next process starts, the first one has ended, meaning that you can’t directly link up to its  `stdout`.
+
+This procedure will only be demonstrated for UNIX systems, because piping in Windows is far less common, as mentioned in the  [simulating a pipe](https://realpython.com/python-subprocess/#pipe-simulation-with-run)  section:
+
+Python
+
+`# popen_pipe.py
+
+import subprocess
+
+ls_process = subprocess.Popen(["ls", "/usr/bin"], stdout=subprocess.PIPE)
+grep_process = subprocess.Popen(
+    ["grep", "python"], stdin=ls_process.stdout, stdout=subprocess.PIPE
+)
+
+for line in grep_process.stdout:
+    print(line.decode("utf-8").strip())` 
+
+In this example, the two processes are started in parallel. They are joined with a common pipe, and the  `for`  loop takes care of reading the pipe at  `stdout`  to output the lines.
+
+A key point to note is that in contrast to  `run()`, which returns a  `CompletedProcess`  object, the  `Popen()`  constructor returns a  `Popen`  object. The standard stream attributes of a  `CompletedProcess`  point to  _bytes objects or strings_, but the same attributes of a  `Popen`  object point to the  _actual streams_. This allows you to communicate with processes as they’re running.
+
+Whether you really need to pipe processes into one another, though, is another matter. Ask yourself if there’s much to be lost by mediating the process with Python and using  `run()`  exclusively. There are some situations in which you really need  `Popen`, though, such as hacking the new version of the reaction time game.
+
+### Interacting Dynamically With a Process[](https://realpython.com/python-subprocess/#interacting-dynamically-with-a-process "Permanent link")
+
+Now that you know you can use  `Popen()`  to interact with a process dynamically as it runs, it’s time to turn that knowledge toward exploiting the reaction time game again:
+
+Python
+
+`# reaction_game_v2_hack.py
+
+import subprocess
+
+def get_char(process):
+    character = process.stdout.read1(1)
+    print(
+        character.decode("utf-8"),
+        end="",
+        flush=True,  # Unbuffered print
+    )
+    return character.decode("utf-8")
+
+def search_for_output(strings, process):
+    buffer = ""
+    while not any(string in buffer for string in strings):
+        buffer = buffer + get_char(process)
+
+with subprocess.Popen(
+    [
+        "python",
+        "-u",  # Unbuffered stdout and stderr
+        "reaction_game_v2.py",
+    ],
+    stdin=subprocess.PIPE,
+    stdout=subprocess.PIPE,
+) as process:
+    process.stdin.write(b"\n")
+    process.stdin.flush()
+    search_for_output(["==\n= ", "==\r\n= "], process)
+    target_char = get_char(process)
+    stdout, stderr = process.communicate(
+        input=f"{target_char}\n".encode("utf-8"), timeout=10
+    )
+    print(stdout.decode("utf-8"))` 
+
+With this script, you’re taking complete control of the buffering of a process, which is why you pass in arguments such as  `-u`  to the Python process and  [`flush=True`  to  `print()`](https://realpython.com/python-flush-print-output/). These arguments are to ensure that no extra buffering is taking place.
+
+The script works by using a function that’ll search for one of a list of strings by grabbing one character at a time from the process’s  `stdout`. As each character comes through, the script will search for the string.
+
+**Note:**  To make this work on both Windows and UNIX-based systems, two strings are searched for: either  `"==\n= "`  or  `"==\r\n= "`. The Windows-style  [carriage return](https://en.wikipedia.org/wiki/Carriage_return)  along with the typical newline is required on Windows systems.
+
+After the script has found one of the target strings, which in this case is the sequence of characters before the target letter, it’ll then grab the next character and write that letter to the process’s  `stdin`  followed by a newline:
+
+At one millisecond, it’s not quite as good as the original hack, but it’s still very much superhuman. Well done!
+
+With all this fun aside, interacting with processes using  `Popen`  can be very tricky and is prone to errors. First, see if you can use  `run()`  exclusively before resorting to the  `Popen()`  constructor.
+
+If you really need to interact with processes at this level, the  [`asyncio`](https://realpython.com/async-io-python/)  module has a  [high-level API](https://docs.python.org/3/library/asyncio-subprocess.html)  to create and manage subprocesses.
+
+The  `asyncio`  subprocess functionality is intended for more complex uses of  `subprocess`  where you may need to orchestrate various processes. This might be the case if you’re performing complex processing of many image, video, or audio files, for example. If you’re using  `subprocess`  at this level, then you’re probably building a library.
+
+## Conclusion[](https://realpython.com/python-subprocess/#conclusion "Permanent link")
+
+You’ve completed your journey into the Python  `subprocess`  module. You should now be able to decide whether  `subprocess`  is a good fit for your problem. You should also be able to decide whether you need to invoke the shell. Aside from that, you should be able to run subprocesses and interact with their inputs and outputs.
+
+You should also be able to start exploring the possibilities of process manipulation with the  `Popen()`  constructor.
+
+Along the way, you’ve:
+
+-   Learned about  **processes in general**
+-   Gone from basic to advanced  **usage of  `subprocess`**
+-   Understood how to  **raise and handle errors**  when using  `run()`
+-   Gotten familiar with  **shells**  and their intricacies on both  **Windows and UNIX-like systems**
+-   Explored the  **use cases for  `subprocess`**  through  **practical examples**
+-   Understood the standard  **I/O streams**  and how to  **interact with them**
+-   Come to grips with  **pipes**, both in the shell and with  `subprocess`
+-   Looked at the  **`Popen()`  constructor**  and used it for some advanced process communication
+
+You’re now ready to bring a variety of executables into your Pythonic sphere of influence!
+
 
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
@@ -4405,7 +4772,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzQzMDE2MTAsLTIwMDIzNDA5OTgsLT
+eyJoaXN0b3J5IjpbLTE4NjU1Mzg2MjYsLTIwMDIzNDA5OTgsLT
 Y5NjI5NDU4LC0yMDUzODIzOTMwLC0xNTY2ODc1NDcyLC01NjI1
 Nzg3NzksMTk3OTg2OTQyMywyMDI3NjMyMzk2LDE3NDY3NDE1Mi
 wtMTIxNzYxOTkzNCwtMTE5OTczNTMzOSwyMDQ0NTkxNjE5LDY1
