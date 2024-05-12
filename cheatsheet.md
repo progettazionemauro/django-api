@@ -1701,6 +1701,87 @@ With the output available, you can use more than one subprocess to grab values a
 
 In this example, you start two magic number processes that fetch two magic numbers and then add them together. For now, you rely on the automatic decoding of the bytes object by the  `int()`  constructor. In the next section, though, you’ll learn how to decode and encode explicitly.
 
+### The Decoding of Standard Streams[](https://realpython.com/python-subprocess/#the-decoding-of-standard-streams "Permanent link")
+
+Processes communicate in bytes, and you have a few different ways to deal with  [encoding and decoding](https://realpython.com/python-encodings-guide/)  these bytes. Beneath the surface,  `subprocess`  has a few ways of getting into  [_text mode_](https://github.com/python/cpython/blob/3.10/Lib/subprocess.py#L849).
+
+_Text mode_  means that  `subprocess`  will try to take care of encoding itself. To do that, it needs to know what character encoding to use. Most of the options for doing this in  `subprocess`  will try to use the default encoding. However, you generally  [want to be explicit about what encoding to use](https://peps.python.org/pep-0597/#using-the-default-encoding-is-a-common-mistake)  to prevent a bug that would be hard to find in the future.
+
+You can pass a  `text=True`  argument for Python to take care of encodings using the default encoding. But, as mentioned, it’s always safer to specify the encodings explicitly using the  `encoding`  argument, as not all systems work with the  _nearly_  universal  [UTF-8](https://en.wikipedia.org/wiki/UTF-8):
+
+Python
+
+`>>> magic_number_process = subprocess.run(
+...     ["python", "magic_number.py"], capture_output=True, encoding="utf-8"
+... )
+...
+>>> magic_number_process.stdout
+'647\n'` 
+
+If in  _text mode_, the  `.stdout`  attribute on a  `CompletedProcess`  is now a string and not a bytes object.
+
+You can also decode the bytes returned by calling the  `.decode()`  method on the  `stdout`  attribute directly, without requiring  _text mode_  at all:
+
+Python
+
+`>>> magic_number_process = subprocess.run(
+...     ["python", "magic_number.py"], capture_output=True
+... )
+...
+>>> magic_number_process.stdout.decode("utf-8")
+'72\n'` 
+
+There are other ways to put  `run()`  into  _text mode_. You can also set a  `True`  value for  `errors`  or  `universal_newlines`, which will also put  `run()`  into  _text mode_. This may seem redundant, but much of this is kept for backwards compatibility, seeing as the  `subprocess`  module has changed over the years.
+
+Now that you know how to read and decode the output of a process, it’s time to take a look at writing to the input of a process.
+
+### Reaction Game Example[](https://realpython.com/python-subprocess/#reaction-game-example "Permanent link")
+
+In this section, you’ll use  `subprocess`  to interact with a command-line game. It’s a basic program that’s designed to test a human’s reaction time. With your knowledge of standard I/O streams, though, you’ll be able to hack it! The source code of the game makes use of the  [`time`](https://realpython.com/python-time-module/)  and  [`random`](https://realpython.com/python-random/)  module:
+
+Python
+
+`# reaction_game.py
+
+from time import perf_counter, sleep
+from random import random
+
+print("Press enter to play")
+input()
+print("Ok, get ready!")
+sleep(random() * 5 + 1)
+print("go!")
+start = perf_counter()
+input()
+end = perf_counter()
+print(f"You reacted in {(end  -  start)  *  1000:.0f} milliseconds!\nGoodbye!")` 
+
+The program starts, asks for the user to press enter, and then after a random amount of time will ask the user to press enter again. It  [measures](https://realpython.com/python-timer/)  from the time the message appears to the time the user presses enter, or at least that’s what the game developer thinks:
+
+The  `input()`  function will read from  `stdin`  until it reaches a newline, which means an  Enter  keystroke in this context. It returns everything it consumed from  `stdin`  except the newline. With that knowledge, you can use  `subprocess`  to interact with this game:
+
+Python
+
+`>>> import subprocess
+>>> process = subprocess.run(
+...     ["python", "reaction_game.py"], input="\n\n", encoding="utf-8"
+... )
+...
+Press enter to play
+Ok, get ready!
+go!
+You reacted in 0 milliseconds!
+Goodbye!` 
+
+A reaction time of 0 milliseconds! Not bad! Considering the  [average human reaction time](https://humanbenchmark.com/tests/reactiontime/statistics)  is around 270 milliseconds, your program is definitely superhuman. Note that the game rounds its output, so 0 milliseconds doesn’t mean it’s instantaneous.
+
+The  `input`  argument passed to  `run()`  is a string consisting of two newlines. The  `encoding`  parameter is set to  `utf-8`, which puts  `run()`  into  _text mode_. This sets up the process for it to receive the input you that give it.
+
+Before the program starts,  `stdin`  is stocked, waiting for the program to consume the newlines it contains. One newline is consumed to start the game, and the next newline is consumed to react to  `go!`.
+
+Now that you know what’s happening—namely that  `stdin`  can be  _stocked_, as it were—you can hack the program yourself without  `subprocess`. If you start the game and then press  Enter  a few times, that’ll stock up  `stdin`  with a few newlines that the program will automatically consume once it gets to the  `input()`  line. So your reaction time is really only the time it takes for the reaction game to execute  `start = time()`  and consume an input:
+
+The game developer gets wise to this, though, and vows to release another version, which will guard against this exploit. In the meantime, you’ll peek a bit further under the hood of  `subprocess`  and learn about how it wires up the standard I/O streams.
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -4174,11 +4255,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNTM4MjM5MzAsLTE1NjY4NzU0NzIsLT
-U2MjU3ODc3OSwxOTc5ODY5NDIzLDIwMjc2MzIzOTYsMTc0Njc0
-MTUyLC0xMjE3NjE5OTM0LC0xMTk5NzM1MzM5LDIwNDQ1OTE2MT
-ksNjU2NjI4NzczLC0xMDgyMTAxNjg1LC0xODUyNjA1Mjc2LC02
-MjQ3ODc3ODIsMTUwMTUwMTEwNCwtMTM4NDQ4NTY2MSwtNzI3ND
-g5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOCwtMTEzMzgzOTY4
-LDE1MTA1NzEwMDNdfQ==
+eyJoaXN0b3J5IjpbLTY5NjI5NDU4LC0yMDUzODIzOTMwLC0xNT
+Y2ODc1NDcyLC01NjI1Nzg3NzksMTk3OTg2OTQyMywyMDI3NjMy
+Mzk2LDE3NDY3NDE1MiwtMTIxNzYxOTkzNCwtMTE5OTczNTMzOS
+wyMDQ0NTkxNjE5LDY1NjYyODc3MywtMTA4MjEwMTY4NSwtMTg1
+MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MDExMDQsLTEzODQ0OD
+U2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4NiwxNjc0NTg5MDgs
+LTExMzM4Mzk2OF19
 -->
