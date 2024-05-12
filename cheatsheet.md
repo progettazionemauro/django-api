@@ -1557,6 +1557,41 @@ However, if you’re using  `subprocess`  instead of  `pathlib`  to read and wri
 
 With that out of the way, it’s time to get familiar with the shell environments on both Windows and UNIX-based systems.
 
+### Basic Usage of  `subprocess`  With UNIX-Based Shells[](https://realpython.com/python-subprocess/#basic-usage-of-subprocess-with-unix-based-shells "Permanent link")
+
+To run a shell command using  `run()`, the  `args`  should contain the shell that you want to use, the flag to indicate that you want it to run a specific command, and the command that you’re passing in:
+
+Python
+
+`>>> import subprocess
+>>> subprocess.run(["bash", "-c", "ls /usr/bin | grep pycode"])
+pycodestyle
+pycodestyle-3
+pycodestyle-3.10
+CompletedProcess(args=['bash', '-c', 'ls /usr/bin | grep pycode'], returncode=0)` 
+
+Here a common shell command is demonstrated. It uses  `ls`  piped into  `grep`  to filter some of the entries. The shell is handy for this kind of operation because you can take advantage of the pipe operator (`|`). You’ll cover pipes in more detail  [later](https://realpython.com/python-subprocess/#pipes-and-the-shell).
+
+You can replace  `bash`  with the shell of your choice. The  `-c`  flag stands for  _command_, but may be different depending on the shell that you’re using. This is almost the exact equivalent of what happens when you add the  `shell=True`  argument:
+
+Python
+
+`>>> subprocess.run(["ls /usr/bin | grep pycode"], shell=True)
+pycodestyle
+pycodestyle-3
+pycodestyle-3.10
+CompletedProcess(args=['ls /usr/bin | grep pycode'], returncode=0)` 
+
+The  `shell=True`  argument uses  `["sh", "-c", ...]`  behind the scenes, so it’s almost the equivalent of the previous example.
+
+**Note:**  On UNIX-based systems, the  `sh`  shell was traditionally the  [Bourne shell](https://en.wikipedia.org/wiki/Bourne_shell). That said, the Bourne shell is now quite old, so many operating systems use  `sh`  as a link to  [Bash](https://www.gnu.org/software/bash/)  or  [Dash](https://en.wikipedia.org/wiki/Almquist_shell#dash).
+
+This can often be different from the shell used with the terminal interface that you interact with. For instance, since macOS Catalina, the default shell that you’ll find on the command-line app has changed from Bash to  [Zsh](https://www.zsh.org/), yet  `sh`  often still points to Bash. Likewise, on Ubuntu,  `sh`  points to Dash, but the default that you typically interact with on the command-line application is still Bash.
+
+So, calling  `sh`  on your system may result in a different shell than what is found in this tutorial. Nevertheless, the examples should all still work.
+
+You’ll note that the token after  `"-c"`  should be one single token, with all the spaces included. Here you’re giving control to the shell to parse the command. If you were to include more tokens, this would be interpreted as more options to pass to the shell executable, not as additional commands to run inside the shell.
+
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -4030,11 +4065,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzc4NDU3NzM3LDE5Nzk4Njk0MjMsMjAyNz
-YzMjM5NiwxNzQ2NzQxNTIsLTEyMTc2MTk5MzQsLTExOTk3MzUz
-MzksMjA0NDU5MTYxOSw2NTY2Mjg3NzMsLTEwODIxMDE2ODUsLT
-E4NTI2MDUyNzYsLTYyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMzg0
-NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OT
-A4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1
-MDMzMTI0XX0=
+eyJoaXN0b3J5IjpbLTE0MjAxMDY4MTIsMTk3OTg2OTQyMywyMD
+I3NjMyMzk2LDE3NDY3NDE1MiwtMTIxNzYxOTkzNCwtMTE5OTcz
+NTMzOSwyMDQ0NTkxNjE5LDY1NjYyODc3MywtMTA4MjEwMTY4NS
+wtMTg1MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MDExMDQsLTEz
+ODQ0ODU2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4NiwxNjc0NT
+g5MDgsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1NSw0
+MTUwMzMxMjRdfQ==
 -->
