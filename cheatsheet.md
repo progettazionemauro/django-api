@@ -1084,7 +1084,13 @@ Avoids Diamond Problem: Mixins can help avoid the "diamond problem" that arises 
 
 Small and Focused: Mixins are typically small and focused on a specific task. This makes them easy to understand, maintain, and reuse.
 
-## The subprocess Module: Wrapping Programs With Python
+## THE subprocess Module: Wrapping Programs With Python
+If you’ve ever wanted to simplify your command-line scripting or use Python alongside command-line applications—or any applications for that matter—then the Python `subprocess` module can help. From running shell commands and command-line applications to launching applications, the Python `subprocess` module can help.
+
+## Processes and Subprocesses[](https://realpython.com/python-subprocess/#processes-and-subprocesses "Permanent link")
+
+First off, you might be wondering why there’s a  `sub`  in the Python  `subprocess`  module name. And what exactly is a process, anyway? I
+
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
 1) python3 -m venv venv
@@ -3559,7 +3565,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODAyNzcxNiwtMTM4NDQ4NTY2MSwtNz
+eyJoaXN0b3J5IjpbLTk5NDY0MDc2MiwtMTM4NDQ4NTY2MSwtNz
 I3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOCwtMTEzMzgz
 OTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQxNTAzMzEyNCwxMD
 g3NTg2MDIyLC01OTEyMDUxODldfQ==
