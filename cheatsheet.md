@@ -1224,6 +1224,23 @@ The diagram you sent depicts a high-level view of system components. The `fork` 
 -   Context switching between parent and child processes is managed by the kernel after `fork`.
 
 I hope this visual representation provides a clearer understanding of how `fork` works at the kernel level. Feel free to ask if you have any further questions about specific details in the diagram.
+
+The parent-child relationship between a process and its subprocess isn’t always the same. Sometimes the two processes will share specific resources, like inputs and outputs, but sometimes they won’t. Sometimes child processes live longer than the parent. A child outliving the parent can lead to  [orphaned](https://en.wikipedia.org/wiki/Orphan_process)  or  [zombie](https://en.wikipedia.org/wiki/Zombie_process)  processes, though more discussion about those is outside the scope of this tutorial.
+
+When a process has finished running, it’ll usually end. Every process, on exit, should return an integer. This integer is referred to as the  **return code**  or  [exit status](https://en.wikipedia.org/wiki/Exit_status). Zero is synonymous with success, while any other value is considered a failure. Different integers can be used to indicate the reason why a process has failed.
+
+In the same way that you can return a value from a function in Python, the operating system expects an integer return value from a process once it exits. This is why the canonical  [C](https://en.wikipedia.org/wiki/C_(programming_language))  `main()`  function usually returns an integer:
+
+    C
+    
+    `// minimal_program.c
+    
+    int  main(){
+      return  0;
+    }` 
+
+This example shows a minimal amount of C code necessary for the file to compile with  [`gcc`](https://gcc.gnu.org/)  without any warnings. It has a  `main()`  function that returns an integer. When this program runs, the operating system will interpret its execution as successful since it returns zero.
+
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -3699,9 +3716,9 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NTI2MDUyNzYsLTYyNDc4Nzc4MiwxNT
-AxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2
-OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMy
-w4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIw
-NTE4OV19
+eyJoaXN0b3J5IjpbMTc2OTc2NzI2NiwtMTg1MjYwNTI3NiwtNj
+I0Nzg3NzgyLDE1MDE1MDExMDQsLTEzODQ0ODU2NjEsLTcyNzQ4
+OTA0MywtMTc4MjY5NDQ4NiwxNjc0NTg5MDgsLTExMzM4Mzk2OC
+wxNTEwNTcxMDAzLDg4MDI2MDk1NSw0MTUwMzMxMjQsMTA4NzU4
+NjAyMiwtNTkxMjA1MTg5XX0=
 -->
