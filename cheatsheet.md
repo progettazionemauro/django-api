@@ -1433,9 +1433,8 @@ In this example, the first dot of the timer animation was output, but the subpro
 
 The other type of error that might happen is if the program doesn’t exist on that particular system, which raises one final type of error.
 
-[![](https://img.realpython.net/28d978cf3e7797b78e9cba11b65bc2c6)](https://srv.realpython.net/click/12280765222/?c=10466391474&p=58946116052&r=74839)
 
-[Remove ads](https://realpython.com/account/join/)
+
 
 ### `FileNotFoundError`  for Programs That Don’t Exist[](https://realpython.com/python-subprocess/#filenotfounderror-for-programs-that-dont-exist "Permanent link")
 
@@ -3930,11 +3929,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0Njc0MTUyLC0xMjE3NjE5OTM0LC0xMT
-k5NzM1MzM5LDIwNDQ1OTE2MTksNjU2NjI4NzczLC0xMDgyMTAx
-Njg1LC0xODUyNjA1Mjc2LC02MjQ3ODc3ODIsMTUwMTUwMTEwNC
-wtMTM4NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0NDg2LDE2
-NzQ1ODkwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMsODgwMjYwOT
-U1LDQxNTAzMzEyNCwxMDg3NTg2MDIyLC01OTEyMDUxODldfQ==
-
+eyJoaXN0b3J5IjpbMjAyNzYzMjM5NiwxNzQ2NzQxNTIsLTEyMT
+c2MTk5MzQsLTExOTk3MzUzMzksMjA0NDU5MTYxOSw2NTY2Mjg3
+NzMsLTEwODIxMDE2ODUsLTE4NTI2MDUyNzYsLTYyNDc4Nzc4Mi
+wxNTAxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0ODkwNDMsLTE3
+ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MT
+AwMyw4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5
+MTIwNTE4OV19
 -->
