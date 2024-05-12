@@ -1612,11 +1612,9 @@ import subprocess
 subprocess.run(["bash", "-c", f"ls {input()}"])
 
 # ...` 
-
+```
 You can imagine the intended use case is to wrap  `ls`  and add something to it. So the expected user behavior is to provide a path like  `"/home/realpython/"`. However, if a malicious actor realized what was happening, they could execute almost any code they wanted. Take the following, for instance, but  **be careful with this**:
 
--   [Windows](https://realpython.com/python-subprocess/#windows-4)
--   [Linux + macOS](https://realpython.com/python-subprocess/#linux-macos-4)
 
 > `/home/realpython/; echo 'You could've been hacked: rm -rf /*'`
 
@@ -4106,7 +4104,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1MjEwNTU0NSwxOTc5ODY5NDIzLDIwMj
+eyJoaXN0b3J5IjpbLTU2MjU3ODc3OSwxOTc5ODY5NDIzLDIwMj
 c2MzIzOTYsMTc0Njc0MTUyLC0xMjE3NjE5OTM0LC0xMTk5NzM1
 MzM5LDIwNDQ1OTE2MTksNjU2NjI4NzczLC0xMDgyMTAxNjg1LC
 0xODUyNjA1Mjc2LC02MjQ3ODc3ODIsMTUwMTUwMTEwNCwtMTM4
