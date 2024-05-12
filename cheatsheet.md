@@ -1288,7 +1288,7 @@ In this section, you’ll take a look at some of the most basic examples demonst
 ## Basic Usage of the Python  `subprocess`  
 In this section, you’ll take a look at some of the most basic examples demonstrating the usage of the  `subprocess`  module. You’ll start by exploring a bare-bones command-line timer program with the  `run()`  function.
 
-### The Timer Example[](https://realpython.com/python-subprocess/#the-timer-example "Permanent link")
+### The Timer Example
 
 To come to grips with the Python  `subprocess`  module, you’ll want a bare-bones program to run and experiment with. For this, you’ll use a program written in Python:
 
@@ -1318,9 +1318,9 @@ print("**", end="", flush=True)
 
 sleep(1)
 
-print("Bravo Mauuro!")
+print("Bravo Mauuro!") ```
 
-The timer program uses  to accept an integer as an argument. The integer represents the number of seconds that the timer should wait until exiting, which the program uses  [`sleep()`](https://realpython.com/python-sleep/)  to achieve. It’ll play a small animation representing each passing second until it exits:
+enter code hereThe timer program uses  to accept an integer as an argument. The integer represents the number of seconds that the timer should wait until exiting, which the program uses  [`sleep()`](https://realpython.com/python-sleep/)  to achieve. It’ll play a small animation representing each passing second until it exits:
 
 It’s not much, but the key is that it serves as a cross-platform process that runs for a few seconds and which you can easily tinker with. You’ll be calling it with  `subprocess`  as if it were a separate executable.
 
@@ -1613,9 +1613,8 @@ codekey1:
   key2: value
   key3:
     - item1
-    - item2
-```
-
+    - item2 
+    - 
 ### 2. **Key-Value Pairs:**
 
 - YAML uses a simple key-value format. Keys and values are separated by a colon, and the key-value pair is represented on a new line.
@@ -3801,10 +3800,10 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExOTk3MzUzMzksMjA0NDU5MTYxOSw2NT
-Y2Mjg3NzMsLTEwODIxMDE2ODUsLTE4NTI2MDUyNzYsLTYyNDc4
-Nzc4MiwxNTAxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0ODkwND
-MsLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUx
-MDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMj
-IsLTU5MTIwNTE4OV19
+eyJoaXN0b3J5IjpbLTE4MjQzODc4MDEsLTExOTk3MzUzMzksMj
+A0NDU5MTYxOSw2NTY2Mjg3NzMsLTEwODIxMDE2ODUsLTE4NTI2
+MDUyNzYsLTYyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMzg0NDg1Nj
+YxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0x
+MTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMT
+I0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
 -->
