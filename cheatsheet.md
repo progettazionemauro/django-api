@@ -1091,9 +1091,9 @@ If you’ve ever wanted to simplify your command-line scripting or use Python al
 First off, you might be wondering why there’s a  `sub`  in the Python  `subprocess`  module name. And what exactly is a process, anyway? 
 Whenever you use a computer, you’ll always be interacting with programs. A  **process**  is the operating system’s abstraction of a running program. So, using a computer always involve processes. Start menus, app bars, command-line interpreters, text editors, browsers, and more—every application comprises one or more processes.
 
-A typical operating system will report hundreds or even thousands of running processes, which you’ll get to explore  [shortly](https://realpython.com/python-subprocess/#active-processes-on-your-system). However, central  _processing_  units (CPUs) typically only have a handful of cores, which means that they can only run a handful of instructions simultaneously. So, you may wonder how thousands of processes can appear to run at the same time.
+A typical operating system will report hundreds or even thousands of running processes. However, central  _processing_  units (CPUs) typically only have a handful of cores, which means that they can only run a handful of instructions simultaneously. So, you may wonder how thousands of processes can appear to run at the same time.
 
-In short, the operating system is a marvelous multitasker—as it has to be. The CPU is the brain of a computer, but it operates at the  [nanosecond](https://en.wikipedia.org/wiki/Nanosecond)  timescale. Most other components of a computer are far slower than the CPU. For instance, a magnetic hard disk read takes thousands of times longer than a typical CPU operation.
+In short, the operating system is a marvelous multitasker—as it has to be. The CPU is the brain of a computer, but it operates at the  timescale. Most other components of a computer are far slower than the CPU. For instance, a magnetic hard disk read takes thousands of times longer than a typical CPU operation.
 
 If a process needs to write something to the hard drive, or wait for a response from a remote server, then the CPU would sit idle  _most of the time_. Multitasking keeps the CPU busy.
 
@@ -3587,8 +3587,8 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzIxOTE0NDgyLC0xMzg0NDg1NjYxLC03Mj
-c0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5
-NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0LDEwOD
-c1ODYwMjIsLTU5MTIwNTE4OV19
+eyJoaXN0b3J5IjpbMTUwMTUwMTEwNCwtMTM4NDQ4NTY2MSwtNz
+I3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOCwtMTEzMzgz
+OTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQxNTAzMzEyNCwxMD
+g3NTg2MDIyLC01OTEyMDUxODldfQ==
 -->
