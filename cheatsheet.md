@@ -1625,11 +1625,35 @@ Running these malicious commands would cause irreparable damage to the file syst
 Luckily, the operating system wouldn’t let you do this to some particularly important files. The  `rm`  command would need to use  [`sudo`](https://en.wikipedia.org/wiki/Sudo)  in UNIX-based systems, or be run as an administrator in Windows to be completely successful in its mayhem. The command would probably delete a lot of important stuff before stopping, though.
 
 So, make sure that if you’re dynamically building user inputs to feed into a  `subprocess`  call, then you’re very careful! With that warning, coming up you’ll be covering using the outputs of commands and chaining commands together—in short, how to communicate with processes once they’ve started.
-## Communication With Processes[](https://realpython.com/python-subprocess/#communication-with-processes "Permanent link")
+## Communication With Processes
 
 You’ve used the  `subprocess`  module to execute programs and send basic commands to the shell. But something important is still missing. For many tasks that you might want to use  `subprocess`  for, you might want to dynamically send inputs or use the outputs in your Python code later.
 
 To communicate with your process, you first should understand a little bit about how processes communicate in general, and then you’ll take a look at two examples to come to grips with the concepts.
+
+### The Standard I/O Streams[](https://realpython.com/python-subprocess/#the-standard-io-streams "Permanent link")
+
+A  [stream](https://en.wikipedia.org/wiki/Stream_(computing))  at its most basic represents a sequence of elements that aren’t available all at once. When you  [read characters and lines from a file](https://realpython.com/working-with-files-in-python/), you’re working with a stream in the form of a file object, which at its most basic is a  [file descriptor](https://realpython.com/why-close-file-python/#in-short-files-are-resources-limited-by-the-operating-system). File descriptors are often used for streams. So, it’s not uncommon to see the terms  _stream_,  _file_, and  _file-like_  used interchangeably.
+
+When processes are initialized, there are three special streams that a process makes use of. A process does the following:
+
+1.  Reads  `stdin`  for input
+2.  Writes to  `stdout`  for general output
+3.  Writes to  `stderr`  for error reporting
+
+These are the  [standard streams](https://en.wikipedia.org/wiki/Standard_streams)—a cross-platform pattern for process communication.
+
+Sometimes the child process inherits these streams from the parent. This is what’s happening when you use  `subprocess.run()`  in the REPL and are able to see the output of the command. The  `stdout`  of the Python interpreter is inherited by the subprocess.
+
+When you’re in a REPL environment, you’re looking at a command-line interface process, complete with the three standard I/O streams. The interface has a shell process as a child process, which itself has a Python REPL as a child. In this situation, unless you specify otherwise,  `stdin`  comes from the keyboard, while  `stdout`  and  `stderr`  are displayed on-screen. The interface, the shell, and the REPL share the streams:
+
+[![Diagram demonstrating the structure of processes involved in repl environment](https://files.realpython.com/media/2022-05-31_17_26_47-process__Figma.f98ed0f101b2.png)](https://files.realpython.com/media/2022-05-31_17_26_47-process__Figma.f98ed0f101b2.png)
+
+You can think of the standard I/O streams as byte dispensers. The subprocess fills up  `stdout`  and  `stderr`, and you fill up  `stdin`. Then you read the bytes in  `stdout`  and  `stderr`, and the subprocess reads from  `stdin`.
+
+As with a dispenser, you can stock  `stdin`  before it gets linked up to a child process. The child process will then read from  `stdin`  as and when it needs to. Once a process has read from a stream, though, the bytes are dispensed. You can’t go back and read them again:
+
+These three streams, or files, are the basis for communicating with your process. In the next section, you’ll start to see this in action by getting the output of a magic number generator program.
 
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
@@ -4104,11 +4128,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU2MjU3ODc3OSwxOTc5ODY5NDIzLDIwMj
-c2MzIzOTYsMTc0Njc0MTUyLC0xMjE3NjE5OTM0LC0xMTk5NzM1
-MzM5LDIwNDQ1OTE2MTksNjU2NjI4NzczLC0xMDgyMTAxNjg1LC
-0xODUyNjA1Mjc2LC02MjQ3ODc3ODIsMTUwMTUwMTEwNCwtMTM4
-NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1OD
-kwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQx
-NTAzMzEyNF19
+eyJoaXN0b3J5IjpbLTE1NjY4NzU0NzIsLTU2MjU3ODc3OSwxOT
+c5ODY5NDIzLDIwMjc2MzIzOTYsMTc0Njc0MTUyLC0xMjE3NjE5
+OTM0LC0xMTk5NzM1MzM5LDIwNDQ1OTE2MTksNjU2NjI4NzczLC
+0xMDgyMTAxNjg1LC0xODUyNjA1Mjc2LC02MjQ3ODc3ODIsMTUw
+MTUwMTEwNCwtMTM4NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNj
+k0NDg2LDE2NzQ1ODkwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMs
+ODgwMjYwOTU1XX0=
 -->
