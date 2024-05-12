@@ -1277,6 +1277,13 @@ Python  `subprocess`  was  [originally proposed and accepted](https://peps.pytho
 Most of your interaction with the Python  `subprocess`  module will be via the  [`run()`](https://docs.python.org/3/library/subprocess.html#subprocess.run)  function. This  [blocking](https://en.wikipedia.org/wiki/Blocking_(computing))  function will start a process and  _wait_  until the new process exits before moving on.
 
 The  [documentation](https://docs.python.org/3/library/subprocess.html#using-the-subprocess-module)  recommends using  `run()`  for all cases that it can handle. For edge cases where you need more control, the  [`Popen`](https://docs.python.org/3/library/subprocess.html#subprocess.Popen)  class can be used.  `Popen`  is the underlying class for the whole  `subprocess`  module. All functions in the  `subprocess`  module are convenience wrappers around the  `Popen()`  constructor and its instance methods. Near the end of this tutorial, you’ll  [dive into](https://realpython.com/python-subprocess/#the-popen-class)  the  `Popen`  class.
+You may come across other functions like  [`call()`](https://docs.python.org/3/library/subprocess.html#subprocess.call),  [`check_call()`](https://docs.python.org/3/library/subprocess.html#subprocess.check_call), and  [`check_output()`](https://docs.python.org/3/library/subprocess.html#subprocess.check_output), but these belong to the older  `subprocess`  [API](https://en.wikipedia.org/wiki/API)  from Python 3.5 and earlier. Everything these three functions do can be replicated with the newer  `run()`  function. The older API is mainly still there for backwards compatibility, and you won’t cover it in this tutorial.
+
+There’s also a fair amount of redundancy in the  `subprocess`  module, meaning that there are various ways to achieve the same end goal. You won’t be exploring all variations in this tutorial. What you will find, though, are robust techniques that should keep you on the right path.
+
+## Basic Usage of the Python  `subprocess`  Module[](https://realpython.com/python-subprocess/#basic-usage-of-the-python-subprocess-module "Permanent link")
+
+In this section, you’ll take a look at some of the most basic examples demonstrating the usage of the  `subprocess`  module. You’ll start by exploring a bare-bones command-line timer program with the  `run()`  function.
 
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
@@ -3753,9 +3760,9 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwODIxMDE2ODUsLTE4NTI2MDUyNzYsLT
-YyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0
-ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5Nj
-gsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1
-ODYwMjIsLTU5MTIwNTE4OV19
+eyJoaXN0b3J5IjpbMTcxNzYyNTQ1MSwtMTA4MjEwMTY4NSwtMT
+g1MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MDExMDQsLTEzODQ0
+ODU2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4NiwxNjc0NTg5MD
+gsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1NSw0MTUw
+MzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5XX0=
 -->
