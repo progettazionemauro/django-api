@@ -1520,6 +1520,43 @@ In PowerShell,  `ls`  is the default alias for  `Get-ChildItem`, but calling tha
 
 The fact that many text-based programs can operate independently from the shell may make you wonder if you can cut out the middle process—namely, the shell—and use  `subprocess`  directly with the text-based programs typically associated with the shell.
 
+### Use Cases for the Shell and  `subprocess`[](https://realpython.com/python-subprocess/#use-cases-for-the-shell-and-subprocess "Permanent link")
+
+There are a few common reasons why you might want to call the shell with the  `Python`  subprocess module:
+
+-   When you know certain commands are only available via the shell, which is more common in Windows
+-   When you’re experienced in writing shell scripts with a particular shell, so you want to leverage your ability there to do certain tasks while still working primarily in Python
+-   When you’ve inherited a large shell script that might do nothing that Python couldn’t do, but would take a long time to reimplement in Python
+
+This isn’t an exhaustive list!
+
+You might use the shell to wrap programs or to do some text processing. However, the syntax can be very cryptic when compared to Python. With Python, text processing workflows are easier to write, easier to maintain,  [generally more performant](https://stackoverflow.com/a/4493209/10445017), and cross-platform to boot. So it’s well worth considering going without the shell.
+
+What often happens, though, is that you just don’t have the time or it’s not worth the effort to reimplement existing shell scripts in Python. In those cases, using  `subprocess`  for some  [sloppy Python](https://www.youtube.com/watch?v=Jd8ulMb6_ls)  isn’t a bad thing!
+
+Common reasons for using  `subprocess`  itself are similar in nature to using the shell with  `subprocess`:
+
+-   When you have to use or analyze a  [black box](https://en.wikipedia.org/wiki/Black_box), or even a  [white box](https://en.wikipedia.org/wiki/White_box_(software_engineering))
+-   When you want a wrapper for an application
+-   When you need to launch another application
+-   As an alternative to basic shell scripts
+
+**Note:**  A  [black box](https://en.wikipedia.org/wiki/Black_box)  could be a program that can be freely used but whose source code isn’t available, so there’s no way to know exactly what it does and no way to modify its internals.
+
+Similarly, a  [white box](https://en.wikipedia.org/wiki/White_box_(software_engineering))  could be a program whose source code is available but can’t be changed. It could also be a program whose source code you could change, but its complexity means that it would take you a long time to get your head around it to be able to change it.
+
+In these cases, you can use  `subprocess`  to wrap your boxes of varying opacity, bypassing any need to change or reimplement things in Python.
+
+Often you’ll find that for  `subprocess`  use cases, there will be a dedicated library for that task. Later in the tutorial, you’ll examine a  [script that creates a Python project](https://realpython.com/python-subprocess/#creating-a-new-project-an-example), complete with a  [virtual environment](https://realpython.com/python-virtual-environments-a-primer/)  and a fully initialized  [Git](https://realpython.com/python-git-github-intro/)  repository. However, the  [Cookiecutter](https://github.com/cookiecutter/cookiecutter)  and  [Copier](https://copier.readthedocs.io/)  libraries already exist for that purpose.
+
+Even though specific libraries might be able to do your task, it may still be worth doing things with  `subprocess`. For one, it might be much faster for you to execute what you already know how to do, rather than learning a new library.
+
+Additionally, if you’re sharing this script with friends or colleagues, it’s convenient if your script is pure Python without any other dependencies, especially if your script needs to go on minimal environments like servers or embedded systems.
+
+However, if you’re using  `subprocess`  instead of  `pathlib`  to read and write a few files with Bash, you might want to consider learning how to  [read and write](https://realpython.com/read-write-files-python/)  with Python. Learning how to read and write files doesn’t take long, and it’ll definitely be worth it for such a common task.
+
+With that out of the way, it’s time to get familiar with the shell environments on both Windows and UNIX-based systems.
+
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -3993,7 +4030,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTUxOTU0MDk0LDE5Nzk4Njk0MjMsMjAyNz
+eyJoaXN0b3J5IjpbMzc4NDU3NzM3LDE5Nzk4Njk0MjMsMjAyNz
 YzMjM5NiwxNzQ2NzQxNTIsLTEyMTc2MTk5MzQsLTExOTk3MzUz
 MzksMjA0NDU5MTYxOSw2NTY2Mjg3NzMsLTEwODIxMDE2ODUsLT
 E4NTI2MDUyNzYsLTYyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMzg0
