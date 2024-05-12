@@ -1350,6 +1350,113 @@ An example of something that you might want to do with  `subprocess`  is to open
 Then again,  `subprocess`  can be a remarkably useful tool to get something done quickly. If you don’t need a full-fledged library, then  `subprocess`  can be your  [Swiss Army knife](https://en.wikipedia.org/wiki/Swiss_Army_knife). It all depends on your use case. More discussion on this topic will come  [later](https://realpython.com/python-subprocess/#use-cases-for-the-shell-and-subprocess).
 
 You’ve successfully started new processes using Python! That’s  `subprocess`  at its most basic. Next up, you’ll take a closer look at the  `CompletedProcess`  object that’s returned from  `run()`.
+
+### The  `CompletedProcess`  Object[](https://realpython.com/python-subprocess/#the-completedprocess-object "Permanent link")
+
+When you use  `run()`, the return value is an instance of the  `CompletedProcess`  class. As the name suggests,  `run()`  returns the object only once the child process has ended. It has various attributes that can be helpful, such as the  `args`  that were used for the process and the  `returncode`.
+
+To see this clearly, you can assign the result of  `run()`  to a variable, and then access its attributes such as  `.returncode`:
+
+Python
+
+`>>> import subprocess
+>>> completed_process = subprocess.run(["python", "timer.py"])
+usage: timer.py [-h] time
+timer.py: error: the following arguments are required: time
+
+>>> completed_process.returncode
+2` 
+
+The process has a return code that indicates failure, but it  **doesn’t raise an  [exception](https://realpython.com/python-exceptions/)**. Typically, when a  `subprocess`  process fails, you’ll always want an exception to be raised, which you can do by passing in a  `check=True`  argument:
+
+Python
+
+`>>> completed_process = subprocess.run(
+...     ["python", "timer.py"],
+...     check=True ... )
+...
+usage: timer.py [-h] time
+timer.py: error: the following arguments are required: time
+Traceback (most recent call last):
+  ...
+subprocess.CalledProcessError: Command '['python', 'timer.py']' returned
+ non-zero exit status 2.` 
+
+There are various ways to deal with failures, some of which will be covered in the next section. The important point to note for now is that  `run()`  won’t necessarily raise an exception if the process fails unless you’ve passed in a  `check=True`  argument.
+
+The  `CompletedProcess`  also has a few attributes relating to  [input/output (I/O)](https://en.wikipedia.org/wiki/Input/output), which you’ll cover in more detail in the  [communicating with processes](https://realpython.com/python-subprocess/#communication-with-processes)  section. Before communicating with processes, though, you’ll learn how to handle errors when coding with  `subprocess`.
+
+## `subprocess`  Exceptions[](https://realpython.com/python-subprocess/#subprocess-exceptions "Permanent link")
+
+As you saw earlier, even if a process exits with a return code that represents failure, Python won’t raise an exception. For most use cases of the  `subprocess`  module, this isn’t ideal. If a process fails, you’ll usually want to handle it somehow, not just carry on.
+
+A lot of  `subprocess`  use cases involve short personal scripts that you might not spend much time on, or at least  [shouldn’t spend much time on](https://xkcd.com/1319/). If you’re tinkering with a script like this, then you’ll want  `subprocess`  to fail early and loudly.
+
+### `CalledProcessError`  for Non-Zero Exit Code[](https://realpython.com/python-subprocess/#calledprocesserror-for-non-zero-exit-code "Permanent link")
+
+If a process returns an exit code that isn’t zero, you should interpret that as a failed process. Contrary to what you might expect, the Python  `subprocess`  module does  _not_  automatically raise an exception on a non-zero exit code. A failing process is typically not something you want your program to pass over silently, so you can pass a  `check=True`  argument to  `run()`  to raise an exception:
+
+Python
+
+`>>> completed_process = subprocess.run(
+...     ["python", "timer.py"],
+...     check=True ... )
+...
+usage: timer.py [-h] time
+timer.py: error: the following arguments are required: time
+Traceback (most recent call last):
+  ...
+subprocess.CalledProcessError: Command '['python', 'timer.py']' returned
+ non-zero exit status 2.` 
+
+The  `CalledProcessError`  is raised as soon as the subprocess runs into a non-zero return code. If you’re developing a short personal script, then perhaps this is good enough for you. If you want to handle errors more gracefully, then read on to the section on  [exception handling](https://realpython.com/python-subprocess/#an-example-of-exception-handling).
+
+One thing to bear in mind is that the  `CalledProcessError`  does not apply to processes that may hang and block your execution indefinitely. To guard against that, you’d want to take advantage of the  `timeout`  parameter.
+
+### `TimeoutExpired`  for Processes That Take Too Long[](https://realpython.com/python-subprocess/#timeoutexpired-for-processes-that-take-too-long "Permanent link")
+
+Sometimes processes aren’t well behaved, and they might take too long or just hang indefinitely. To handle those situations, it’s always a good idea to use the  `timeout`  parameter of the  `run()`  function.
+
+Passing a  `timeout=1`  argument to  `run()`  will cause the function to shut down the process and raise a  `TimeoutExpired`  error after one second:
+
+Python
+
+`>>> import subprocess
+>>> subprocess.run(["python", "timer.py", "5"], timeout=1)
+Starting timer of 5 seconds
+.Traceback (most recent call last):
+ ...
+subprocess.TimeoutExpired: Command '['python', 'timer.py', '5']' timed out
+ after 1.0 seconds` 
+
+In this example, the first dot of the timer animation was output, but the subprocess was shut down before being able to complete.
+
+The other type of error that might happen is if the program doesn’t exist on that particular system, which raises one final type of error.
+
+[![](https://img.realpython.net/28d978cf3e7797b78e9cba11b65bc2c6)](https://srv.realpython.net/click/12280765222/?c=10466391474&p=58946116052&r=74839)
+
+[Remove ads](https://realpython.com/account/join/)
+
+### `FileNotFoundError`  for Programs That Don’t Exist[](https://realpython.com/python-subprocess/#filenotfounderror-for-programs-that-dont-exist "Permanent link")
+
+The final type of exception you’ll be looking at is the  `FileNotFoundError`, which is raised if you try and call a program that doesn’t exist on the target system:
+
+Python
+
+`>>> import subprocess
+>>> subprocess.run(["now_you_see_me"])
+Traceback (most recent call last):
+  ...
+FileNotFoundError: The system cannot find the file specified` 
+
+This type of error is raised no matter what, so you don’t need to pass in any arguments for the  `FileNotFoundError`.
+
+Those are the main exceptions that you’ll run into when using the Python  `subprocess`  module. For many use cases, knowing the exceptions and making sure that you use  `timeout`  and  `check`  arguments will be enough. That’s because if the subprocess fails, then that usually means that your script has failed.
+
+However, if you have a more complex program, then you may want to handle errors more gracefully. For instance, you may need to call many processes over a long period of time. For this, you can use the  [`try`  …  `except`](https://realpython.com/python-exceptions/#the-try-and-except-block-handling-exceptions)  construct.
+
+
+
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -3823,10 +3930,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTc2MTk5MzQsLTExOTk3MzUzMzksMj
-A0NDU5MTYxOSw2NTY2Mjg3NzMsLTEwODIxMDE2ODUsLTE4NTI2
-MDUyNzYsLTYyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMzg0NDg1Nj
-YxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0x
-MTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMT
-I0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
+eyJoaXN0b3J5IjpbMTc0Njc0MTUyLC0xMjE3NjE5OTM0LC0xMT
+k5NzM1MzM5LDIwNDQ1OTE2MTksNjU2NjI4NzczLC0xMDgyMTAx
+Njg1LC0xODUyNjA1Mjc2LC02MjQ3ODc3ODIsMTUwMTUwMTEwNC
+wtMTM4NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0NDg2LDE2
+NzQ1ODkwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMsODgwMjYwOT
+U1LDQxNTAzMzEyNCwxMDg3NTg2MDIyLC01OTEyMDUxODldfQ==
+
 -->
