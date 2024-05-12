@@ -1480,7 +1480,45 @@ This snippet shows you an example of how you might handle the three main excepti
 
 Now that you’ve used  `subprocess`  in its basic form and handled some exceptions, it’s time to get familiar with what it takes to interact with the shell.
 
+## Introduction to the Shell and Text-Based Programs With  `subprocess`[](https://realpython.com/python-subprocess/#introduction-to-the-shell-and-text-based-programs-with-subprocess "Permanent link")
 
+Some of the most popular use cases of the  `subprocess`  module are to interact with text-based programs, typically available on the shell. That’s why in this section, you’ll start to explore all the moving parts involved when interacting with text-based programs, and perhaps question if you need the shell at all!
+
+The shell is typically synonymous with the  [command-line interface](https://en.wikipedia.org/wiki/Command-line_interface)  or CLI, but this terminology isn’t entirely accurate. There are actually two separate processes that make up the typical command-line experience:
+
+1.  **The interpreter**, which is typically thought of as the whole CLI. Common interpreters are Bash on Linux, Zsh on macOS, or PowerShell on Windows. In this tutorial, the interpreter will be referred to as the shell.
+2.  **The interface**, which displays the output of the interpreter in a window and sends user keystrokes to the interpreter. The interface is a separate process from the shell, sometimes called a  [terminal emulator](https://en.wikipedia.org/wiki/Terminal_emulator).
+
+When on the command line, it’s common to think that you’re interacting directly with the shell, but you’re really interacting with the  _interface_. The interface takes care of sending your commands to the shell and displaying the shell’s output back to you.
+
+With this important distinction in mind, it’s time to turn your attention to what  `run()`  is actually doing. It’s common to think that calling  `run()`  is somehow the same as typing a command in a terminal interface, but there are important differences.
+
+While all new process are created with the same  [system calls](https://en.wikipedia.org/wiki/System_call), the context from which the system call is made is different. The  `run()`  function can make a system call directly and doesn’t need to go through the shell to do so:
+
+In fact, many programs that are thought of as shell programs, such as  [Git](https://git-scm.com/), are really just  _text-based_  programs that don’t need a shell to run. This is especially true of UNIX environments, where all of the familiar utilities like  `ls`,  `rm`,  `grep`, and  `cat`  are actually separate executables that can be called directly:
+
+Python
+
+`>>> # Linux or macOS
+>>> import subprocess
+>>> subprocess.run(["ls"])
+timer.py
+CompletedProcess(args=['ls'], returncode=0)` 
+
+There are some tools that are specific to shells, though. Finding tools embedded within the shell is far more common on Windows shells like PowerShell, where commands like  `ls`  are  _part of the shell itself_  and not separate executables like they are in a UNIX environment:
+
+Python
+
+`>>> # Windows
+>>> import subprocess
+>>> subprocess.run(["ls"])
+Traceback (most recent call last):
+  ...
+FileNotFoundError: [WinError 2] The system cannot find the file specified` 
+
+In PowerShell,  `ls`  is the default alias for  `Get-ChildItem`, but calling that won’t work either because  `Get-ChildItem`  isn’t a separate executable—it’s  _part of PowerShell_  itself.
+
+The fact that many text-based programs can operate independently from the shell may make you wonder if you can cut out the middle process—namely, the shell—and use  `subprocess`  directly with the text-based programs typically associated with the shell.
 
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
@@ -3955,11 +3993,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk3OTg2OTQyMywyMDI3NjMyMzk2LDE3ND
-Y3NDE1MiwtMTIxNzYxOTkzNCwtMTE5OTczNTMzOSwyMDQ0NTkx
-NjE5LDY1NjYyODc3MywtMTA4MjEwMTY4NSwtMTg1MjYwNTI3Ni
-wtNjI0Nzg3NzgyLDE1MDE1MDExMDQsLTEzODQ0ODU2NjEsLTcy
-NzQ4OTA0MywtMTc4MjY5NDQ4NiwxNjc0NTg5MDgsLTExMzM4Mz
-k2OCwxNTEwNTcxMDAzLDg4MDI2MDk1NSw0MTUwMzMxMjQsMTA4
-NzU4NjAyMl19
+eyJoaXN0b3J5IjpbNTUxOTU0MDk0LDE5Nzk4Njk0MjMsMjAyNz
+YzMjM5NiwxNzQ2NzQxNTIsLTEyMTc2MTk5MzQsLTExOTk3MzUz
+MzksMjA0NDU5MTYxOSw2NTY2Mjg3NzMsLTEwODIxMDE2ODUsLT
+E4NTI2MDUyNzYsLTYyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMzg0
+NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OT
+A4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1
+MDMzMTI0XX0=
 -->
