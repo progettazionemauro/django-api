@@ -1592,6 +1592,47 @@ So, calling  `sh`  on your system may result in a different shell than what is f
 
 You’ll note that the token after  `"-c"`  should be one single token, with all the spaces included. Here you’re giving control to the shell to parse the command. If you were to include more tokens, this would be interpreted as more options to pass to the shell executable, not as additional commands to run inside the shell.
 
+### A Security Warning[](https://realpython.com/python-subprocess/#a-security-warning "Permanent link")
+
+If at any point you plan to get user input and somehow translate that to a call to  `subprocess`, then you have to be very careful of  [injection](https://en.wikipedia.org/wiki/Code_injection)  attacks. That is, take into account potential malicious actors. There are many ways to cause havoc if you just let people run code on your machine.
+
+To use a very simplistic example, where you take user input and send it, unfiltered, to subprocess to run on the shell:
+```
+-   [Windows](https://realpython.com/python-subprocess/#windows-3)
+-   [Linux + macOS](https://realpython.com/python-subprocess/#linux-macos-3)
+
+Python
+
+`# unsafe_program.py
+
+import subprocess
+
+# ...
+
+subprocess.run(["bash", "-c", f"ls {input()}"])
+
+# ...` 
+
+You can imagine the intended use case is to wrap  `ls`  and add something to it. So the expected user behavior is to provide a path like  `"/home/realpython/"`. However, if a malicious actor realized what was happening, they could execute almost any code they wanted. Take the following, for instance, but  **be careful with this**:
+
+-   [Windows](https://realpython.com/python-subprocess/#windows-4)
+-   [Linux + macOS](https://realpython.com/python-subprocess/#linux-macos-4)
+
+> `/home/realpython/; echo 'You could've been hacked: rm -rf /*'`
+
+Again,  **beware**! These innocent-looking lines could try and delete everything on the system! In this case the malicious part is in quotes, so it won’t run, but if the quotes were not there, you’d be in trouble. The key part that does this is the call to  `rm`  with the relevant flags to recursively delete all files, folders, and subfolders, and it’ll work to force the deletion through. It can run the  `echo`  and potentially the  `rm`  as entirely separate commands by adding semicolons, which act as command separators allowing what would usually be multiple lines of code to run on one line.
+
+Running these malicious commands would cause irreparable damage to the file system, and would require reinstalling the operating system. So, beware!
+
+Luckily, the operating system wouldn’t let you do this to some particularly important files. The  `rm`  command would need to use  [`sudo`](https://en.wikipedia.org/wiki/Sudo)  in UNIX-based systems, or be run as an administrator in Windows to be completely successful in its mayhem. The command would probably delete a lot of important stuff before stopping, though.
+
+So, make sure that if you’re dynamically building user inputs to feed into a  `subprocess`  call, then you’re very careful! With that warning, coming up you’ll be covering using the outputs of commands and chaining commands together—in short, how to communicate with processes once they’ve started.
+## Communication With Processes[](https://realpython.com/python-subprocess/#communication-with-processes "Permanent link")
+
+You’ve used the  `subprocess`  module to execute programs and send basic commands to the shell. But something important is still missing. For many tasks that you might want to use  `subprocess`  for, you might want to dynamically send inputs or use the outputs in your Python code later.
+
+To communicate with your process, you first should understand a little bit about how processes communicate in general, and then you’ll take a look at two examples to come to grips with the concepts.
+
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -4065,11 +4106,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MjAxMDY4MTIsMTk3OTg2OTQyMywyMD
-I3NjMyMzk2LDE3NDY3NDE1MiwtMTIxNzYxOTkzNCwtMTE5OTcz
-NTMzOSwyMDQ0NTkxNjE5LDY1NjYyODc3MywtMTA4MjEwMTY4NS
-wtMTg1MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MDExMDQsLTEz
-ODQ0ODU2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4NiwxNjc0NT
-g5MDgsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2MDk1NSw0
-MTUwMzMxMjRdfQ==
+eyJoaXN0b3J5IjpbLTg1MjEwNTU0NSwxOTc5ODY5NDIzLDIwMj
+c2MzIzOTYsMTc0Njc0MTUyLC0xMjE3NjE5OTM0LC0xMTk5NzM1
+MzM5LDIwNDQ1OTE2MTksNjU2NjI4NzczLC0xMDgyMTAxNjg1LC
+0xODUyNjA1Mjc2LC02MjQ3ODc3ODIsMTUwMTUwMTEwNCwtMTM4
+NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1OD
+kwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQx
+NTAzMzEyNF19
 -->
