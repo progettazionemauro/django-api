@@ -1087,9 +1087,31 @@ Small and Focused: Mixins are typically small and focused on a specific task. Th
 ## THE subprocess Module: Wrapping Programs With Python
 If you’ve ever wanted to simplify your command-line scripting or use Python alongside command-line applications—or any applications for that matter—then the Python `subprocess` module can help. From running shell commands and command-line applications to launching applications, the Python `subprocess` module can help.
 
-## Processes and Subprocesses[](https://realpython.com/python-subprocess/#processes-and-subprocesses "Permanent link")
+### Processes and Subprocesses
+First off, you might be wondering why there’s a  `sub`  in the Python  `subprocess`  module name. And what exactly is a process, anyway? 
+Whenever you use a computer, you’ll always be interacting with programs. A  **process**  is the operating system’s abstraction of a running program. So, using a computer always involve processes. Start menus, app bars, command-line interpreters, text editors, browsers, and more—every application comprises one or more processes.
 
-First off, you might be wondering why there’s a  `sub`  in the Python  `subprocess`  module name. And what exactly is a process, anyway? I
+A typical operating system will report hundreds or even thousands of running processes, which you’ll get to explore  [shortly](https://realpython.com/python-subprocess/#active-processes-on-your-system). However, central  _processing_  units (CPUs) typically only have a handful of cores, which means that they can only run a handful of instructions simultaneously. So, you may wonder how thousands of processes can appear to run at the same time.
+
+In short, the operating system is a marvelous multitasker—as it has to be. The CPU is the brain of a computer, but it operates at the  [nanosecond](https://en.wikipedia.org/wiki/Nanosecond)  timescale. Most other components of a computer are far slower than the CPU. For instance, a magnetic hard disk read takes thousands of times longer than a typical CPU operation.
+
+If a process needs to write something to the hard drive, or wait for a response from a remote server, then the CPU would sit idle  _most of the time_. Multitasking keeps the CPU busy.
+
+Part of what makes the operating system so great at multitasking is that it’s fantastically organized too. The operating system keeps track of processes in a process table or  [process control block](https://en.wikipedia.org/wiki/Process_control_block). In this table, you’ll find the process’s  [file handles](https://realpython.com/why-close-file-python/#in-short-files-are-resources-limited-by-the-operating-system), security context, references to its  [address spaces](https://en.wikipedia.org/wiki/Address_space), and more.
+
+The process table allows the operating system to abandon a particular process at will, because it has all the information it needs to come back and continue with the process at a later time. A process may be interrupted many thousands of times during execution, but the operating system always finds the exact point where it left off upon returning.
+
+An operating system doesn’t boot up with thousands of processes, though. Many of the processes you’re familiar with are started by you. In the next section, you’ll look into the lifetime of a process.
+
+### Process Lifetime[](https://realpython.com/python-subprocess/#process-lifetime "Permanent link")
+
+Think of how you might start a Python application from the command line. This is an instance of your command-line  _process_  starting a Python  _process_:
+
+[![Animation of basic process creation](https://files.realpython.com/media/Peek_2022-05-06_11-31.b24eb35f6ed0.gif)](https://files.realpython.com/media/Peek_2022-05-06_11-31.b24eb35f6ed0.gif)
+
+The process that starts another process is referred to as the  **parent**, and the new process is referred to as the  **child**. The parent and child processes run mostly independently. Sometimes the child inherits specific resources or contexts from the parent.
+
+As you learned in  [Processes and the Operating System](https://realpython.com/python-subprocess/#processes-and-the-operating-system), information about processes is kept in a table. Each process keeps track of its parents, which allows the process hierarchy to be represented as a tree. You’ll be exploring your system’s process tree in the  [next section](https://realpython.com/python-subprocess/#active-processes-on-your-system).
 
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -3565,8 +3587,8 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk5NDY0MDc2MiwtMTM4NDQ4NTY2MSwtNz
-I3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOCwtMTEzMzgz
-OTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQxNTAzMzEyNCwxMD
-g3NTg2MDIyLC01OTEyMDUxODldfQ==
+eyJoaXN0b3J5IjpbMzIxOTE0NDgyLC0xMzg0NDg1NjYxLC03Mj
+c0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5
+NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0LDEwOD
+c1ODYwMjIsLTU5MTIwNTE4OV19
 -->
