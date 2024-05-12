@@ -1295,9 +1295,7 @@ To come to grips with the Python  `subprocess`  module, you’ll want a bare-bon
 
 
 
-
-  
-``` python
+```python
 from  argparse  import  ArgumentParser
 
 from  time  import  sleep
@@ -1319,6 +1317,9 @@ print("**", end="", flush=True)
 sleep(1)
 
 print("Bravo Mauuro!") ```
+```
+
+
 
 enter code hereThe timer program uses  to accept an integer as an argument. The integer represents the number of seconds that the timer should wait until exiting, which the program uses  [`sleep()`](https://realpython.com/python-sleep/)  to achieve. It’ll play a small animation representing each passing second until it exits:
 
@@ -1326,6 +1327,29 @@ It’s not much, but the key is that it serves as a cross-platform process that 
 
 Each item in the sequence represents a  [token](https://en.wikipedia.org/wiki/Lexical_analysis#Token)  which is used for a system call to start a new process.
 
+### The Use of  `subprocess`  to Run Any App[](https://realpython.com/python-subprocess/#the-use-of-subprocess-to-run-any-app "Permanent link")
+
+With  `subprocess`, you aren’t limited to text-based applications like the shell. You can call any application that you can with the Start menu or app bar, as long as you know the precise name or path of the program that you want to run:
+
+
+Python
+
+`>>> subprocess.run(["gedit"])
+CompletedProcess(args=['gedit'], returncode=0)` 
+
+Depending on your Linux distribution, you may have a different text editor, such as  `kate`,  `leafpad`,  `kwrite`, or  `enki`.
+
+These commands should open up a text editor window. Usually  `CompletedProcess`  won’t get returned until you close the editor window. Yet in the case of macOS, since you need to run the launcher process  [`open`](https://ss64.com/osx/open.html)  to launch  [TextEdit](https://support.apple.com/guide/textedit/welcome/mac), the  `CompletedProcess`  gets returned straight away.
+
+Launcher processes are in charge of launching a specific process and then ending. Sometimes programs, such as web browsers, have them built in. The mechanics of launcher processes is out of the scope of this tutorial, but suffice to say that they’re able to manipulate the operating system’s process tree to reassign parent-child relationships.
+
+**Note:**  There are many problems that you might initially reach for  `subprocess`  to solve, but then you’ll find a specific module or library that solves it for you. This tends to be a theme with  `subprocess`  since it is quite a low-level utility.
+
+An example of something that you might want to do with  `subprocess`  is to open a web browser to a specific page. However, for that, it’s probably best to use the Python module  [`webbrowser`](https://docs.python.org/3/library/webbrowser.html). The  `webbrowser`  module uses  `subprocess`  [under the hood](https://github.com/python/cpython/blob/3.10/Lib/webbrowser.py#L9)  but handles all the finicky cross-platform and browser differences that you might encounter.
+
+Then again,  `subprocess`  can be a remarkably useful tool to get something done quickly. If you don’t need a full-fledged library, then  `subprocess`  can be your  [Swiss Army knife](https://en.wikipedia.org/wiki/Swiss_Army_knife). It all depends on your use case. More discussion on this topic will come  [later](https://realpython.com/python-subprocess/#use-cases-for-the-shell-and-subprocess).
+
+You’ve successfully started new processes using Python! That’s  `subprocess`  at its most basic. Next up, you’ll take a closer look at the  `CompletedProcess`  object that’s returned from  `run()`.
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -1614,8 +1638,7 @@ codekey1:
   key3:
     - item1
     - item2 
-    - 
-### 2. **Key-Value Pairs:**
+ ### 2. **Key-Value Pairs:**
 
 - YAML uses a simple key-value format. Keys and values are separated by a colon, and the key-value pair is represented on a new line.
 
@@ -3800,7 +3823,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjQzODc4MDEsLTExOTk3MzUzMzksMj
+eyJoaXN0b3J5IjpbLTEyMTc2MTk5MzQsLTExOTk3MzUzMzksMj
 A0NDU5MTYxOSw2NTY2Mjg3NzMsLTEwODIxMDE2ODUsLTE4NTI2
 MDUyNzYsLTYyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMzg0NDg1Nj
 YxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0x
