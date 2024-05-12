@@ -1930,6 +1930,8 @@ python3.8-config
 As you learned in the previous section, for Windows PowerShell, doing something like this doesn’t make a whole lot of sense because most of the time, these utilities are part of PowerShell itself. Because you aren’t dealing with separate executables, piping becomes less of a necessity. However, the pattern for piping is still the same if something like this needs to be done.
 
 With most of the tools out the way, it’s now time to think about some practical applications for  `subprocess`.
+
+
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -4403,11 +4405,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMDIzNDA5OTgsLTY5NjI5NDU4LC0yMD
-UzODIzOTMwLC0xNTY2ODc1NDcyLC01NjI1Nzg3NzksMTk3OTg2
-OTQyMywyMDI3NjMyMzk2LDE3NDY3NDE1MiwtMTIxNzYxOTkzNC
-wtMTE5OTczNTMzOSwyMDQ0NTkxNjE5LDY1NjYyODc3MywtMTA4
-MjEwMTY4NSwtMTg1MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MD
-ExMDQsLTEzODQ0ODU2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4
-NiwxNjc0NTg5MDhdfQ==
+eyJoaXN0b3J5IjpbLTE4NzQzMDE2MTAsLTIwMDIzNDA5OTgsLT
+Y5NjI5NDU4LC0yMDUzODIzOTMwLC0xNTY2ODc1NDcyLC01NjI1
+Nzg3NzksMTk3OTg2OTQyMywyMDI3NjMyMzk2LDE3NDY3NDE1Mi
+wtMTIxNzYxOTkzNCwtMTE5OTczNTMzOSwyMDQ0NTkxNjE5LDY1
+NjYyODc3MywtMTA4MjEwMTY4NSwtMTg1MjYwNTI3NiwtNjI0Nz
+g3NzgyLDE1MDE1MDExMDQsLTEzODQ0ODU2NjEsLTcyNzQ4OTA0
+MywtMTc4MjY5NDQ4Nl19
 -->
