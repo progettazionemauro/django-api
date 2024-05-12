@@ -1109,9 +1109,7 @@ Think of how you might start a Python application from the command line. This is
 
 [![Animation of basic process creation](https://files.realpython.com/media/Peek_2022-05-06_11-31.b24eb35f6ed0.gif)](https://files.realpython.com/media/Peek_2022-05-06_11-31.b24eb35f6ed0.gif)
 
-The process that starts another process is referred to as the  **parent**, and the new process is referred to as the  **child**. The parent and child processes run mostly independently. Sometimes the child inherits specific resources or contexts from the parent.
-
-As you learned in  [Processes and the Operating System](https://realpython.com/python-subprocess/#processes-and-the-operating-system), information about processes is kept in a table. Each process keeps track of its parents, which allows the process hierarchy to be represented as a tree. You’ll be exploring your system’s process tree in the  [next section](https://realpython.com/python-subprocess/#active-processes-on-your-system).
+The process that starts another process is referred to as the  **parent**, and the new process is referred to as the  **child**. The parent and child processes run mostly independently. Sometimes the child inherits specific resources or contexts from the parentand nformation about processes is kept in a table. Each process keeps track of its parents, which allows the process hierarchy to be represented as a tree.
 
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -3587,7 +3585,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg5NDg3NzA2MywxNTAxNTAxMTA0LC0xMz
+eyJoaXN0b3J5IjpbLTYyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMz
 g0NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4
 OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsND
 E1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
