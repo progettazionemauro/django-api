@@ -1241,6 +1241,43 @@ In the same way that you can return a value from a function in Python, the opera
 
 This example shows a minimal amount of C code necessary for the file to compile with  [`gcc`](https://gcc.gnu.org/)  without any warnings. It has a  `main()`  function that returns an integer. When this program runs, the operating system will interpret its execution as successful since it returns zero.
 
+### Active Processes on Your System[](https://realpython.com/python-subprocess/#active-processes-on-your-system "Permanent link")
+
+You may be curious to see what processes are running on your system right now. To do that, you can use platform-specific utilities to track them:
+
+-   [Windows](https://realpython.com/python-subprocess/#windows-1)
+-   [Linux + macOS](https://realpython.com/python-subprocess/#linux-macos-1)
+
+For UNIX-based systems, there are many command-line utilities to choose from:
+
+-   [`top`](https://man7.org/linux/man-pages/man1/top.1.html): The classic process and resource monitor, often installed by default. Once it’s running, to see the tree view, also called the forest view, press  Shift+V. The forest view may not work on the default macOS  `top`.
+-   [`htop`](https://htop.dev/): More advanced and user-friendly version of  `top`.
+-   [`atop`](https://man7.org/linux/man-pages/man1/pcp-atop.1.html): Another version of  `top`  with more information, but more technical.
+-   [`bpytop`](https://pypi.org/project/bpytop/): A Python implementation of  `top`  with nice visuals.
+-   [`pstree`](https://en.wikipedia.org/wiki/Pstree): A utility specifically to explore the process tree.
+
+On macOS, you also have the  [Activity Monitor](https://support.apple.com/guide/activity-monitor/welcome/mac)  application in your utilities. In the View menu, if you select  _All Processes, Hierarchically_, you should be able to see your process tree.
+
+You can also explore the Python  [psutil](https://github.com/giampaolo/psutil)  library, which allows you to retrieve running process information on both Windows and UNIX-based systems.
+
+One universal attribute of process tracking across systems is that each process has a  **process identification number**, or  **PID**, which is a unique integer to identify the process within the context of the operating system. You’ll see this number on most of the utilities listed above.
+
+Along with the PID, it’s typical to see the resource usage, such as  [CPU](https://en.wikipedia.org/wiki/Central_processing_unit)  percentage and amount of  [RAM](https://en.wikipedia.org/wiki/Random-access_memory)  that a particular process is using. This is the information that you look for if a program is hogging all your resources.
+
+The resource utilization of processes can be useful for developing or debugging scripts that use the  `subprocess`  module, even though you don’t need the PID, or any information about what resources processes are using in the code itself. While playing with the examples that are coming up, consider leaving a representation of the process tree open to see the new processes pop up.
+
+You now have a bird’s-eye view of processes. You’ll deepen your mental model throughout the tutorial, but now it’s time to see how to start your own processes with the Python  `subprocess`  module.
+
+## Overview of the Python  `subprocess`  Module
+
+The Python  `subprocess`  module is for launching child processes. These processes can be anything from GUI applications to the shell. The parent-child relationship of processes is where the  **sub**  in the  `subprocess`  name comes from. When you use  `subprocess`, Python is the parent that creates a new child process. What that new child process is, is up to you.
+
+Python  `subprocess`  was  [originally proposed and accepted](https://peps.python.org/pep-0324/)  for Python 2.4 as an alternative to using the  [`os`  module](https://docs.python.org/3/library/os.html). Some documented changes have happened as late as 3.8. The examples in this article were tested with Python 3.10.4, but you only need 3.8+ to follow along with this tutorial.
+
+Most of your interaction with the Python  `subprocess`  module will be via the  [`run()`](https://docs.python.org/3/library/subprocess.html#subprocess.run)  function. This  [blocking](https://en.wikipedia.org/wiki/Blocking_(computing))  function will start a process and  _wait_  until the new process exits before moving on.
+
+The  [documentation](https://docs.python.org/3/library/subprocess.html#using-the-subprocess-module)  recommends using  `run()`  for all cases that it can handle. For edge cases where you need more control, the  [`Popen`](https://docs.python.org/3/library/subprocess.html#subprocess.Popen)  class can be used.  `Popen`  is the underlying class for the whole  `subprocess`  module. All functions in the  `subprocess`  module are convenience wrappers around the  `Popen()`  constructor and its instance methods. Near the end of this tutorial, you’ll  [dive into](https://realpython.com/python-subprocess/#the-popen-class)  the  `Popen`  class.
+
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -3716,9 +3753,9 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2OTc2NzI2NiwtMTg1MjYwNTI3NiwtNj
-I0Nzg3NzgyLDE1MDE1MDExMDQsLTEzODQ0ODU2NjEsLTcyNzQ4
-OTA0MywtMTc4MjY5NDQ4NiwxNjc0NTg5MDgsLTExMzM4Mzk2OC
-wxNTEwNTcxMDAzLDg4MDI2MDk1NSw0MTUwMzMxMjQsMTA4NzU4
-NjAyMiwtNTkxMjA1MTg5XX0=
+eyJoaXN0b3J5IjpbLTEwODIxMDE2ODUsLTE4NTI2MDUyNzYsLT
+YyNDc4Nzc4MiwxNTAxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0
+ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5Nj
+gsMTUxMDU3MTAwMyw4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1
+ODYwMjIsLTU5MTIwNTE4OV19
 -->
