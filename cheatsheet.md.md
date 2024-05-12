@@ -2,7 +2,7 @@
 
 
 # MARKUP HINTS
-By Mauro alle h.1
+By Mauro alle h. 06 12 maggio 24
 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like 
 
 [Typora]: (https://typora.io/#feature)
@@ -3558,5 +3558,5 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODAzMjk2NywtNzI3NDg5MDQzXX0=
+eyJoaXN0b3J5IjpbLTEzODQ0ODU2NjFdfQ==
 -->
