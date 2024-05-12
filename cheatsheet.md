@@ -1192,7 +1192,8 @@ The `fork` system call primarily interacts with the operating system kernel. It 
 **Important Note:**
 
 The diagram you sent depicts a high-level view of system components. The `fork` system call and process creation happen within the operating system kernel, which is not explicitly shown in the diagram.
- epresenting the `fork` system call at the kernel level on Unix-based systems:
+ 
+ ### Flow representing the `fork` system call at the kernel level on Unix-based systems:
 
 **Components:**
 
@@ -3698,7 +3699,7 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1ODU2MTE2NjUsLTYyNDc4Nzc4MiwxNT
+eyJoaXN0b3J5IjpbLTE4NTI2MDUyNzYsLTYyNDc4Nzc4MiwxNT
 AxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2
 OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMy
 w4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIw
