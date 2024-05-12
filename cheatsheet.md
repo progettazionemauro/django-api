@@ -1782,6 +1782,154 @@ Before the program starts,  `stdin`  is stocked, waiting for the program to cons
 Now that you know what’s happening—namely that  `stdin`  can be  _stocked_, as it were—you can hack the program yourself without  `subprocess`. If you start the game and then press  Enter  a few times, that’ll stock up  `stdin`  with a few newlines that the program will automatically consume once it gets to the  `input()`  line. So your reaction time is really only the time it takes for the reaction game to execute  `start = time()`  and consume an input:
 
 The game developer gets wise to this, though, and vows to release another version, which will guard against this exploit. In the meantime, you’ll peek a bit further under the hood of  `subprocess`  and learn about how it wires up the standard I/O streams.
+
+## Pipes and the Shell[](https://realpython.com/python-subprocess/#pipes-and-the-shell "Permanent link")
+
+To really understand subprocesses and the redirection of streams, you really need to understand pipes and what they are. This is especially true if you want to wire up two processes together, feeding one  `stdout`  into another process’s  `stdin`, for instance. In this section, you’ll be coming to grips with pipes and how to use them with the  `subprocess`  module.
+
+### Introduction to Pipes[](https://realpython.com/python-subprocess/#introduction-to-pipes "Permanent link")
+
+A pipe, or  [pipeline](https://en.wikipedia.org/wiki/Pipeline_(computing)), is a special stream that, instead of having one file handle as most files do, has two. One handle is read-only, and the other is write-only. The name is very descriptive—a pipe serves to pipe a byte stream from one process to another. It’s also buffered, so a process can write to it, and it’ll hold onto those bytes until it’s read, like a dispenser.
+
+You may be used to seeing pipes on the command line, as you did in the  [section on shells](https://realpython.com/python-subprocess/#introduction-to-the-shell-and-text-based-programs-with-subprocess):
+
+Shell
+
+`$ ls  /usr/bin  |  grep  python` 
+
+This command tells the shell to create an  `ls`  process to list all the files in  `/usr/bin`. The pipe operator (`|`) tells the shell to create a pipe from the  `stdout`  of the  `ls`  process and feed it into the  `stdin`  of the  `grep`  process. The  `grep`  process filters out all the lines that don’t contain the string  `python`.
+
+Windows doesn’t have  `grep`, but a rough equivalent of the same command would be as follows:
+
+Windows PowerShell
+
+`PS> ls "C:\Program Files" | Out-String -stream | Select-String windows` 
+
+However, on Windows PowerShell, things work very differently. As you learned in the  [Windows shell section](https://realpython.com/python-subprocess/#basic-usage-of-subprocess-with-windows-shells)  of this tutorial, the different commands are not separate executables. Therefore, PowerShell is internally redirecting the output of one command into another without starting new processes.
+
+**Note:**  If you don’t have access to a UNIX-based operating system but have Windows 10 or above, then you actually  _do_  have access to a UNIX-based operating system! Check out  [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install), which will give you access to a fully featured Linux shell.
+
+You can use pipes for different processes on PowerShell, though getting into the intricacies of which ones is outside the scope of this tutorial. For more information on PowerShell pipes, check out the  [documentation](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines). So, for the rest of the pipe examples, only UNIX-based examples will be used, as the basic mechanism is the same for both systems. They’re not nearly as common on Windows, anyway.
+
+If you want to let the shell take care of piping processes into one another, then you can just pass the whole string as a command into  `subprocess`:
+
+Python
+
+`>>> import subprocess
+>>> subprocess.run(["sh" , "-c", "ls /usr/bin | grep python"])
+python3
+python3-config
+python3.8
+python3.8-config
+...
+CompletedProcess(...)` 
+
+This way, you can let your chosen shell take care of piping one process into another, instead of trying to reimplement things in Python. This is a perfectly valid choice in certain situations.
+
+[Later in the tutorial](https://realpython.com/python-subprocess/#pipe-simulation-with-run), you’ll also come to see that you  _can’t_  pipe processes directly with  `run()`. For that, you’ll need the more complicated  `Popen()`. Actual piping is demonstrated in  [Connecting Two Porcesses Together With Pipes](https://realpython.com/python-subprocess/#connecting-two-processes-together-with-pipes), near the end of the tutorial.
+
+Whether you mean to pipe one process into another with the  `subprocess`  module or not, the  `subprocess`  module makes extensive use of pipes behind the scenes.
+
+### The Pipes of  `subprocess`[](https://realpython.com/python-subprocess/#the-pipes-of-subprocess "Permanent link")
+
+The Python  `subprocess`  module uses pipes extensively to interact with the processes that it starts. In a previous example, you used the  `capture_output`  parameter to be able to access  `stdout`:
+
+Python
+
+`>>> import subprocess
+>>> magic_number_process = subprocess.run(
+...     ["python", "magic_number.py"], capture_output=True
+... )
+>>> magic_number_process.stdout
+b'769\n'` 
+
+`capture_output=True`  is equivalent to explicitly setting the  `stdout`  and  `stderr`  parameters to the  `subprocess.PIPE`  constant:
+
+Python
+
+`>>> import subprocess
+>>> magic_number_process = subprocess.run(
+...     ["python", "magic_number.py"],
+...     stdout=subprocess.PIPE,
+...     stderr=subprocess.PIPE
+... )
+...
+>>> magic_number_process.stdout
+b'769\n'` 
+
+The  `PIPE`  constant is nothing special. It’s just a number that indicates to  `subprocess`  that a pipe should be created. The function then creates a pipe to link up to the  `stdout`  of the subprocess, which the function then reads into the  `CompletedProcess`  object’s  `stdout`  attribute. By the time it’s a  `CompletedProcess`, it’s no longer a pipe, but a bytes object that can be accessed multiple times.
+
+**Note:**  Pipe buffers have a limited capacity. Depending on the system you are running on, you may easily run into that limit if you plan on holding large quantities of data in the buffer. To work around this limit, you can use normal files.
+
+You can also pass a  [file object](https://realpython.com/working-with-files-in-python/#pythons-with-open-as-pattern)  to any of the standard stream parameters:
+
+Python
+
+`>>> from tempfile import TemporaryFile
+>>> with TemporaryFile() as f:
+...     ls_process = subprocess.run(["python", "magic_number.py"], stdout=f)
+...     f.seek(0)
+...     print(f.read().decode("utf-8"))
+...
+0
+554` 
+
+You  _can’t_  pass a bytes object or a string directly to the  `stdin`  argument, though. It needs to be something file-like.
+
+Note that the  `0`  that gets returned first is from the call to  [`seek()`](https://docs.python.org/3/library/io.html?highlight=seek#io.IOBase.seek)  which returns the new stream position, which in this case is the start of the stream.
+
+The  `input`  parameter is similar to the  `capture_output`  parameter in that it’s a shortcut. Using the  `input`  parameter will create a buffer to store the contents of  `input`, and then link the file up to the new process to serve as its  `stdin`.
+
+To actually link up two processes with a pipe from within  `subprocess`  is something that you  _can’t_  do with  `run()`. Instead, you can delegate the plumbing to the shell, as you did earlier in the  [Introduction to the Shell and Text Based Programs with  `subprocess`](https://realpython.com/python-subprocess/#introduction-to-the-shell-and-text-based-programs-with-subprocess)  section.
+
+If you needed to link up different processes without delegating any of the work to the shell, then you  [could do that with the underlying  `Popen()`  constructor](https://realpython.com/python-subprocess/#connecting-two-processes-together-with-pipes). You’ll cover  `Popen()`  in a later  [section](https://realpython.com/python-subprocess/#the-popen-class). In the next section, though, you’ll be  _simulating_  a pipe with  `run()`  because in most cases, it’s not vital for processes to be linked up directly.
+
+### Pipe Simulation With  `run()`[](https://realpython.com/python-subprocess/#pipe-simulation-with-run "Permanent link")
+
+Though you can’t actually link up two processes together with a pipe by using the  `run()`  function, at least not without delegating it to the shell, you can simulate piping by judicious use of the  `stdout`  attribute.
+
+If you’re on a UNIX-based system where almost all typical shell commands are separate executables, then you can just set the  `input`  of the second process to the  `.stdout`  attribute of the first  `CompletedProcess`:
+
+Python
+
+`>>> import subprocess
+>>> ls_process = subprocess.run(["ls", "/usr/bin"], stdout=subprocess.PIPE)
+>>> grep_process = subprocess.run(
+...     ["grep", "python"], input=ls_process.stdout, stdout=subprocess.PIPE
+... )
+>>> print(grep_process.stdout.decode("utf-8"))
+python3
+python3-config
+python3.8
+python3.8-config
+...` 
+
+Here the  `.stdout`  attribute of the  `CompletedProcess`  object of  `ls`  is set to the  `input`  of the  `grep_process`. It’s important that it’s set to  `input`  rather than  `stdin`. This is because the  `.stdout`  attribute isn’t a file-like object. It’s a bytes object, so it can’t be used as an argument to  `stdin`.
+
+As an alternative, you can operate directly with files too, setting them to the standard stream parameters. When using files, you set the file object as the argument to  `stdin`, instead of using the  `input`  parameter:
+
+Python
+
+`>>> import subprocess
+>>> from tempfile import TemporaryFile
+>>> with TemporaryFile() as f:
+...     ls_process = subprocess.run(["ls", "/usr/bin"], stdout=f)
+...     f.seek(0)
+...     grep_process = subprocess.run(
+...         ["grep", "python"], stdin=f, stdout=subprocess.PIPE
+...     )
+...
+0 # from f.seek(0)
+>>> print(grep_process.stdout.decode("utf-8"))
+python3
+python3-config
+python3.8
+python3.8-config
+...` 
+
+As you learned in the previous section, for Windows PowerShell, doing something like this doesn’t make a whole lot of sense because most of the time, these utilities are part of PowerShell itself. Because you aren’t dealing with separate executables, piping becomes less of a necessity. However, the pattern for piping is still the same if something like this needs to be done.
+
+With most of the tools out the way, it’s now time to think about some practical applications for  `subprocess`.
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -4255,11 +4403,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY5NjI5NDU4LC0yMDUzODIzOTMwLC0xNT
-Y2ODc1NDcyLC01NjI1Nzg3NzksMTk3OTg2OTQyMywyMDI3NjMy
-Mzk2LDE3NDY3NDE1MiwtMTIxNzYxOTkzNCwtMTE5OTczNTMzOS
-wyMDQ0NTkxNjE5LDY1NjYyODc3MywtMTA4MjEwMTY4NSwtMTg1
-MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MDExMDQsLTEzODQ0OD
-U2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4NiwxNjc0NTg5MDgs
-LTExMzM4Mzk2OF19
+eyJoaXN0b3J5IjpbLTIwMDIzNDA5OTgsLTY5NjI5NDU4LC0yMD
+UzODIzOTMwLC0xNTY2ODc1NDcyLC01NjI1Nzg3NzksMTk3OTg2
+OTQyMywyMDI3NjMyMzk2LDE3NDY3NDE1MiwtMTIxNzYxOTkzNC
+wtMTE5OTczNTMzOSwyMDQ0NTkxNjE5LDY1NjYyODc3MywtMTA4
+MjEwMTY4NSwtMTg1MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MD
+ExMDQsLTEzODQ0ODU2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4
+NiwxNjc0NTg5MDhdfQ==
 -->
