@@ -1111,7 +1111,53 @@ Think of how you might start a Python application from the command line. This is
 
 The process that starts another process is referred to as the  **parent**, and the new process is referred to as the  **child**. The parent and child processes run mostly independently. Sometimes the child inherits specific resources or contexts from the parentand nformation about processes is kept in a table. Each process keeps track of its parents, which allows the process hierarchy to be represented as a tree.
 
-### 
+###  Process Creation Mechanism on Unix-based Systems
+
+Here's a breakdown of the process creation mechanism on Unix-based systems, focusing on the key concepts and functionalities:
+
+**1. fork() System Call:**
+
+-   The foundation of process creation in Unix systems is the `fork()` system call.
+-   When a process calls `fork()`, the kernel creates a **copy** of the calling process. This copy is called the **child process**, while the original process becomes the **parent process**.
+-   Both parent and child processes share the same memory space initially. This might seem inefficient, but it allows for quick process creation and efficient memory sharing when needed.
+
+**2. Process Identifier (PID):**
+
+-   The kernel assigns a unique identifier, called a **Process Identifier (PID)**, to each process. This PID helps the system differentiate between processes and manage their resources.
+-   After the `fork()` call, both the parent and child process receive the PID of the child process as the return value. However, they can distinguish their own identity using functions like `getpid()`.
+
+**3. The Exec Family of Functions:**
+
+-   Once a child process is created with `fork()`, it typically doesn't continue executing the original program's code.
+-   The child process usually replaces its code and data space with a new program using functions like `execve()`, `execvp()`, or others from the `exec` family.
+-   These functions take the path to the executable file and optional arguments as input.
+-   By replacing its code with the new program, the child process essentially starts executing a completely different program.
+
+**4. Memory Management:**
+
+-   After `fork()`, the parent and child processes share the same memory space. However, any changes made by one process are not reflected immediately in the other's memory.
+-   When either process modifies memory, a technique called **copy-on-write** is employed. The kernel creates a copy of the modified memory page for the modifying process, allowing them to have independent memory regions for further changes.
+
+**5. Resource Inheritance:**
+
+-   The child process inherits most resources from the parent process, including file descriptors, open files, signal handlers (with some exceptions), and environment variables. This inheritance simplifies program execution as the child process inherits a ready-made environment.
+
+**Overall Flow:**
+
+1.  Parent process calls `fork()`.
+2.  Kernel creates a copy of the parent process (child process).
+3.  Both parent and child receive the child's PID.
+4.  Child process usually replaces its code with a new program using `exec` functions.
+5.  Memory management employs copy-on-write to maintain independent memory spaces for parent and child.
+6.  Child process inherits most resources from the parent.
+
+**Additional Notes:**
+
+-   This explanation provides a basic overview. There are additional details and complexities involved in process creation, like process states, scheduling, and signals.
+-   The `wait()` system call allows the parent process to wait for the child process to finish execution.
+-   Inter-process communication (IPC) mechanisms enable processes to communicate and share data after creation.
+
+This knowledge should provide a solid foundation for understanding process creation on Unix-based systems. You can explore further details in resources like the Unix man pages for `fork()`, `exec`, and related functions.
 
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -3587,9 +3633,9 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDMzODk5MTYzLC02MjQ3ODc3ODIsMTUwMT
-UwMTEwNCwtMTM4NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0
-NDg2LDE2NzQ1ODkwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMsOD
-gwMjYwOTU1LDQxNTAzMzEyNCwxMDg3NTg2MDIyLC01OTEyMDUx
-ODldfQ==
+eyJoaXN0b3J5IjpbLTE5MTY3MDgxMjUsLTYyNDc4Nzc4MiwxNT
+AxNTAxMTA0LC0xMzg0NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2
+OTQ0ODYsMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMy
+w4ODAyNjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIw
+NTE4OV19
 -->
