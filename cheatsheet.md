@@ -1292,21 +1292,36 @@ In this section, you’ll take a look at some of the most basic examples demonst
 
 To come to grips with the Python  `subprocess`  module, you’ll want a bare-bones program to run and experiment with. For this, you’ll use a program written in Python:
 
-Python
 
-`# timer.py
+
+
+
+  
+``` bas
+timer.py
 
 from argparse import ArgumentParser
 from time import sleep
 
-parser = ArgumentParser()
+from  argparse  import  ArgumentParser
+
+from  time  import  sleep
+parser  =  ArgumentParser()
+
 parser.add_argument("time", type=int)
-args = parser.parse_args()
+
+args  =  parser.parse_args()
+
 print(f"Starting timer of {args.time} seconds")
-for _ in range(args.time):
-    print(".", end="", flush=True)
-    sleep(1)
-print("Done!")` 
+
+for  _  in  range(args.time):
+
+print("**", end="", flush=True)
+
+sleep(1)
+
+print("Bravo Mauuro!")
+```
 
 The timer program uses  to accept an integer as an argument. The integer represents the number of seconds that the timer should wait until exiting, which the program uses  [`sleep()`](https://realpython.com/python-sleep/)  to achieve. It’ll play a small animation representing each passing second until it exits:
 
@@ -3787,9 +3802,10 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjU2NjI4NzczLC0xMDgyMTAxNjg1LC0xOD
-UyNjA1Mjc2LC02MjQ3ODc3ODIsMTUwMTUwMTEwNCwtMTM4NDQ4
-NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOC
-wtMTEzMzgzOTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQxNTAz
-MzEyNCwxMDg3NTg2MDIyLC01OTEyMDUxODldfQ==
+eyJoaXN0b3J5IjpbLTE2Njk5OTY2ODQsNjU2NjI4NzczLC0xMD
+gyMTAxNjg1LC0xODUyNjA1Mjc2LC02MjQ3ODc3ODIsMTUwMTUw
+MTEwNCwtMTM4NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNjk0ND
+g2LDE2NzQ1ODkwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMsODgw
+MjYwOTU1LDQxNTAzMzEyNCwxMDg3NTg2MDIyLC01OTEyMDUxOD
+ldfQ==
 -->
