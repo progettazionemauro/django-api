@@ -1084,6 +1084,7 @@ Avoids Diamond Problem: Mixins can help avoid the "diamond problem" that arises 
 
 Small and Focused: Mixins are typically small and focused on a specific task. This makes them easy to understand, maintain, and reuse.
 
+## The subprocess Module: Wrapping Programs With Python
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
 1) python3 -m venv venv
@@ -3558,8 +3559,8 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODQ0ODU2NjEsLTcyNzQ4OTA0MywtMT
-c4MjY5NDQ4NiwxNjc0NTg5MDgsLTExMzM4Mzk2OCwxNTEwNTcx
-MDAzLDg4MDI2MDk1NSw0MTUwMzMxMjQsMTA4NzU4NjAyMiwtNT
-kxMjA1MTg5XX0=
+eyJoaXN0b3J5IjpbLTE4ODAyNzcxNiwtMTM4NDQ4NTY2MSwtNz
+I3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOCwtMTEzMzgz
+OTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQxNTAzMzEyNCwxMD
+g3NTg2MDIyLC01OTEyMDUxODldfQ==
 -->
