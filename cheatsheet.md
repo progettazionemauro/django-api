@@ -1655,6 +1655,52 @@ As with a dispenser, you can stock  `stdin`  before it gets linked up to a child
 
 These three streams, or files, are the basis for communicating with your process. In the next section, you’ll start to see this in action by getting the output of a magic number generator program.
 
+### The Magic Number Generator Example[](https://realpython.com/python-subprocess/#the-magic-number-generator-example "Permanent link")
+
+Often, when using the  `subprocess`  module, you’ll want to use the output for something and not just display the output as you have been doing so far. In this section, you’ll use a magic number generator that outputs, well, a magic number.
+
+Imagine that the magic number generator is some obscure program, a black box, inherited across generations of  [sysadmins](https://xkcd.com/705/)  at your job. It outputs a magic number that you need for your secret calculations. You’ll read from the  `stdout`  of  `subprocess`  and use it in your wrapper Python program:
+
+Python
+
+`# magic_number.py
+
+from random import randint
+
+print(randint(0, 1000))` 
+
+Okay, not really so magical. That said, it’s not the magic number generator that you’re interested in—it’s interacting with a hypothetical black box with  `subprocess`  that’s interesting. To grab the number generator’s output to use later, you can pass in a  `capture_output=True`  argument to  `run()`:
+
+Python
+
+`>>> import subprocess
+>>> magic_number_process = subprocess.run(
+...     ["python", "magic_number.py"], capture_output=True
+... )
+>>> magic_number_process.stdout
+b'769\n'` 
+
+Passing a  `capture_output`  argument of  `True`  to  `run()`  makes the output of the process available at the  `.stdout`  attribute of the completed process object. You’ll note that it’s returned as a  [bytes object](https://docs.python.org/3/library/stdtypes.html#bytes-objects), so you need to be mindful of  [encodings](https://realpython.com/python-subprocess/#the-decoding-of-standard-streams)  when reading it.
+
+Also note that the  `.stdout`  attribute of the  `CompletedProcess`  is no longer a stream. The stream has been read, and it’s stored as a bytes object in the  `.stdout`  attribute.
+
+With the output available, you can use more than one subprocess to grab values and operate on them in your code:
+
+    Python
+    
+    `>>> import subprocess
+    >>> sum(
+    ...     int(
+    ...         subprocess.run(
+    ...             ["python", "magic_number.py"], capture_output=True
+    ...         ).stdout
+    ...     )
+    ...     for _ in range(2)
+    ... )
+    1085` 
+
+In this example, you start two magic number processes that fetch two magic numbers and then add them together. For now, you rely on the automatic decoding of the bytes object by the  `int()`  constructor. In the next section, though, you’ll learn how to decode and encode explicitly.
+
 ####
 # STANDARD COMMANDS IN DJANGO INSTALLATION#
 
@@ -4128,11 +4174,11 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjY4NzU0NzIsLTU2MjU3ODc3OSwxOT
-c5ODY5NDIzLDIwMjc2MzIzOTYsMTc0Njc0MTUyLC0xMjE3NjE5
-OTM0LC0xMTk5NzM1MzM5LDIwNDQ1OTE2MTksNjU2NjI4NzczLC
-0xMDgyMTAxNjg1LC0xODUyNjA1Mjc2LC02MjQ3ODc3ODIsMTUw
-MTUwMTEwNCwtMTM4NDQ4NTY2MSwtNzI3NDg5MDQzLC0xNzgyNj
-k0NDg2LDE2NzQ1ODkwOCwtMTEzMzgzOTY4LDE1MTA1NzEwMDMs
-ODgwMjYwOTU1XX0=
+eyJoaXN0b3J5IjpbLTIwNTM4MjM5MzAsLTE1NjY4NzU0NzIsLT
+U2MjU3ODc3OSwxOTc5ODY5NDIzLDIwMjc2MzIzOTYsMTc0Njc0
+MTUyLC0xMjE3NjE5OTM0LC0xMTk5NzM1MzM5LDIwNDQ1OTE2MT
+ksNjU2NjI4NzczLC0xMDgyMTAxNjg1LC0xODUyNjA1Mjc2LC02
+MjQ3ODc3ODIsMTUwMTUwMTEwNCwtMTM4NDQ4NTY2MSwtNzI3ND
+g5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOCwtMTEzMzgzOTY4
+LDE1MTA1NzEwMDNdfQ==
 -->
