@@ -1326,6 +1326,7 @@ print("Bravo Mauuro!")
 The timer program uses  to accept an integer as an argument. The integer represents the number of seconds that the timer should wait until exiting, which the program uses  [`sleep()`](https://realpython.com/python-sleep/)  to achieve. It’ll play a small animation representing each passing second until it exits:
 
 It’s not much, but the key is that it serves as a cross-platform process that runs for a few seconds and which you can easily tinker with. You’ll be calling it with  `subprocess`  as if it were a separate executable.
+
 Each item in the sequence represents a  [token](https://en.wikipedia.org/wiki/Lexical_analysis#Token)  which is used for a system call to start a new process.
 
 ####
@@ -3803,10 +3804,10 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzMzc0MzIxLDY1NjYyODc3MywtMTA4Mj
-EwMTY4NSwtMTg1MjYwNTI3NiwtNjI0Nzg3NzgyLDE1MDE1MDEx
-MDQsLTEzODQ0ODU2NjEsLTcyNzQ4OTA0MywtMTc4MjY5NDQ4Ni
-wxNjc0NTg5MDgsLTExMzM4Mzk2OCwxNTEwNTcxMDAzLDg4MDI2
-MDk1NSw0MTUwMzMxMjQsMTA4NzU4NjAyMiwtNTkxMjA1MTg5XX
-0=
+eyJoaXN0b3J5IjpbMjA0NDU5MTYxOSw2NTY2Mjg3NzMsLTEwOD
+IxMDE2ODUsLTE4NTI2MDUyNzYsLTYyNDc4Nzc4MiwxNTAxNTAx
+MTA0LC0xMzg0NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0OD
+YsMTY3NDU4OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAy
+NjA5NTUsNDE1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV
+19
 -->
