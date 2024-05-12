@@ -1103,7 +1103,7 @@ The process table allows the operating system to abandon a particular process at
 
 An operating system doesn’t boot up with thousands of processes, though. Many of the processes you’re familiar with are started by you. In the next section, you’ll look into the lifetime of a process.
 
-### Process Lifetime[](https://realpython.com/python-subprocess/#process-lifetime "Permanent link")
+### Process Lifetime
 
 Think of how you might start a Python application from the command line. This is an instance of your command-line  _process_  starting a Python  _process_:
 
@@ -3587,8 +3587,8 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUwMTUwMTEwNCwtMTM4NDQ4NTY2MSwtNz
-I3NDg5MDQzLC0xNzgyNjk0NDg2LDE2NzQ1ODkwOCwtMTEzMzgz
-OTY4LDE1MTA1NzEwMDMsODgwMjYwOTU1LDQxNTAzMzEyNCwxMD
-g3NTg2MDIyLC01OTEyMDUxODldfQ==
+eyJoaXN0b3J5IjpbLTg5NDg3NzA2MywxNTAxNTAxMTA0LC0xMz
+g0NDg1NjYxLC03Mjc0ODkwNDMsLTE3ODI2OTQ0ODYsMTY3NDU4
+OTA4LC0xMTMzODM5NjgsMTUxMDU3MTAwMyw4ODAyNjA5NTUsND
+E1MDMzMTI0LDEwODc1ODYwMjIsLTU5MTIwNTE4OV19
 -->
