@@ -4680,21 +4680,69 @@ Verify that the Django admin interface is working correctly
 
    Per capire meglio cosa significa "non-fast-forward", è necessario comprendere il concetto di fast forward. Un fast forward è un tipo di push che aggiorna un branch locale con le ultime modifiche apportate a un branch remoto. Il fast forward è possibile solo se le modifiche apportate ai due branch sono consecutive.
 
-### Step 1: Verify GitHub Repository
+### Step 18: Verify GitHub Repository
 
 Go to your GitHub repository in the web browser and verify that your code has been pushed successfully.
 
 That's it! Now you have a Django project with a superuser account, and your code is version-controlled using Git and hosted on GitHub.
 
-### Step 17: Create Models, Views, and Templates (Optional)
+### Step 19: Create Models, Views, and Templates (Optional)
 
 You can now start building your Django app by creating models, views, and templates. Define your models in the `models.py` file, create views in the `views.py` file, and add templates in the `templates` directory.
 
-### Step 18: Create API App (Optional)
+### Step 20: Create API App (Optional)
 
 If you want to create a separate app for your API, follow the instructions provided in the previous response to create an `api` app and set up serializers, views, and URLs.
 
 That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
+## Working with Django APP
+### Add new database in the app
+To create a new model in your Django `blog` app that holds information about files, images, text, and image links, you can modify your `models.py` file as follows:
+
+```python
+from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length=255)
+    text = models.TextField()
+    file_name = models.CharField(max_length=255, unique=True)  # Name of the file
+    image_name = models.CharField(max_length=255)  # Name of the image
+    image_link = models.URLField()  # Link to the image
+
+    def __str__(self):
+        return self.title
+```
+
+In this model:
+
+- `title`: Represents the title of the post.
+- `text`: Represents the content of the post (text).
+- `file_name`: Represents the name of the file produced by your autogenerative Python code.
+- `image_name`: Represents the name of the associated image.
+- `image_link`: Represents the link to the image.
+
+You can adjust the field types and lengths according to your requirements.
+
+
+
+```
+
+Once the model is created and migrated, you can register it in the Django admin site to manage it:
+
+```python
+from django.contrib import admin
+from .models import Post
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'file_name', 'image_name', 'image_link')
+```
+After defining the model, don't forget to run the following commands to create and apply the migrations:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+With this setup, you'll be able to add, edit, and delete posts with associated file names, image names, and image links through the Django admin interface. You can also access and manipulate this data programmatically through your Django views and templates as needed.
 
 # ADVANCED BASH COMMANDS & DJANGO
 ## Comando per generare pagine in Hugo
@@ -4914,5 +4962,5 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAzMTA5MjcxMywtMTAxNDExMjc3N119
+eyJoaXN0b3J5IjpbNDY0NzE2OTc3LC0xMDE0MTEyNzc3XX0=
 -->
