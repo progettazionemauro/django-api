@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import CustomFeature
 import os
 import subprocess
+from .models import Post
 
 @admin.register(CustomFeature)
 class CustomFeatureAdmin(admin.ModelAdmin):
@@ -24,3 +25,9 @@ class CustomFeatureAdmin(admin.ModelAdmin):
     run_script.short_description = "Run add_page.sh"
 
     actions = [run_script]
+    
+    from .models import Post
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'file_name', 'image_name', 'image_link')

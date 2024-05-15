@@ -80,6 +80,9 @@
     <loc>http://localhost:1313/posts/post_number_1/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/post_number_10/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/post_number_2/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
@@ -87,6 +90,21 @@
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/post_number_4/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/post_number_5/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/post_number_6/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/post_number_7/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/post_number_8/</loc>
+    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/post_number_9/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/lifestyle/</loc>
