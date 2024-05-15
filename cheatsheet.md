@@ -4657,7 +4657,7 @@ Verify that the Django admin interface is working correctly
 
    Make sure to replace "your-username" and "your-repo" with your GitHub username and repository name.
 
-   ## Step 16 bis: problems with git push
+   ### Step 17 bis: problems with git push
 
    In doing push it can happen to find issues related to pushing for the first time into Github. For example when you created the repo and added readme.md and it is not present into local repo this can generate a misealignment that che lead to generate an error likse that:
 
@@ -4680,17 +4680,17 @@ Verify that the Django admin interface is working correctly
 
    Per capire meglio cosa significa "non-fast-forward", è necessario comprendere il concetto di fast forward. Un fast forward è un tipo di push che aggiorna un branch locale con le ultime modifiche apportate a un branch remoto. Il fast forward è possibile solo se le modifiche apportate ai due branch sono consecutive.
 
-### Step 16: Verify GitHub Repository
+### Step 1: Verify GitHub Repository
 
 Go to your GitHub repository in the web browser and verify that your code has been pushed successfully.
 
 That's it! Now you have a Django project with a superuser account, and your code is version-controlled using Git and hosted on GitHub.
 
-### Step 10: Create Models, Views, and Templates (Optional)
+### Step 17: Create Models, Views, and Templates (Optional)
 
 You can now start building your Django app by creating models, views, and templates. Define your models in the `models.py` file, create views in the `views.py` file, and add templates in the `templates` directory.
 
-### Step 11: Create API App (Optional)
+### Step 18: Create API App (Optional)
 
 If you want to create a separate app for your API, follow the instructions provided in the previous response to create an `api` app and set up serializers, views, and URLs.
 
@@ -4914,5 +4914,5 @@ That's it! You now have a basic Django project and app set up. Customize it base
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NTc5NjcxLC0xMDE0MTEyNzc3XX0=
+eyJoaXN0b3J5IjpbMTAzMTA5MjcxMywtMTAxNDExMjc3N119
 -->
