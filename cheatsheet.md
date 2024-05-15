@@ -4737,11 +4737,14 @@ from .models import Post
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'file_name', 'image_name', 'image_link')
 ```
+
 After defining the model, don't forget to run the following commands to create and apply the migrations:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
+```
+
 With this setup, you'll be able to add, edit, and delete posts with associated file names, image names, and image links through the Django admin interface. You can also access and manipulate this data programmatically through your Django views and templates as needed.
 
 # ADVANCED BASH COMMANDS & DJANGO
@@ -4962,5 +4965,5 @@ With this setup, you'll be able to add, edit, and delete posts with associated f
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDY0NzE2OTc3LC0xMDE0MTEyNzc3XX0=
+eyJoaXN0b3J5IjpbOTczNTU3MDI5LC0xMDE0MTEyNzc3XX0=
 -->
