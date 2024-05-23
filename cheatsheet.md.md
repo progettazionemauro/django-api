@@ -4747,6 +4747,8 @@ python manage.py migrate
 
 With this setup, you'll be able to add, edit, and delete posts with associated file names, image names, and image links through the Django admin interface. You can also access and manipulate this data programmatically through your Django views and templates as needed.
 
+### Step 21: Create a command to populate Django Admin from /content files directory from 
+
 # ADVANCED BASH COMMANDS & DJANGO
 ## Comando per generare pagine in Hugo
 
@@ -4965,5 +4967,5 @@ With this setup, you'll be able to add, edit, and delete posts with associated f
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzMjc5NDI3NCwyMDU1MDAxNTg1XX0=
+eyJoaXN0b3J5IjpbLTQzNzI4ODUyMSwyMDU1MDAxNTg1XX0=
 -->
