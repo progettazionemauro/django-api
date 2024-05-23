@@ -31,3 +31,15 @@ class CustomFeatureAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'file_name', 'image_name', 'image_link')
+
+    def populate_posts(self, request, queryset):
+        try:
+            current_dir = os.path.dirname(__file__)
+            script_path = os.path.abspath(os.path.join(current_dir, 'populate_posts.sh'))
+            subprocess.run([script_path], check=True)
+            self.message_user(request, "Posts populated successfully")
+        except Exception as e:
+            self.message_user(request, f"Failed to populate posts: {e}", level='ERROR')
+
+    populate_posts.short_description = "Run populate_posts.sh"
+    actions = [populate_posts]

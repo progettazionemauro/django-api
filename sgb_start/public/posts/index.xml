@@ -151,6 +151,14 @@ lsof -i :8000 chiudere la porta occupata forzatamente:
 kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
     </item>
     <item>
+      <title></title>
+      <link>http://localhost:1313/posts/post_number_11/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post_number_11/</guid>
+      <description>Welcome to StackEdit! Ultimo aggiornamento h. 17:50 Hi! I&amp;rsquo;m your first Markdown file in StackEdit. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the file explorer on the left corner of the navigation bar.
+Files StackEdit stores your files in your browser, which means all your files are automatically saved locally and are accessible offline!</description>
+    </item>
+    <item>
       <title>Pagina di ricerca</title>
       <link>http://localhost:1313/posts/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
