@@ -4747,7 +4747,202 @@ python manage.py migrate
 
 With this setup, you'll be able to add, edit, and delete posts with associated file names, image names, and image links through the Django admin interface. You can also access and manipulate this data programmatically through your Django views and templates as needed.
 
-### Step 21: Create a command to populate Django Admin from /content files directory from 
+### Step 21: Create a command to populate Django Admin from /content files directory from Hugo:
+
+    bash
+    #!/bin/bash
+
+  
+
+# Directory containing markdown files
+
+markdown_dir="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/"
+
+  
+
+# Output file to store processed file details
+
+output_file="/home/mauro/Scrivania/dJANGO_apI/progetto_api/blog/processed_files.txt"
+
+  
+
+# Check if the directory exists
+
+if [ !  -d  "$markdown_dir" ]; then
+
+echo  "Error: Directory $markdown_dir does not exist."
+
+exit  1
+
+fi
+
+  
+
+# Create or clear the output file
+
+>  "$output_file"
+
+  
+
+# Iterate over all markdown files in the directory
+
+for  markdown_file  in  "$markdown_dir"/*.md; do
+
+if [ -f  "$markdown_file" ]; then
+
+# Read contents of the markdown file and escape problematic characters
+
+content=$(cat  "$markdown_file"  |  sed  's/"/\\"/g'  |  sed  "s/'/\\'/g"  |  tr  '\n'  ' ')
+
+  
+
+# Extract title from filename
+
+filename=$(basename  --  "$markdown_file")
+
+title="${filename%.*}"
+
+  
+
+# Construct image_link based on the extracted title
+
+image_link="http://localhost:1313/posts/${title}/"
+
+  
+
+# Print the details (for demonstration purposes)
+
+echo  "Title: $title"
+
+echo  "File Name: $filename"
+
+echo  "Content: $content"
+
+echo  "Image Link: $image_link"
+
+echo  "-------------------------"
+
+  
+
+# Save the data to the Django database using the Django shell
+
+echo  "from blog.models import Post; Post.objects.create(title=\"$title\", text=\"$content\", file_name=\"$filename\", image_name='', image_link=\"$image_link\")"  |  python3  manage.py  shell
+
+  
+
+# Log the details to the output file
+
+echo  "Title: $title"  >>  "$output_file"
+
+echo  "File Name: $filename"  >>  "$output_file"
+
+echo  "Content: $content"  >>  "$output_file"
+
+echo  "Image Link: $image_link"  >>  "$output_file"
+
+echo  "-------------------------"  >>  "$output_file"
+
+else
+
+echo  "Error: $markdown_file is not a valid file."
+
+fi
+
+done
+
+  
+
+echo  "Processing complete. Details stored in $output_file."
+In admin.py:
+
+    python
+      
+
+from  django.contrib  import  admin
+
+from .models  import  CustomFeature
+
+import  os
+
+import  subprocess
+
+from .models  import  Post
+
+  
+
+@admin.register(CustomFeature)
+
+class  CustomFeatureAdmin(admin.ModelAdmin):
+
+list_display  = ('name', 'description')
+
+  
+
+def  run_script(self, request, queryset):
+
+try:
+
+# This line retrieves the directory path of the current Python script (admin.py in this case) using __file__,
+
+# which is a special attribute in Python that represents the current file path.
+
+current_dir  =  os.path.dirname(__file__)
+
+script_path  =  os.path.abspath(os.path.join(current_dir, 'add_page.sh'))
+
+print("Absolute path to script:", script_path) # Print out the absolute path
+
+subprocess.run([script_path], check=True)
+
+self.message_user(request, "Script executed successfully")
+
+except  Exception  as  e:
+
+self.message_user(request, f"Script execution failed: {e}", level='ERROR')
+
+  
+  
+
+run_script.short_description =  "Run add_page.sh"
+
+  
+
+actions  = [run_script]
+
+from .models  import  Post
+
+  
+
+@admin.register(Post)
+
+class  PostAdmin(admin.ModelAdmin):
+
+list_display  = ('title', 'file_name', 'image_name', 'image_link')
+
+  
+
+def  populate_posts(self, request, queryset):
+
+try:
+
+current_dir  =  os.path.dirname(__file__)
+
+script_path  =  os.path.abspath(os.path.join(current_dir, 'populate_posts.sh'))
+
+subprocess.run([script_path], check=True)
+
+self.message_user(request, "Posts populated successfully")
+
+except  Exception  as  e:
+
+self.message_user(request, f"Failed to populate posts: {e}", level='ERROR')
+
+  
+
+populate_posts.short_description =  "Run populate_posts.sh"
+
+actions  = [populate_posts]
+
 
 # ADVANCED BASH COMMANDS & DJANGO
 ## Comando per generare pagine in Hugo
@@ -4967,5 +5162,5 @@ With this setup, you'll be able to add, edit, and delete posts with associated f
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzNzI4ODUyMSwyMDU1MDAxNTg1XX0=
+eyJoaXN0b3J5IjpbMTUwNTQzMDkyOCwyMDU1MDAxNTg1XX0=
 -->
