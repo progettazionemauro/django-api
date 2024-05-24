@@ -4986,92 +4986,93 @@ return  self.title
 # ADVANCED BASH COMMANDS & DJANGO
 ## Comando per generare pagine in Hugo
 
- #!/bin/bash
-
-  
-
-    # Define paths
-    
-    posts_dir="../sgb_start/content/posts"
-    
-    template_file="./../cheatsheet.md"  # Adjust this path to the location of your cheatsheet.md file
+     #!/bin/bash
     
       
     
-    # Check if the posts directory exists
-    
-    if [ !  -d  "$posts_dir" ]; then
-    
-    echo  "Error: Hugo posts directory not found!"
-    
-    exit  1
-    
-    fi
-    
-      
-    
-    # Check if the template file exists
-    
-    if [ !  -f  "$template_file" ]; then
-    
-    echo  "Error: Template file not found!"
-    
-    exit  1
-    
-    fi
-    
-      
-    
-    # Define the new file name
-    
-    new_post_file="$posts_dir/il_mio_secondo_post.md"
-    
-      
-    
-    # Check if the new post file already exists
-    
-    if [ -f  "$new_post_file" ]; then
-    
-    echo  "Error: il_mio_secondo_post.md already exists!"
-    
-    exit  1
-    
-    fi
-    
-      
-    
-    # Extract front matter using sed
-    
-    front_matter=$(sed  -n '/^\+\+\+/,/^\+\+\+/p' "$posts_dir/il_mio_primo_post.md")
-    
-      
-    
-    # Check if front matter is empty
-    
-    if [ -z  "$front_matter" ]; then
-    
-    echo  "Error: Front matter not found in il_mio_primo_post.md"
-    
-    exit  1
-    
-    fi
-    
-      
-    
-    # Append the front matter to the new post file
-    
-    echo  "$front_matter"  >  "$new_post_file"
-    
-      
-    
-    # Append the content of the template file to the new post file
-    
-    cat  "$template_file"  >>  "$new_post_file"
-    
-      
-    
-    echo  "New post created successfully: $new_post_file"
+        # Define paths
         
+        posts_dir="../sgb_start/content/posts"
+        
+        template_file="./../cheatsheet.md"  # Adjust this path to the location of your cheatsheet.md file
+        
+          
+        
+        # Check if the posts directory exists
+        
+        if [ !  -d  "$posts_dir" ]; then
+        
+        echo  "Error: Hugo posts directory not found!"
+        
+        exit  1
+        
+        fi
+        
+          
+        
+        # Check if the template file exists
+        
+        if [ !  -f  "$template_file" ]; then
+        
+        echo  "Error: Template file not found!"
+        
+        exit  1
+        
+        fi
+        
+          
+        
+        # Define the new file name
+        
+        new_post_file="$posts_dir/il_mio_secondo_post.md"
+        
+          
+        
+        # Check if the new post file already exists
+        
+        if [ -f  "$new_post_file" ]; then
+        
+        echo  "Error: il_mio_secondo_post.md already exists!"
+        
+        exit  1
+        
+        fi
+        
+          
+        
+        # Extract front matter using sed
+        
+        front_matter=$(sed  -n '/^\+\+\+/,/^\+\+\+/p' "$posts_dir/il_mio_primo_post.md")
+        
+          
+        
+        # Check if front matter is empty
+        
+        if [ -z  "$front_matter" ]; then
+        
+        echo  "Error: Front matter not found in il_mio_primo_post.md"
+        
+        exit  1
+        
+        fi
+        
+          
+        
+        # Append the front matter to the new post file
+        
+        echo  "$front_matter"  >  "$new_post_file"
+        
+          
+        
+        # Append the content of the template file to the new post file
+        
+        cat  "$template_file"  >>  "$new_post_file"
+        
+          
+        
+        echo  "New post created successfully: $new_post_file"
+            
+
 ### Implementazione del comando add_sheet.sh into Django (nella medesima app)
 ### Django app: admin.py
 
@@ -5201,5 +5202,6 @@ return  self.title
     print(runs_script2())
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc3MjcwNzU2OSwyMDU1MDAxNTg1XX0=
+eyJoaXN0b3J5IjpbLTU2ODU5NDk0MSwxNzcyNzA3NTY5LDIwNT
+UwMDE1ODVdfQ==
 -->
