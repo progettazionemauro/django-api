@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Editor</title>
+  <!-- Include CKEditor prova 123 -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+  <!-- Include marked.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <!-- Container for CKEditor -->
+  <div id="editor"></div>
+
+  <!-- Button to preview Markdown content -->
+  <button onclick="previewMarkdown()">Preview Markdown</button>
+
+  <script>
+    // Function to fetch Markdown file content
+    async function fetchMarkdownFile() {
+      try {
+        const response = await fetch('cheatsheet.md.md'); // Replace with your file path
+        const markdownContent = await response.text();
+        return markdownContent;
+      } catch (error) {
+        console.error('Error fetching Markdown file:', error);
+        return null;
+      }
+    }
+
+    // Initialize CKEditor with fetched Markdown content
+    async function initEditor() {
+      const markdownContent = await fetchMarkdownFile();
+      if (markdownContent !== null) {
+        ClassicEditor
+          .create(document.querySelector('#editor'), {
+            // CKEditor configuration
+          })
+          .then(editor => {
+            // Set Markdown content in CKEditor
+            editor.setData(markdownContent);
+          })
+          .catch(error => {
+            console.error('Error initializing CKEditor:', error);
+          });
+      }
+    }
+
+    // Function to preview Markdown content
+    async function previewMarkdown() {
+      const markdownContent = await fetchMarkdownFile();
+      if (markdownContent !== null) {
+        // Render Markdown content in a separate window
+        const previewWindow = window.open();
+        previewWindow.document.write(`<html><head><title>Markdown Preview</title></head><body>${marked(markdownContent)}</body></html>`);
+      }
+    }
+
+    // Call function to initialize CKEditor when the page loads
+    initEditor();
+  </script>
+</body>
+</html>

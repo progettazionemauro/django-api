@@ -1,0 +1,12 @@
+
+# Commit all staged changes
+git commit -m "Auto-commit before pulling latest version of cheatsheet.md"
+
+# Push the commit to the remote repository
+git push origin main --force
+
+# Check if cheatsheet.md has been modified
+if ! file_modified "$CHEATSHEET_FILE"; then
+    # Pull the latest version of cheatsheet.md
+    git pull origin main --no-edit --no-rebase "$CHEATSHEET_FILE"
+fi

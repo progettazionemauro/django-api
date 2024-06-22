@@ -1,0 +1,12 @@
+import os
+
+def run_script():
+    # Get the directory containing the current script file
+    current_dir = os.path.dirname(__file__)
+    # Construct the full path to the script
+    script_path = os.path.join(current_dir, '..', 'progetto_api', 'add_page.sh')
+
+    # Print the full path to the script
+    print("Full path to the script:", script_path)
+
+run_script()

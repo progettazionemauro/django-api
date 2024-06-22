@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor.js Demo</title>
+  <!-- Include Editor.js stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editorjs.min.css">
+</head>
+<body>
+  <!-- Container for Editor.js -->
+  <div id="editorjs"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+  <script>
+    // Function to fetch and display content in Editor.js
+    async function fetchAndDisplayContent() {
+      try {
+        // Fetch the contents of readme.md from the server
+        const response = await fetch('./cheatsheet.md.md');
+        const markdownContent = await response.text();
+
+        // Initialize Editor.js with the retrieved content
+        const editor = new EditorJS({
+          holder: 'editorjs',
+          data: {
+            // Convert Markdown content to Editor.js block data
+            blocks: [
+              {
+                type: 'paragraph',
+                data: {
+                  text: markdownContent
+                }
+              }
+            ]
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching and displaying content:', error);
+      }
+    }
+
+    // Call the function to fetch and display content when the page loads
+    fetchAndDisplayContent();
+  </script>
+</body>
+</html>

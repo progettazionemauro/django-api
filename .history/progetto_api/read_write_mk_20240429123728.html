@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Editor</title>
+  <!-- Include CKEditor -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+  <!-- Include marked.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <!-- Container for CKEditor -->
+  <div id="editor"></div>
+
+  <script>
+    // Function to fetch Markdown file content
+    async function fetchMarkdownFile() {
+      try {
+        const response = await fetch('cheatsheet..md'); // Replace with your file path
+        const markdownContent = await response.text();
+        return markdownContent;
+      } catch (error) {
+        console.error('Error fetching Markdown file:', error);
+        return null;
+      }
+    }
+
+    // Initialize CKEditor with fetched Markdown content
+    async function initEditor() {
+      const markdownContent = await fetchMarkdownFile();
+      if (markdownContent !== null) {
+        ClassicEditor
+          .create(document.querySelector('#editor'), {
+            // CKEditor configuration
+          })
+          .then(editor => {
+            // Set Markdown content in CKEditor
+            editor.setData(markdownContent);
+
+            // Render Markdown content with marked.js
+            const markdownOutput = document.getElementById('markdown-output');
+            markdownOutput.innerHTML = marked(markdownContent);
+          })
+          .catch(error => {
+            console.error('Error initializing CKEditor:', error);
+          });
+      }
+    }
+
+    // Call function to initialize CKEditor when the page loads
+    initEditor();
+  </script>
+
+  <!-- Container for rendered Markdown output -->
+  <div id="markdown-output"></div>
+</body>
+</html>

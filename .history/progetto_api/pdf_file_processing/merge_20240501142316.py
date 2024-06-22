@@ -1,0 +1,1 @@
+https://levelup.gitconnected.com/python-office-magic-a-complete-guide-to-pdf-file-processing-70552bc49151
