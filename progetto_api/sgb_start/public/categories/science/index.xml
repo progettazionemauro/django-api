@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Science on My New Hugo Site</title>
+    <link>http://localhost:1313/categories/science/</link>
+    <description>Recent content in Science on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Mar 2024 10:30:18 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/science/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Manuale di installazione</title>
+      <link>http://localhost:1313/posts/manuale_di_installazione-copy/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/manuale_di_installazione-copy/</guid>
+      <description>[toc]
+MARKUP HINTS I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Manuale di installazione</title>
+      <link>http://localhost:1313/posts/manuale_di_installazione/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/manuale_di_installazione/</guid>
+      <description>[toc]
+MARKUP HINTS I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+  </channel>
+</rss>
