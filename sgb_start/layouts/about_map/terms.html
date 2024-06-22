@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{ partial "header" . }}
+
+<div class="content">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="mx-auto w-700">
+                <div class="markdown">
+                    {{ partial "content" . }}
+                </div>
+
+                <div class="posts">
+                    <h1>{{ .Title }}</h1>
+                    <hr>
+                    <ul class="list-unstyled">
+                        {{ range .Data.Terms.Alphabetical }}
+                        <li class="taxonomy-term">
+                            <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a> ({{ .Count }})
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ partial "footer" . }}
+{{ end }}

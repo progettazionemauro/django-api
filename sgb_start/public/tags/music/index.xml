@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Music on My New Hugo Site</title>
+    <link>http://localhost:1313/tags/music/</link>
+    <description>Recent content in Music on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Mar 2024 10:30:18 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/music/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/il_mio_secondo_post/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/il_mio_secondo_post/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_1/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_1/</guid>
+      <description>Installazione di un tema ed attivazione del sito
+Si fa riferimento al Papermod Theme
+In ubuntu istallare (This command will install the Go programming language using Snap with classic confinement)
+sudo snap install go --class
+Create a new Hugo site
+hugo new site MyFreshWebsite --format yaml # replace MyFreshWebsite with name of your website Clonare il tema come modulo Hugo:
+git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod &amp;ndash;depth=1
+Finally set theme as PaperMod in your site config In config.</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_10/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_10/</guid>
+      <description>Welcome to StackEdit! Ultimo aggiornamento h. 16:28 Hi! I&amp;rsquo;m your first Markdown file in StackEdit. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the file explorer on the left corner of the navigation bar.
+Files StackEdit stores your files in your browser, which means all your files are automatically saved locally and are accessible offline!</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_2/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_2/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_3/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_3/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_4/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_4/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_5/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_5/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_6/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_6/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_7/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_7/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_8/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_8/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+    <item>
+      <title>Installazione del Tema in Hugo</title>
+      <link>http://localhost:1313/posts/post_number_9/</link>
+      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
+      <guid>http://localhost:1313/posts/post_number_9/</guid>
+      <description>[toc]
+MARKUP HINTS By Mauro alle h.13:16 I have my README.md inside my project. Here are a method to work with your README.md separately while working on your vsc local project: Use an external Markdown editor like
+** (a minimal markdown editor and reader) **. These editors provide a live preview feature by default.
+BASH trovare la oporta occupata:
+lsof -i :8000 chiudere la porta occupata forzatamente:
+kill -9 32394(esempio) vedere i comandi che iniziano per una determinata strina effettuati in precedenza:</description>
+    </item>
+  </channel>
+</rss>
