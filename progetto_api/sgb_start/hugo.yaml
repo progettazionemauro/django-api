@@ -29,6 +29,10 @@ menu:
       name: MAP
       url: /about_map/about/
       weight: 10
+    - identifier: Store Locator
+      name: Store
+      url: /store_locator/about/
+      weight: 10
     - identifier: categories
       name: Categories
       url : /categories/
