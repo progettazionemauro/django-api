@@ -6,28 +6,14 @@
     <description>Recent content in Art on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Mar 2024 10:30:18 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jul 2024 09:09:15 +0200</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/art/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Il_mio_primo_post</title>
-      <link>http://localhost:1313/posts/il_mio_primo_post/</link>
-      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
-      <guid>http://localhost:1313/posts/il_mio_primo_post/</guid>
-      <description>Installazione di un tema ed attivazione del sito
-Si fa riferimento al Papermod Theme
-In ubuntu istallare (This command will install the Go programming language using Snap with classic confinement)
-sudo snap install go --class
-Create a new Hugo site
-hugo new site MyFreshWebsite --format yaml # replace MyFreshWebsite with name of your website Clonare il tema come modulo Hugo:
-git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod &amp;ndash;depth=1
-Finally set theme as PaperMod in your site config In config.</description>
-    </item>
-    <item>
-      <title>Il_mio_secondo_post</title>
-      <link>http://localhost:1313/posts/il_mio_secondo_post-/</link>
-      <pubDate>Mon, 18 Mar 2024 10:30:18 +0100</pubDate>
-      <guid>http://localhost:1313/posts/il_mio_secondo_post-/</guid>
-      <description>Cos’è Lorem Ipsum? Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.</description>
+      <title>AA POST</title>
+      <link>http://localhost:1313/posts/aa_primo_post/</link>
+      <pubDate>Mon, 15 Jul 2024 09:09:15 +0200</pubDate>
+      <guid>http://localhost:1313/posts/aa_primo_post/</guid>
+      <description>Default content for the post.</description>
     </item>
   </channel>
 </rss>
