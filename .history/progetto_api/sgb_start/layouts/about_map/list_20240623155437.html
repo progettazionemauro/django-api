@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1>{{ .Params.Title }}</h1>
+<div class="container bg-warning py-5">
+
+<p>Published on: {{ .Date.Format "January 2, 2006" }}</p>
+<p>Author: {{ .Params.author }}</p>
+<p>Tags: {{ range .Params.tags }}{{ . }}, {{ end }}</p>
+<p>Site Description: {{ .Site.Params.siteDescription }}</p>
+{{ .Content }}
+</div>
+</div>
+{{ end }}

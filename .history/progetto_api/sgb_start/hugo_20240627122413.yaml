@@ -1,0 +1,73 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: My New Hugo Site
+theme: ["PaperMod"]
+
+
+params:
+  params:
+  homeInfoParams:
+    Title: "Benvenuti to My Website!"
+    Content: "This is a sample content for the homepage."
+  socialIcons:
+    - name: "kofi"
+      url: "https://kofi.com"
+    - name: "x"
+      url: "https://x.com"
+  ShowBreadCrumbs: true
+  ShowReadingTime: true
+  ShowSharingButtons: true
+  ShowPostNavLinks: true
+
+menu:
+  main:
+    - identifier: Search
+      name: Search
+      url: search
+      weight: 10
+    - identifier: About Map
+      name: MAP
+      url: /about_map/about/
+      weight: 10
+        - identifier: About Map
+      name: MAP
+      url: /about_map/about/
+      weight: 10
+    - identifier: categories
+      name: Categories
+      url : /categories/
+      weight: 10
+    - identifier: tags
+      name: Tags
+      url : /tags/
+      weight: 10
+    - identifier: archives
+      name: Archives
+      url : /archives/
+      weight: 10
+    - Identifier: Json
+      name: Tabella Json
+      url: /data_from_json/data_json
+      weight: 30
+    - identifier: Endpoint
+      name: Endpoint
+      url: /data_from_endpoint/data_from_endpoint
+      weight: 60
+    - identifier: Vue_Endpoint
+      name: Vue Endpoint
+      url: /vue_retrieve/vue_retrieve      
+      weight: 60
+    - identifier: Django Retrieve
+      name: Django Retrieve
+      url: /django_retrieve/django_retrieve     
+      weight: 60
+    
+    
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+ignoreLogs: ["error-remote-getjson"]

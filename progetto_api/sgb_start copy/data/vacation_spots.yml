@@ -1,0 +1,39 @@
+- name: Eiffel Tower
+  latitude: 48.8584
+  longitude: 2.2945
+
+- name: Colosseum
+  latitude: 41.8902
+  longitude: 12.4922
+
+- name: Sagrada Família
+  latitude: 41.4036
+  longitude: 2.1744
+
+- name: Brandenburg Gate
+  latitude: 52.5163
+  longitude: 13.3777
+
+- name: Acropolis
+  latitude: 37.9715
+  longitude: 23.7257
+
+- name: Edinburgh Castle
+  latitude: 55.9486
+  longitude: -3.1999
+
+- name: Prague Castle
+  latitude: 50.0900
+  longitude: 14.3983
+
+- name: Van Gogh Museum
+  latitude: 52.3584
+  longitude: 4.8811
+
+- name: Schönbrunn Palace
+  latitude: 48.1845
+  longitude: 16.3122
+
+- name: Bruges Belfry
+  latitude: 51.2089
+  longitude: 3.2243

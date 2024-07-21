@@ -1,0 +1,92 @@
+[
+    {
+        "shopName": "Colosseum",
+        "shopAddress": "Piazza del Colosseo, 1",
+        "shopPLZ": "00184",
+        "shopCountry": "Italy",
+        "shopLatitude": "41.8902",
+        "shopLongitude": "12.4922",
+        "shopActive": true
+    },
+    {
+        "shopName": "Leaning Tower of Pisa",
+        "shopAddress": "Piazza del Duomo",
+        "shopPLZ": "56126",
+        "shopCountry": "Italy",
+        "shopLatitude": "43.7228",
+        "shopLongitude": "10.3966",
+        "shopActive": true
+    },
+    {
+        "shopName": "Florence Cathedral",
+        "shopAddress": "Piazza del Duomo",
+        "shopPLZ": "50122",
+        "shopCountry": "Italy",
+        "shopLatitude": "43.7731",
+        "shopLongitude": "11.2560",
+        "shopActive": true
+    },
+    {
+        "shopName": "St. Peter's Basilica",
+        "shopAddress": "Piazza San Pietro",
+        "shopPLZ": "00120",
+        "shopCountry": "Vatican City",
+        "shopLatitude": "41.9029",
+        "shopLongitude": "12.4534",
+        "shopActive": true
+    },
+    {
+        "shopName": "Milan Cathedral",
+        "shopAddress": "Piazza del Duomo",
+        "shopPLZ": "20122",
+        "shopCountry": "Italy",
+        "shopLatitude": "45.4642",
+        "shopLongitude": "9.1916",
+        "shopActive": true
+    },
+    {
+        "shopName": "Pantheon",
+        "shopAddress": "Piazza della Rotonda",
+        "shopPLZ": "00186",
+        "shopCountry": "Italy",
+        "shopLatitude": "41.8986",
+        "shopLongitude": "12.4769",
+        "shopActive": true
+    },
+    {
+        "shopName": "Trevi Fountain",
+        "shopAddress": "Piazza di Trevi",
+        "shopPLZ": "00187",
+        "shopCountry": "Italy",
+        "shopLatitude": "41.9009",
+        "shopLongitude": "12.4833",
+        "shopActive": true
+    },
+    {
+        "shopName": "Sistine Chapel",
+        "shopAddress": "Viale Vaticano",
+        "shopPLZ": "00165",
+        "shopCountry": "Vatican City",
+        "shopLatitude": "41.9029",
+        "shopLongitude": "12.4545",
+        "shopActive": true
+    },
+    {
+        "shopName": "Doge's Palace",
+        "shopAddress": "Piazza San Marco",
+        "shopPLZ": "30124",
+        "shopCountry": "Italy",
+        "shopLatitude": "45.4340",
+        "shopLongitude": "12.3382",
+        "shopActive": true
+    },
+    {
+        "shopName": "Pompeii",
+        "shopAddress": "Via Villa dei Misteri",
+        "shopPLZ": "80045",
+        "shopCountry": "Italy",
+        "shopLatitude": "40.7496",
+        "shopLongitude": "14.4840",
+        "shopActive": true
+    }
+]

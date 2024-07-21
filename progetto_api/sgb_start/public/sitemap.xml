@@ -2,115 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
+    <loc>https://example.org/posts/</loc>
+    <lastmod>2024-07-15T09:19:39+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/aa_primo_post/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
+    <loc>https://example.org/</loc>
+    <lastmod>2024-07-15T09:19:39+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/adventure/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/adventure/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/art/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/entertainment/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/fitness/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/food/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/foodie/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/fun/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/health/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/inspiration/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/lifestyle/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/nature/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/science/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/travel/</loc>
-    <lastmod>2024-07-15T09:09:15+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/django_retrieve/</loc>
+    <loc>https://example.org/django_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/django_retrieve/django_retrieve/</loc>
+    <loc>https://example.org/django_retrieve/django_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vue_retrieve/vue_retrieve/</loc>
+    <loc>https://example.org/vue_retrieve/vue_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vue_retrieve/</loc>
+    <loc>https://example.org/vue_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/data_from_json/data_json/</loc>
+    <loc>https://example.org/data_from_endpoint/</loc>
     <lastmod>2024-03-27T18:13:13+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/data_from_endpoint/</loc>
+    <loc>https://example.org/data_from_json/</loc>
     <lastmod>2024-03-27T18:13:13+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/data_from_json/</loc>
-    <lastmod>2024-03-27T18:13:13+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/data_from_endpoint/data_from_endpoint/</loc>
-    <lastmod>2024-03-27T18:13:13+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/mappa/</loc>
-    <lastmod>2024-03-23T19:48:33+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/dir/ilil_mio_quarto_post/</loc>
-    <lastmod>2024-03-21T19:33:01+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/dir/</loc>
-    <lastmod>2024-03-21T19:30:34+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/dir/il_mio_terzo_post/</loc>
-    <lastmod>2024-03-21T18:21:47+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/archives/</loc>
+    <loc>https://example.org/archives/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/il_mio_secondo_post-/</loc>
-    <lastmod>2024-03-18T10:30:18+01:00</lastmod>
+    <loc>https://example.org/posts/post_number_1/</loc>
   </url><url>
-    <loc>http://localhost:1313/about_map/about/</loc>
+    <loc>https://example.org/about_map/about/</loc>
   </url><url>
-    <loc>http://localhost:1313/store_locator/about/</loc>
+    <loc>https://example.org/store_locator/about/</loc>
   </url><url>
-    <loc>http://localhost:1313/about_map/</loc>
+    <loc>https://example.org/about_map/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/search/</loc>
+    <loc>https://example.org/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/search/</loc>
+    <loc>https://example.org/posts/search/</loc>
   </url><url>
-    <loc>http://localhost:1313/store_locator/</loc>
+    <loc>https://example.org/search/</loc>
+  </url><url>
+    <loc>https://example.org/store_locator/</loc>
+  </url><url>
+    <loc>https://example.org/tags/</loc>
   </url>
 </urlset>

@@ -1,0 +1,101 @@
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/leaflet.bundle.min.js"></script>
+<script>
+    (function() {
+        // Definitions and encapsulated logic
+        {{/*  Mauro 7/7/24 - Latitudine e longitudine di inizio  */}}
+        const items = $('.store-locator .sItem');
+        const item = $('.store-locator .sItem--offline');
+        const startZoom = 11;
+        const startLat = 45.4642;
+        const startLon = 9.1916;
+        
+
+        var mymap = L.map('map', {scrollWheelZoom: false}).setView([startLat, startLon], startZoom);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors | <a href="javascript:resetMap();">Reset map</a>'
+        }).addTo(mymap);
+
+        L.control.locate().addTo(mymap);
+
+        mymap.on('click', () => { mymap.scrollWheelZoom.enable(); });
+        mymap.on('mouseout', () => { mymap.scrollWheelZoom.disable(); });
+
+        var markers = L.markerClusterGroup();
+
+        for (let i = 0; i < items.length; i++) {
+            let iLat = items[i].getAttribute('data-lat');
+            let iLon = items[i].getAttribute('data-lon');
+
+            if (!isEmpty(iLat) || !isEmpty(iLon)) {
+                let name = items[i].getAttribute('data-name');
+                let ad = items[i].getAttribute('data-add');
+                let plz = items[i].getAttribute('data-plz');
+                markers.addLayer(L.marker([iLat,iLon], {key: iLat + '__' + iLon}).bindPopup("<b>" + name + "</b>" + "<br>" + ad + ", " + plz));
+            }
+        }
+
+        mymap.addLayer(markers);
+
+        item.click(function() {
+            let ct = $(this);
+            let pt = ct.parent();
+            let pLat = pt.attr('data-lat');
+            let pLon = pt.attr('data-lon');
+            let id = pLat + '__' + pLon;
+
+            if (!isEmpty(pLat) || !isEmpty(pLon)) {
+                markers.eachLayer(function(layer) {
+                    if (layer.options.key === id) {
+                        mymap.setView([pLat, pLon], 19);
+                        layer.openPopup();
+                    }
+                });
+            }
+        });
+
+        function resetMap() {
+            mymap.closePopup();
+            mymap.setView([startLat, startLon], startZoom);
+        }
+
+        function findStore() {
+            const searchInput = $('.store-locator #storefinder');
+            const hidden = 'sItem--hidden';
+            const result = $('.store-locator #result');
+
+            let filter = searchInput.val().toUpperCase();
+            let count = 0;
+
+            for (let i = 0; i < items.length; i++) {
+                let name = items[i].getAttribute('data-name') ? items[i].getAttribute('data-name').toUpperCase() : "";
+                let address = items[i].getAttribute('data-add') ? items[i].getAttribute('data-add').toUpperCase() : "";
+                let plz = items[i].getAttribute('data-plz').toUpperCase();
+                let city = items[i].getAttribute('data-cty').toUpperCase();
+
+                if (name.indexOf(filter) > -1 || address.indexOf(filter) > -1 || plz.indexOf(filter) > -1 || city.indexOf(filter) > -1) {
+                    items[i].classList.remove(hidden);
+                    count++;
+                } else {
+                    items[i].classList.add(hidden);
+                }
+            }
+            result.html(count + ' Shops - <a href="javascript:clearSearch();">Reset</a>');
+        }
+
+        function clearSearch() {
+            $('.store-locator #storefinder').val('');
+            findStore();
+            resetMap();
+        }
+
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
+
+        window.findStore = findStore;
+        window.clearSearch = clearSearch;
+    })();
+</script>
