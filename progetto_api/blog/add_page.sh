@@ -1,64 +1,48 @@
-#!/bin/bash
+import os
+import subprocess
+from django.contrib import admin
+from .models import Post
 
-# Enable debug mode
-set -x
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'file_name', 'image_name', 'image_link')
 
-# Define paths
-posts_dir="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts"
-template_file="/home/mauro/Scrivania/dJANGO_apI/progetto_api/cheatsheet.md"
+    def run_manage_posts_script(self, request, queryset):
+        try:
+            current_dir = os.path.dirname(__file__)
+            script_path = os.path.abspath(os.path.join(current_dir, '..', 'sgb_start', 'manage_posts.sh'))
+            print("Absolute path to script:", script_path)
+            
+            # Ensure the script is executable
+            if not os.access(script_path, os.X_OK):
+                print(f"Script {script_path} is not executable")
+                self.message_user(request, f"Script {script_path} is not executable", level='ERROR')
+                return
+            
+            # Define the environment for the subprocess
+            env = os.environ.copy()
+            env['PATH'] = '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:' + env.get('PATH', '')
 
-# Function to read all files in a directory
-read_files() {
-    local directory="$1"
-    local file_count=0
-    for file in "$directory"/*; do
-        if [ -f "$file" ]; then
-            echo "Found file: $file"
-            ((file_count++))
-        fi
-    done
-    echo "Total files found: $file_count"
-}
+            # Add or delete a post based on the user's input
+            action = input("Enter 'add' to create a new post or 'delete' to delete a post: ").strip().lower()
+            if action == 'add':
+                result = subprocess.run([script_path, 'add'], capture_output=True, text=True, check=True, env=env)
+            elif action == 'delete':
+                result = subprocess.run([script_path, 'delete'], capture_output=True, text=True, check=True, env=env)
+            else:
+                print("Invalid action. Please enter 'add' or 'delete'.")
+                return
 
-# Find the latest post number
-latest_post_number=1
-while [ -f "$posts_dir/post_number_${latest_post_number}.md" ]; do
-  latest_post_number=$((latest_post_number + 1))
-done
+            print("Script stdout:", result.stdout)
+            print("Script stderr:", result.stderr)
+            self.message_user(request, "Manage posts script executed successfully")
+        except subprocess.CalledProcessError as e:
+            print("Error details:", e)
+            self.message_user(request, f"Manage posts script execution failed: {e.stderr}", level='ERROR')
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+            self.message_user(request, f"Unexpected error: {e}", level='ERROR')
 
-# Define the new file name
-new_post_file="$posts_dir/post_number_${latest_post_number}.md"
+    run_manage_posts_script.short_description = "Run manage_posts.sh"
+    actions = [run_manage_posts_script]
 
-# Check if the posts directory exists
-if [ ! -d "$posts_dir" ]; then
-  echo "Error: Hugo posts directory not found!"
-  exit 1
-fi
-
-# Check if the template file exists
-if [ ! -f "$template_file" ]; then
-  echo "Error: Template file not found!"
-  exit 1
-fi
-
-# Append the content of the template file to the new post file
-cat "$template_file" > "$new_post_file"
-echo "New post created successfully: $new_post_file"
-
-# Verify the new post file was created
-if [ ! -f "$new_post_file" ]; then
-  echo "Error: Failed to create new post file!"
-  exit 1
-fi
-
-# Call the function to read files in the posts directory
-read_files "$posts_dir"
-
-# Introduce a small delay to ensure the file is accessible
-sleep 1
-
-# Optional: Trigger Hugo to rebuild the site
-hugo -s /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start
-
-# Disable debug mode
-set +x

@@ -1,24 +1,30 @@
 #!/bin/bash
 
+# Log file for debugging
+LOG_FILE="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/manage_posts.log"
+echo "Script called with action: $1" >> "$LOG_FILE"
+
 # Directory containing the posts
 POSTS_DIR="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts"
 
 # Check if the posts directory exists
 if [ ! -d "$POSTS_DIR" ]; then
-  echo "Directory $POSTS_DIR does not exist."
+  echo "Directory $POSTS_DIR does not exist." >> "$LOG_FILE"
   exit 1
 fi
 
 # Function to create a new post
 create_post() {
-  read -p "Enter the name of the new post (with .md extension): " POST_NAME
-  read -p "Enter the title of the new post: " POST_TITLE
-  read -p "Enter the date of the new post (YYYY-MM-DDTHH:MM:SS+TZ): " POST_DATE
-  read -p "Enter the tags for the new post (comma separated): " POST_TAGS
-  read -p "Enter the categories for the new post (comma separated): " POST_CATEGORIES
-  read -p "Enter the image path for the new post: " POST_IMAGE
-  read -p "Enter the image alt text: " POST_IMAGE_ALT
-  read -p "Enter the image caption: " POST_IMAGE_CAPTION
+  POST_NAME="$1"
+  POST_TITLE="$2"
+  POST_DATE="$3"
+  POST_TAGS="$4"
+  POST_CATEGORIES="$5"
+  POST_IMAGE="$6"
+  POST_IMAGE_ALT="$7"
+  POST_IMAGE_CAPTION="$8"
+
+  echo "Creating post with name: $POST_NAME" >> "$LOG_FILE"
 
   # Set default values if no input is provided
   POST_TITLE=${POST_TITLE:-"Default Title"}
@@ -50,43 +56,34 @@ categories = $formatted_categories
 +++
 EOF
 
-  echo "Post '$POST_NAME' has been created."
+  echo "Post '$POST_NAME' has been created at $POST_FILE." >> "$LOG_FILE"
 }
-
-# List all posts
-echo "List of posts:"
-ls "$POSTS_DIR"
-
-# Ask the user for the action they want to perform
-echo "Choose an action:"
-echo "1) Delete a post"
-echo "2) Add a new post"
-read -p "Enter the number of the action you want to perform: " ACTION
 
 # Function to delete a post
 delete_post() {
-  # Ask for the post to delete
-  read -p "Enter the name of the post to delete: " POST_NAME
-
-  # Check if the post exists
+  POST_NAME="$1"
+  echo "Deleting post with name: $POST_NAME" >> "$LOG_FILE"
   if [ -f "$POSTS_DIR/$POST_NAME" ]; then
-    # Delete the post
     rm "$POSTS_DIR/$POST_NAME"
-    echo "Post '$POST_NAME' has been deleted."
+    echo "Post '$POST_NAME' has been deleted." >> "$LOG_FILE"
   else
-    echo "Post '$POST_NAME' does not exist."
+    echo "Post '$POST_NAME' does not exist." >> "$LOG_FILE"
   fi
 }
 
-# Perform the chosen action
-case $ACTION in
-  1)
-    delete_post
+# Main script logic
+ACTION="$1"
+shift
+
+case "$ACTION" in
+  add)
+    create_post "$@"
     ;;
-  2)
-    create_post
+  delete)
+    delete_post "$1"
     ;;
   *)
-    echo "Invalid action."
+    echo "Invalid action. Use 'add' or 'delete'." >> "$LOG_FILE"
+    exit 1
     ;;
 esac
