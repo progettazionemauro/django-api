@@ -15,12 +15,5 @@
       <guid>http://localhost:1313/posts/new_post/</guid>
       <description></description>
     </item>
-    <item>
-      <title>Sample Post</title>
-      <link>http://localhost:1313/posts/sample_post/</link>
-      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/sample_post/</guid>
-      <description></description>
-    </item>
   </channel>
 </rss>

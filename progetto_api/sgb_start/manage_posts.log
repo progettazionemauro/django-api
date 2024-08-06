@@ -1,3 +1,42 @@
 Script called with action: add
 Creating post with name: pecorino.md
 Post 'pecorino.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/pecorino.md.
+Script called with action: add
+Creating post with name: pippo.md
+Post 'pippo.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/pippo.md.
+Script called with action: add
+Creating post with name: prova1.md.md
+Post 'prova1.md.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/prova1.md.md.
+Script called with action: delete
+Deleting post with name: pippo
+Post 'pippo' does not exist.
+Script called with action: delete
+Deleting post with name: pippo
+Post 'pippo' does not exist.
+Script called with action: delete
+Deleting post with name: ppp.md
+Post 'ppp.md' does not exist.
+Script called with action: delete
+Deleting post with name: pippo
+Post 'pippo' does not exist.
+Script called with action: delete
+Deleting post with name: ppp.md
+Post 'ppp.md' does not exist.
+Script called with action: delete
+Deleting post with name: ggg.md
+Post 'ggg.md' does not exist.
+Script called with action: add
+Creating post with name: pippo.md
+Post 'pippo.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/pippo.md.
+Script called with action: delete
+Deleting post with name: pippo
+Post 'pippo' does not exist.
+Script called with action: add
+Creating post with name: pippo.md
+Post 'pippo.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/pippo.md.
+Script called with action: add
+Creating post with name: maputo1.md
+Post 'maputo1.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/maputo1.md.
+Script called with action: delete
+Deleting post with name: maputo1.md
+Post 'maputo1.md' has been deleted.

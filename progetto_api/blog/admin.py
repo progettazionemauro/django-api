@@ -67,10 +67,24 @@ class PostAdmin(admin.ModelAdmin):
             )
 
     add_post_action.short_description = "Add a new post"
-    actions = [add_post_action]
+    actions = ['add_post_action']
 
     def delete_model(self, request, obj):
+        # Call the script to delete the Hugo post
         self.run_manage_posts_script(request, None, 'delete', post_name=obj.file_name)
+        # Delete the post from the Django database
+        obj.delete()
+
+    def delete_selected_posts(self, request, queryset):
+        for post in queryset:
+            self.run_manage_posts_script(request, queryset, 'delete', post_name=post.file_name)
+            post.delete()
+        self.message_user(request, "Selected posts have been deleted.")
+
+    delete_selected_posts.short_description = "Delete selected posts"
+    
+    # Remove the default delete action and add our custom delete action
+    actions = [add_post_action, delete_selected_posts]
 
     def get_actions(self, request):
         actions = super().get_actions(request)
