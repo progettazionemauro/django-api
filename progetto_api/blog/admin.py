@@ -7,7 +7,7 @@ from .models import Post
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'file_name', 'image_name', 'image_link')
 
-    def run_manage_posts_script(self, request, queryset, action, **kwargs):
+    def run_manage_posts_script(self, request, action, **kwargs):
         try:
             script_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'sgb_start', 'manage_posts.sh'))
             env = os.environ.copy()
@@ -55,7 +55,7 @@ class PostAdmin(admin.ModelAdmin):
             image_caption = post.image_caption
 
             self.run_manage_posts_script(
-                request, queryset, 'add',
+                request, 'add',
                 post_name=post_name,
                 title=title,
                 date=date,
@@ -67,24 +67,18 @@ class PostAdmin(admin.ModelAdmin):
             )
 
     add_post_action.short_description = "Add a new post"
-    actions = ['add_post_action']
-
-    def delete_model(self, request, obj):
-        # Call the script to delete the Hugo post
-        self.run_manage_posts_script(request, None, 'delete', post_name=obj.file_name)
-        # Delete the post from the Django database
-        obj.delete()
 
     def delete_selected_posts(self, request, queryset):
         for post in queryset:
-            self.run_manage_posts_script(request, queryset, 'delete', post_name=post.file_name)
+            post_name = post.file_name if post.file_name.endswith('.md') else f"{post.file_name}.md"
+            self.run_manage_posts_script(request, 'delete', post_name=post_name)
             post.delete()
         self.message_user(request, "Selected posts have been deleted.")
 
+
     delete_selected_posts.short_description = "Delete selected posts"
-    
-    # Remove the default delete action and add our custom delete action
-    actions = [add_post_action, delete_selected_posts]
+
+    actions = ['add_post_action', 'delete_selected_posts']
 
     def get_actions(self, request):
         actions = super().get_actions(request)

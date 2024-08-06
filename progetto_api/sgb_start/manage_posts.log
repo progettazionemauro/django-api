@@ -40,3 +40,109 @@ Post 'maputo1.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_
 Script called with action: delete
 Deleting post with name: maputo1.md
 Post 'maputo1.md' has been deleted.
+Script called with action: delete
+Deleting post with name: ppp.md
+Post 'ppp.md' does not exist.
+Script called with action: delete
+Deleting post with name: provola.md
+Post 'provola.md' does not exist.
+Script called with action: delete
+Deleting post with name: mio_post.md
+Post 'mio_post.md' does not exist.
+Script called with action: delete
+Deleting post with name: ggg.md
+Post 'ggg.md' does not exist.
+Script called with action: delete
+Deleting post with name: prova_prova.md
+Post 'prova_prova.md' does not exist.
+Script called with action: delete
+Deleting post with name: Manuale_di_Installazione.md
+Post 'Manuale_di_Installazione.md' does not exist.
+Script called with action: add
+Creating post with name: provolino.md
+Post 'provolino.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/provolino.md.
+Script called with action: add
+Creating post with name: provoletta.md
+Post 'provoletta.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/provoletta.md.
+Script called with action: delete
+Deleting post with name: provoletta
+Post 'provoletta' does not exist.
+Script called with action: delete
+Deleting post with name: provolino
+Post 'provolino' does not exist.
+Script called with action: add
+Creating post with name: piruna.md
+Post 'piruna.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/piruna.md.
+Script called with action: delete
+Deleting post with name: pirtuna
+Post 'pirtuna' does not exist.
+Script called with action: add
+Creating post with name: virella.md
+Post 'virella.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/virella.md.
+Script called with action: add
+Creating post with name: hhh.md
+Post 'hhh.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/hhh.md.
+Script called with action: delete
+Deleting post with name: hhh
+Post 'hhh' does not exist.
+Script called with action: add
+Creating post with name: mirella.md
+Post 'mirella.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/mirella.md.
+Script called with action: add
+Creating post with name: mirella.md
+Post 'mirella.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/mirella.md.
+Script called with action: add
+Creating post with name: mirino.md
+Post 'mirino.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/mirino.md.
+Script called with action: add
+Creating post with name: miruccio.md
+Post 'miruccio.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/miruccio.md.
+Script called with action: delete
+Deleting post with name: miruccio
+Post 'miruccio' does not exist.
+Script called with action: add
+Creating post with name: miretta.md
+Post 'miretta.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/miretta.md.
+Script called with action: add
+Creating post with name: gigi.md
+Post 'gigi.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/gigi.md.
+Script called with action: delete
+Deleting post with name: miretta
+Post 'miretta' does not exist.
+Script called with action: add
+Creating post with name: virietta.md
+Post 'virietta.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/virietta.md.
+Script called with action: delete
+Deleting post with name: virietta
+Post 'virietta' does not exist.
+Script called with action: add
+Creating post with name: nolo.md
+Post 'nolo.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/nolo.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: nillo.md
+Title: nillo, Date: 2024-08-06T18:33:03+0000, Tags: adventure,foodie,travel,fitness,nature,fun,inspiration, Categories: adventure,food,health,art,entertainment,science,lifestyle
+Image: nillo, Alt: Default Alt Text, Caption: Default Caption
+Post 'nillo.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/nillo.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: nillo
+Post 'nillo' does not exist.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: nolo.md
+Title: nolo, Date: 2024-08-06T18:31:09+0000, Tags: adventure,foodie,travel,fitness,nature,fun,inspiration, Categories: adventure,food,health,art,entertainment,science,lifestyle
+Image: nolo, Alt: Default Alt Text, Caption: Default Caption
+Post 'nolo.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/nolo.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: nolo
+Post 'nolo' does not exist.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: diegi.md.md
+Post 'diegi.md.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/diegi.md.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: diegi.md.md
+Post 'diegi.md.md' has been deleted.

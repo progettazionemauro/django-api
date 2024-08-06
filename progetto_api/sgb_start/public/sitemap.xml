@@ -3,67 +3,85 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/adventure/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/adventure/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/art/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/entertainment/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/fitness/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/food/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/foodie/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/fun/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/health/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/inspiration/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/lifestyle/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/miretta/</loc>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/nature/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/pippo/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/science/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/travel/</loc>
-    <lastmod>2024-08-03T06:55:02+00:00</lastmod>
+    <lastmod>2024-08-06T17:52:46+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/pecorino/</loc>
-    <lastmod>2024-08-02T15:44:21+00:00</lastmod>
+    <loc>http://localhost:1313/posts/miruccio/</loc>
+    <lastmod>2024-08-06T17:50:47+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/prova1.md/</loc>
-    <lastmod>2024-08-02T13:53:25+00:00</lastmod>
+    <loc>http://localhost:1313/posts/mirino/</loc>
+    <lastmod>2024-08-06T17:48:45+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/mirella/</loc>
+    <lastmod>2024-08-06T17:47:42+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/hhh/</loc>
+    <lastmod>2024-08-06T11:28:13+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/virella/</loc>
+    <lastmod>2024-08-06T11:21:22+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/piruna/</loc>
+    <lastmod>2024-08-06T11:19:38+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/provoletta/</loc>
+    <lastmod>2024-08-06T11:17:19+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/provolino/</loc>
+    <lastmod>2024-08-06T11:13:50+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/django_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
@@ -94,12 +112,6 @@
   </url><url>
     <loc>http://localhost:1313/archives/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/new_post/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/travel/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/about_map/about/</loc>
   </url><url>

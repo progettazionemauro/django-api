@@ -1,12 +1,12 @@
 +++
-title = "Pippo"
-date = "2024-08-03T06:55:02+0000"
+title = "mirino"
+date = "2024-08-06T17:48:45+0000"
 draft = true
 ShowToc = true
 tags = ["adventure", "foodie", "travel", "fitness", "nature", "fun", "inspiration"]
 categories = ["adventure", "food", "health", "art", "entertainment", "science", "lifestyle"]
 [cover]
-    image = "pippo"
+    image = "mirino"
     alt = "Default Alt Text"
     caption = "Default Caption"
 +++

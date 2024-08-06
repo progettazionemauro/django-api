@@ -6,27 +6,69 @@
     <description>Recent content in Art on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Aug 2024 06:55:02 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Aug 2024 17:52:46 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/art/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Pippo</title>
-      <link>http://localhost:1313/posts/pippo/</link>
-      <pubDate>Sat, 03 Aug 2024 06:55:02 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pippo/</guid>
+      <title>miretta</title>
+      <link>http://localhost:1313/posts/miretta/</link>
+      <pubDate>Tue, 06 Aug 2024 17:52:46 +0000</pubDate>
+      <guid>http://localhost:1313/posts/miretta/</guid>
       <description></description>
     </item>
     <item>
-      <title>Pecorino</title>
-      <link>http://localhost:1313/posts/pecorino/</link>
-      <pubDate>Fri, 02 Aug 2024 15:44:21 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pecorino/</guid>
+      <title>miruccio</title>
+      <link>http://localhost:1313/posts/miruccio/</link>
+      <pubDate>Tue, 06 Aug 2024 17:50:47 +0000</pubDate>
+      <guid>http://localhost:1313/posts/miruccio/</guid>
       <description></description>
     </item>
     <item>
-      <title>prova1.md</title>
-      <link>http://localhost:1313/posts/prova1.md/</link>
-      <pubDate>Fri, 02 Aug 2024 13:53:25 +0000</pubDate>
-      <guid>http://localhost:1313/posts/prova1.md/</guid>
+      <title>mirino</title>
+      <link>http://localhost:1313/posts/mirino/</link>
+      <pubDate>Tue, 06 Aug 2024 17:48:45 +0000</pubDate>
+      <guid>http://localhost:1313/posts/mirino/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>mirella</title>
+      <link>http://localhost:1313/posts/mirella/</link>
+      <pubDate>Tue, 06 Aug 2024 17:47:42 +0000</pubDate>
+      <guid>http://localhost:1313/posts/mirella/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>hhh</title>
+      <link>http://localhost:1313/posts/hhh/</link>
+      <pubDate>Tue, 06 Aug 2024 11:28:13 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hhh/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>virella</title>
+      <link>http://localhost:1313/posts/virella/</link>
+      <pubDate>Tue, 06 Aug 2024 11:21:22 +0000</pubDate>
+      <guid>http://localhost:1313/posts/virella/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Piruna</title>
+      <link>http://localhost:1313/posts/piruna/</link>
+      <pubDate>Tue, 06 Aug 2024 11:19:38 +0000</pubDate>
+      <guid>http://localhost:1313/posts/piruna/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Provoletta</title>
+      <link>http://localhost:1313/posts/provoletta/</link>
+      <pubDate>Tue, 06 Aug 2024 11:17:19 +0000</pubDate>
+      <guid>http://localhost:1313/posts/provoletta/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Provolino</title>
+      <link>http://localhost:1313/posts/provolino/</link>
+      <pubDate>Tue, 06 Aug 2024 11:13:50 +0000</pubDate>
+      <guid>http://localhost:1313/posts/provolino/</guid>
       <description></description>
     </item>
   </channel>

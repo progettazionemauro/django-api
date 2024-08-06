@@ -6,6 +6,7 @@ echo "Script called with action: $1" >> "$LOG_FILE"
 
 # Directory containing the posts
 POSTS_DIR="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts"
+echo "Posts directory: $POSTS_DIR" >> "$LOG_FILE"
 
 # Check if the posts directory exists
 if [ ! -d "$POSTS_DIR" ]; then
@@ -15,7 +16,7 @@ fi
 
 # Function to create a new post
 create_post() {
-  POST_NAME="$1"
+  POST_NAME="$1.md"
   POST_TITLE="$2"
   POST_DATE="$3"
   POST_TAGS="$4"
@@ -61,7 +62,7 @@ EOF
 
 # Function to delete a post
 delete_post() {
-  POST_NAME="$1"
+  POST_NAME="$1.md"
   echo "Deleting post with name: $POST_NAME" >> "$LOG_FILE"
   if [ -f "$POSTS_DIR/$POST_NAME" ]; then
     rm "$POSTS_DIR/$POST_NAME"
