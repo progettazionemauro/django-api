@@ -6,97 +6,13 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Aug 2024 18:33:03 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Aug 2024 08:13:21 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>nillo</title>
-      <link>http://localhost:1313/posts/nillo/</link>
-      <pubDate>Tue, 06 Aug 2024 18:33:03 +0000</pubDate>
-      <guid>http://localhost:1313/posts/nillo/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>nolo</title>
-      <link>http://localhost:1313/posts/nolo/</link>
-      <pubDate>Tue, 06 Aug 2024 18:31:09 +0000</pubDate>
-      <guid>http://localhost:1313/posts/nolo/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>virietta</title>
-      <link>http://localhost:1313/posts/virietta/</link>
-      <pubDate>Tue, 06 Aug 2024 18:25:38 +0000</pubDate>
-      <guid>http://localhost:1313/posts/virietta/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>gigi</title>
-      <link>http://localhost:1313/posts/gigi/</link>
-      <pubDate>Tue, 06 Aug 2024 18:10:42 +0000</pubDate>
-      <guid>http://localhost:1313/posts/gigi/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>miretta</title>
-      <link>http://localhost:1313/posts/miretta/</link>
-      <pubDate>Tue, 06 Aug 2024 17:52:46 +0000</pubDate>
-      <guid>http://localhost:1313/posts/miretta/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>miruccio</title>
-      <link>http://localhost:1313/posts/miruccio/</link>
-      <pubDate>Tue, 06 Aug 2024 17:50:47 +0000</pubDate>
-      <guid>http://localhost:1313/posts/miruccio/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>mirino</title>
-      <link>http://localhost:1313/posts/mirino/</link>
-      <pubDate>Tue, 06 Aug 2024 17:48:45 +0000</pubDate>
-      <guid>http://localhost:1313/posts/mirino/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>mirella</title>
-      <link>http://localhost:1313/posts/mirella/</link>
-      <pubDate>Tue, 06 Aug 2024 17:47:42 +0000</pubDate>
-      <guid>http://localhost:1313/posts/mirella/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>hhh</title>
-      <link>http://localhost:1313/posts/hhh/</link>
-      <pubDate>Tue, 06 Aug 2024 11:28:13 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hhh/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>virella</title>
-      <link>http://localhost:1313/posts/virella/</link>
-      <pubDate>Tue, 06 Aug 2024 11:21:22 +0000</pubDate>
-      <guid>http://localhost:1313/posts/virella/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Piruna</title>
-      <link>http://localhost:1313/posts/piruna/</link>
-      <pubDate>Tue, 06 Aug 2024 11:19:38 +0000</pubDate>
-      <guid>http://localhost:1313/posts/piruna/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Provoletta</title>
-      <link>http://localhost:1313/posts/provoletta/</link>
-      <pubDate>Tue, 06 Aug 2024 11:17:19 +0000</pubDate>
-      <guid>http://localhost:1313/posts/provoletta/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Provolino</title>
-      <link>http://localhost:1313/posts/provolino/</link>
-      <pubDate>Tue, 06 Aug 2024 11:13:50 +0000</pubDate>
-      <guid>http://localhost:1313/posts/provolino/</guid>
+      <title>ficA</title>
+      <link>http://localhost:1313/posts/fica/</link>
+      <pubDate>Wed, 07 Aug 2024 08:13:21 +0000</pubDate>
+      <guid>http://localhost:1313/posts/fica/</guid>
       <description></description>
     </item>
     <item>
@@ -140,13 +56,6 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/store_locator/about/</guid>
       <description>Sto verificando la mappa</description>
-    </item>
-    <item>
-      <title>Pagina di ricerca</title>
-      <link>http://localhost:1313/posts/search/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/search/</guid>
-      <description>search</description>
     </item>
   </channel>
 </rss>

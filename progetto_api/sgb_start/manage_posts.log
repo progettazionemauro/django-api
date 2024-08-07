@@ -146,3 +146,51 @@ Script called with action: delete
 Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
 Deleting post with name: diegi.md.md
 Post 'diegi.md.md' has been deleted.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: viria.md.md
+Post 'viria.md.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/viria.md.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: viria.md
+Post 'viria.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/viria.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: fico.md
+Post 'fico.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/fico.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: viria.md
+Post 'viria.md' has been deleted.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: fico.md
+Post 'fico.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/fico.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: fica.md
+Image link: https://www.google.com/imgres?q=fico&imgurl=https%3A%2F%2Fwww.orto.it%2F148%2Fimg%2Ffico-brogiotto-nero_oit_13275.jpg&imgrefurl=https%3A%2F%2Fwww.orto.it%2Ffico-brogiotto-nero&docid=-a3kmClg2xTuQM&tbn
+Post 'fica.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/fica.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: fico.md
+Post 'fico.md' has been deleted.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: fagiolo.md
+Image link: https://www.mondopiante.com/1305-large_default/semi-fagiolo-nano-da-sgusciare-cannellino.jpg
+Post 'fagiolo.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/fagiolo.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: fica.md
+Image link: https://www.google.com/imgres?q=fico&imgurl=https%3A%2F%2Fwww.orto.it%2F148%2Fimg%2Ffico-brogiotto-nero_oit_13275.jpg&imgrefurl=https%3A%2F%2Fwww.orto.it%2Ffico-brogiotto-nero&docid=-a3kmClg2xTuQM&tbn
+Post 'fica.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/fica.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: fagiolo.md
+Post 'fagiolo.md' has been deleted.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: fica.md
+Image link: https://www.google.com/imgres?q=fico&imgurl=https%3A%2F%2Fwww.orto.it%2F148%2Fimg%2Ffico-brogiotto-nero_oit_13275.jpg&imgrefurl=https%3A%2F%2Fwww.orto.it%2Ffico-brogiotto-nero&docid=-a3kmClg2xTuQM&tbn
+Post 'fica.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/fica.md.

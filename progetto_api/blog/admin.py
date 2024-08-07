@@ -45,12 +45,12 @@ class PostAdmin(admin.ModelAdmin):
 
     def add_post_action(self, request, queryset):
         for post in queryset:
-            post_name = post.title.replace(' ', '_').lower() + '.md'
+            post_name = post.title.replace(' ', '_').lower()
             title = post.title
             date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
             tags = post.tags
             categories = post.categories
-            image = post.image_name
+            image = post.image_link  # Use image_link to get the URL
             image_alt = post.image_alt
             image_caption = post.image_caption
 
@@ -67,18 +67,19 @@ class PostAdmin(admin.ModelAdmin):
             )
 
     add_post_action.short_description = "Add a new post"
+    actions = ['add_post_action', 'delete_selected_posts']
+
+    def delete_model(self, request, obj):
+        self.run_manage_posts_script(request, 'delete', post_name=obj.file_name.replace('.md', ''))
+        obj.delete()
 
     def delete_selected_posts(self, request, queryset):
         for post in queryset:
-            post_name = post.file_name if post.file_name.endswith('.md') else f"{post.file_name}.md"
-            self.run_manage_posts_script(request, 'delete', post_name=post_name)
+            self.run_manage_posts_script(request, 'delete', post_name=post.file_name.replace('.md', ''))
             post.delete()
         self.message_user(request, "Selected posts have been deleted.")
 
-
     delete_selected_posts.short_description = "Delete selected posts"
-
-    actions = ['add_post_action', 'delete_selected_posts']
 
     def get_actions(self, request):
         actions = super().get_actions(request)

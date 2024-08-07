@@ -26,13 +26,14 @@ create_post() {
   POST_IMAGE_CAPTION="$8"
 
   echo "Creating post with name: $POST_NAME" >> "$LOG_FILE"
+  echo "Image link: $POST_IMAGE" >> "$LOG_FILE"
 
   # Set default values if no input is provided
   POST_TITLE=${POST_TITLE:-"Default Title"}
   POST_DATE=${POST_DATE:-$(date +"%Y-%m-%dT%H:%M:%S%:z")}
   POST_TAGS=${POST_TAGS:-"adventure,foodie,travel,fitness,nature,fun,inspiration"}
   POST_CATEGORIES=${POST_CATEGORIES:-"adventure,food,health,art,entertainment,science,lifestyle"}
-  POST_IMAGE=${POST_IMAGE:-"img/default.png"}
+  POST_IMAGE=${POST_IMAGE:-"img/default.jpeg"}
   POST_IMAGE_ALT=${POST_IMAGE_ALT:-"Default Alt Text"}
   POST_IMAGE_CAPTION=${POST_IMAGE_CAPTION:-"Default Caption"}
 
