@@ -14,8 +14,8 @@ if [ ! -d "$POSTS_DIR" ]; then
   exit 1
 fi
 
-# Function to create a new post
-create_post() {
+# Function to create or update a post
+create_or_update_post() {
   POST_NAME="$1.md"
   POST_TITLE="$2"
   POST_DATE="$3"
@@ -25,7 +25,7 @@ create_post() {
   POST_IMAGE_ALT="$7"
   POST_IMAGE_CAPTION="$8"
 
-  echo "Creating post with name: $POST_NAME" >> "$LOG_FILE"
+  echo "Creating or updating post with name: $POST_NAME" >> "$LOG_FILE"
   echo "Image link: $POST_IMAGE" >> "$LOG_FILE"
 
   # Set default values if no input is provided
@@ -41,7 +41,7 @@ create_post() {
   formatted_tags=$(echo "$POST_TAGS" | sed 's/ *, */", "/g' | sed 's/^/["/' | sed 's/$/"]/')
   formatted_categories=$(echo "$POST_CATEGORIES" | sed 's/ *, */", "/g' | sed 's/^/["/' | sed 's/$/"]/')
 
-  # Create the new post file
+  # Create or update the post file
   POST_FILE="$POSTS_DIR/$POST_NAME"
   cat <<EOF > "$POST_FILE"
 +++
@@ -58,7 +58,7 @@ categories = $formatted_categories
 +++
 EOF
 
-  echo "Post '$POST_NAME' has been created at $POST_FILE." >> "$LOG_FILE"
+  echo "Post '$POST_NAME' has been created or updated at $POST_FILE." >> "$LOG_FILE"
 }
 
 # Function to delete a post
@@ -78,14 +78,14 @@ ACTION="$1"
 shift
 
 case "$ACTION" in
-  add)
-    create_post "$@"
+  add|update)
+    create_or_update_post "$@"
     ;;
   delete)
     delete_post "$1"
     ;;
   *)
-    echo "Invalid action. Use 'add' or 'delete'." >> "$LOG_FILE"
+    echo "Invalid action. Use 'add', 'update', or 'delete'." >> "$LOG_FILE"
     exit 1
     ;;
 esac

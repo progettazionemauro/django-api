@@ -13,7 +13,7 @@ class PostAdmin(admin.ModelAdmin):
             env = os.environ.copy()
             env['PATH'] = '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:' + env.get('PATH', '')
 
-            if action == 'add':
+            if action in ['add', 'update']:
                 post_name = kwargs.get('post_name')
                 title = kwargs.get('title')
                 date = kwargs.get('date')
@@ -24,7 +24,7 @@ class PostAdmin(admin.ModelAdmin):
                 image_caption = kwargs.get('image_caption')
 
                 result = subprocess.run(
-                    [script_path, 'add', post_name, title, date, tags, categories, image, image_alt, image_caption],
+                    [script_path, action, post_name, title, date, tags, categories, image, image_alt, image_caption],
                     capture_output=True, text=True, check=True, env=env
                 )
             elif action == 'delete':
@@ -67,7 +67,32 @@ class PostAdmin(admin.ModelAdmin):
             )
 
     add_post_action.short_description = "Add a new post"
-    actions = ['add_post_action', 'delete_selected_posts']
+
+    def update_post_action(self, request, queryset):
+        for post in queryset:
+            post_name = post.title.replace(' ', '_').lower()
+            title = post.title
+            date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
+            tags = post.tags
+            categories = post.categories
+            image = post.image_link  # Use image_link to get the URL
+            image_alt = post.image_alt
+            image_caption = post.image_caption
+
+            self.run_manage_posts_script(
+                request, 'update',
+                post_name=post_name,
+                title=title,
+                date=date,
+                tags=tags,
+                categories=categories,
+                image=image,
+                image_alt=image_alt,
+                image_caption=image_caption
+            )
+
+    update_post_action.short_description = "Update selected posts"
+    actions = ['add_post_action', 'update_post_action', 'delete_selected_posts']
 
     def delete_model(self, request, obj):
         self.run_manage_posts_script(request, 'delete', post_name=obj.file_name.replace('.md', ''))

@@ -194,3 +194,36 @@ Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content
 Creating post with name: fica.md
 Image link: https://www.google.com/imgres?q=fico&imgurl=https%3A%2F%2Fwww.orto.it%2F148%2Fimg%2Ffico-brogiotto-nero_oit_13275.jpg&imgrefurl=https%3A%2F%2Fwww.orto.it%2Ffico-brogiotto-nero&docid=-a3kmClg2xTuQM&tbn
 Post 'fica.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/fica.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: piripicchio.md
+Image link: https://www.google.com/imgres?q=piripicchio&imgurl=https%3A%2F%2Fwww.mondadoristore.it%2Fimg%2FPiripicchio-in-aereoplano-Augusto-Piccioni%2Fea979122247059%2FBL%2FBL%2F82%2FNZO%2F71dfde49-fb1a-45eb-8a2
+Post 'piripicchio.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/piripicchio.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: piripacchio.md
+Image link: https://scontent.fcia8-2.fna.fbcdn.net/v/t39.30808-6/272521052_333603028772894_6016953044003182185_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8HFCg7LTZBcQ7kNvgEeQSzC&_nc_ht=scontent.fcia8-2.fna&
+Post 'piripacchio.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/piripacchio.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating post with name: pippo.md
+Image link: https://liberliber.it/wp-content/uploads/2023/10/kandinsky_sky_blue_1200x0600.jpg
+Post 'pippo.md' has been created at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/pippo.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: piripacchio.md
+Post 'piripacchio.md' has been deleted.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: pimpinella.md
+Image link: https://blog.giallozafferano.it/chiwawa69/wp-content/uploads/2018/10/800px-Pimpinella_peregrina_IP0705014-768x497.jpg
+Post 'pimpinella.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/pimpinella.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: pippo.md
+Post 'pippo.md' has been deleted.
+Script called with action: update
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: piripicchio.md
+Image link: https://pad.mymovies.it/filmclub/2010/11/042/cover1000.jpg
+Post 'piripicchio.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/piripicchio.md.
