@@ -6,7 +6,7 @@ ShowToc = true
 tags = ["adventure", "foodie", "travel", "fitness", "nature", "fun", "inspiration"]
 categories = ["adventure", "food", "health", "art", "entertainment", "science", "lifestyle"]
 [cover]
-    image = "https://pad.mymovies.it/filmclub/2010/11/042/cover1000.jpg"
+    image = "https://arpapollini.weebly.com/uploads/9/6/2/6/9626584/4246660_orig.jpg"
     alt = "Default Alt Text"
     caption = "Default Caption"
 +++
