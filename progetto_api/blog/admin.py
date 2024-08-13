@@ -2,6 +2,7 @@ import os
 import subprocess
 from django.contrib import admin
 from .models import Post
+from django_api_for_wagtail.models import Nation  # Import the Nation model
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -22,9 +23,11 @@ class PostAdmin(admin.ModelAdmin):
                 image = kwargs.get('image')
                 image_alt = kwargs.get('image_alt')
                 image_caption = kwargs.get('image_caption')
+                nation_name = kwargs.get('nation_name')
+                nation_capital = kwargs.get('nation_capital')
 
                 result = subprocess.run(
-                    [script_path, action, post_name, title, date, tags, categories, image, image_alt, image_caption],
+                    [script_path, action, post_name, title, date, tags, categories, image, image_alt, image_caption, nation_name, nation_capital],
                     capture_output=True, text=True, check=True, env=env
                 )
             elif action == 'delete':
@@ -45,12 +48,13 @@ class PostAdmin(admin.ModelAdmin):
 
     def add_post_action(self, request, queryset):
         for post in queryset:
+            nation = Nation.objects.first()  # Replace with logic to select the desired nation
             post_name = post.title.replace(' ', '_').lower()
             title = post.title
             date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
             tags = post.tags
             categories = post.categories
-            image = post.image_link  # Use image_link to get the URL
+            image = post.image_link
             image_alt = post.image_alt
             image_caption = post.image_caption
 
@@ -63,19 +67,22 @@ class PostAdmin(admin.ModelAdmin):
                 categories=categories,
                 image=image,
                 image_alt=image_alt,
-                image_caption=image_caption
+                image_caption=image_caption,
+                nation_name=nation.name,
+                nation_capital=nation.capital
             )
 
     add_post_action.short_description = "Add a new post"
 
     def update_post_action(self, request, queryset):
         for post in queryset:
+            nation = Nation.objects.first()  # Replace with logic to select the desired nation
             post_name = post.title.replace(' ', '_').lower()
             title = post.title
             date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
             tags = post.tags
             categories = post.categories
-            image = post.image_link  # Use image_link to get the URL
+            image = post.image_link
             image_alt = post.image_alt
             image_caption = post.image_caption
 
@@ -88,7 +95,9 @@ class PostAdmin(admin.ModelAdmin):
                 categories=categories,
                 image=image,
                 image_alt=image_alt,
-                image_caption=image_caption
+                image_caption=image_caption,
+                nation_name=nation.name,
+                nation_capital=nation.capital
             )
 
     update_post_action.short_description = "Update selected posts"

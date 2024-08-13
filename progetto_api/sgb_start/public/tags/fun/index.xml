@@ -6,8 +6,15 @@
     <description>Recent content in Fun on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Aug 2024 15:58:33 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Aug 2024 15:04:24 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/fun/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>asteracee</title>
+      <link>http://localhost:1313/posts/asteracee/</link>
+      <pubDate>Mon, 12 Aug 2024 15:04:24 +0000</pubDate>
+      <guid>http://localhost:1313/posts/asteracee/</guid>
+      <description></description>
+    </item>
     <item>
       <title>pimpinella</title>
       <link>http://localhost:1313/posts/pimpinella/</link>
@@ -20,13 +27,6 @@
       <link>http://localhost:1313/posts/piripicchio/</link>
       <pubDate>Wed, 07 Aug 2024 15:32:47 +0000</pubDate>
       <guid>http://localhost:1313/posts/piripicchio/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>ficA</title>
-      <link>http://localhost:1313/posts/fica/</link>
-      <pubDate>Wed, 07 Aug 2024 08:13:21 +0000</pubDate>
-      <guid>http://localhost:1313/posts/fica/</guid>
       <description></description>
     </item>
   </channel>

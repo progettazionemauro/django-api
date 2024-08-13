@@ -24,9 +24,12 @@ create_or_update_post() {
   POST_IMAGE="$6"
   POST_IMAGE_ALT="$7"
   POST_IMAGE_CAPTION="$8"
+  NATION_NAME="$9"
+  NATION_CAPITAL="${10}"
 
   echo "Creating or updating post with name: $POST_NAME" >> "$LOG_FILE"
   echo "Image link: $POST_IMAGE" >> "$LOG_FILE"
+  echo "Nation: $NATION_NAME, Capital: $NATION_CAPITAL" >> "$LOG_FILE"
 
   # Set default values if no input is provided
   POST_TITLE=${POST_TITLE:-"Default Title"}
@@ -51,6 +54,8 @@ draft = true
 ShowToc = true
 tags = $formatted_tags
 categories = $formatted_categories
+nation = "$NATION_NAME"
+capital = "$NATION_CAPITAL"
 [cover]
     image = "$POST_IMAGE"
     alt = "$POST_IMAGE_ALT"
