@@ -4403,6 +4403,765 @@ In `admin.py`, you can add functionality to push data directly to Hugo using Dja
 
 With these steps, you've set up a fully functional API in Django that interacts with a Hugo site, allowing you to manage content across both platforms seamlessly.
 
+##  **Integrazione totale** 
+Let's update the code to integrate the `Nation` model data into the Django-Hugo workflow. I'll show you how to modify `blog/admin.py`, `blog/models.py`, and `manage_posts.sh` to utilize the `Nation` model data when creating or updating posts in Hugo.
+
+### Updated `blog/admin.py`
+
+This code now integrates the `Nation` model data into the post creation process.
+
+python
+
+Copia codice
+
+`import os
+import subprocess
+from django.contrib import admin
+from .models import Post
+from django_api_for_wagtail.models import Nation  # Import the Nation model
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'file_name', 'image_name', 'image_link')
+
+    def run_manage_posts_script(self, request, action, **kwargs):
+        try:
+            script_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'sgb_start', 'manage_posts.sh'))
+            env = os.environ.copy()
+            env['PATH'] = '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:' + env.get('PATH', '')
+
+            if action in ['add', 'update']:
+                post_name = kwargs.get('post_name')
+                title = kwargs.get('title')
+                date = kwargs.get('date')
+                tags = kwargs.get('tags')
+                categories = kwargs.get('categories')
+                image = kwargs.get('image')
+                image_alt = kwargs.get('image_alt')
+                image_caption = kwargs.get('image_caption')
+                nation_name = kwargs.get('nation_name')
+                nation_capital = kwargs.get('nation_capital')
+
+                result = subprocess.run(
+                    [script_path, action, post_name, title, date, tags, categories, image, image_alt, image_caption, nation_name, nation_capital],
+                    capture_output=True, text=True, check=True, env=env
+                )
+            elif action == 'delete':
+                post_name = kwargs.get('post_name')
+                result = subprocess.run(
+                    [script_path, 'delete', post_name],
+                    capture_output=True, text=True, check=True, env=env
+                )
+
+            if result.returncode == 0:
+                self.message_user(request, "Manage posts script executed successfully")
+            else:
+                self.message_user(request, f"Manage posts script execution failed: {result.stderr}", level='ERROR')
+        except subprocess.CalledProcessError as e:
+            self.message_user(request, f"Manage posts script execution failed: {e.stderr}", level='ERROR')
+        except Exception as e:
+            self.message_user(request, f"Unexpected error: {e}", level='ERROR')
+
+    def add_post_action(self, request, queryset):
+        for post in queryset:
+            nation = Nation.objects.first()  # Replace with logic to select the desired nation
+            post_name = post.title.replace(' ', '_').lower()
+            title = post.title
+            date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
+            tags = post.tags
+            categories = post.categories
+            image = post.image_link
+            image_alt = post.image_alt
+            image_caption = post.image_caption
+
+            self.run_manage_posts_script(
+                request, 'add',
+                post_name=post_name,
+                title=title,
+                date=date,
+                tags=tags,
+                categories=categories,
+                image=image,
+                image_alt=image_alt,
+                image_caption=image_caption,
+                nation_name=nation.name,
+                nation_capital=nation.capital
+            )
+
+    add_post_action.short_description = "Add a new post"
+
+    def update_post_action(self, request, queryset):
+        for post in queryset:
+            nation = Nation.objects.first()  # Replace with logic to select the desired nation
+            post_name = post.title.replace(' ', '_').lower()
+            title = post.title
+            date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
+            tags = post.tags
+            categories = post.categories
+            image = post.image_link
+            image_alt = post.image_alt
+            image_caption = post.image_caption
+
+            self.run_manage_posts_script(
+                request, 'update',
+                post_name=post_name,
+                title=title,
+                date=date,
+                tags=tags,
+                categories=categories,
+                image=image,
+                image_alt=image_alt,
+                image_caption=image_caption,
+                nation_name=nation.name,
+                nation_capital=nation.capital
+            )
+
+    update_post_action.short_description = "Update selected posts"
+    actions = ['add_post_action', 'update_post_action', 'delete_selected_posts']
+
+    def delete_model(self, request, obj):
+        self.run_manage_posts_script(request, 'delete', post_name=obj.file_name.replace('.md', ''))
+        obj.delete()
+
+    def delete_selected_posts(self, request, queryset):
+        for post in queryset:
+            self.run_manage_posts_script(request, 'delete', post_name=post.file_name.replace('.md', ''))
+            post.delete()
+        self.message_user(request, "Selected posts have been deleted.")
+
+    delete_selected_posts.short_description = "Delete selected posts"
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions` 
+
+### Updated `blog/models.py`
+
+No changes are required in the `Nation` model, but here's how `Post` model could be connected to `Nation`:
+
+python
+
+Copia codice
+
+`from django.db import models
+from django.utils import timezone
+from django_api_for_wagtail.models import Nation  # Import Nation model
+
+class Post(models.Model):
+    title = models.CharField(max_length=255)
+    file_name = models.CharField(max_length=255, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    tags = models.CharField(max_length=255, default="adventure,foodie,travel,fitness,nature,fun,inspiration")
+    categories = models.CharField(max_length=255, default="adventure,food,health,art,entertainment,science,lifestyle")
+    image_name = models.CharField(max_length=255)
+    image_alt = models.CharField(max_length=255, default="Default Alt Text")
+    image_caption = models.CharField(max_length=255, default="Default Caption")
+    image_link = models.URLField()
+    draft = models.BooleanField(default=True)
+    nation = models.ForeignKey(Nation, on_delete=models.CASCADE)  # Link to Nation model
+
+    def __str__(self):
+        return self.title` 
+
+### Updated `manage_posts.sh`
+
+This version of `manage_posts.sh` includes nation details:
+
+bash
+
+Copia codice
+
+``#!/bin/bash
+
+# Log file for debugging
+LOG_FILE="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/manage_posts.log"
+echo "Script called with action: $1" >> "$LOG_FILE"
+
+# Directory containing the posts
+POSTS_DIR="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts"
+echo "Posts directory: $POSTS_DIR" >> "$LOG_FILE"
+
+# Check if the posts directory exists
+if [ ! -d "$POSTS_DIR" ]; then
+  echo "Directory $POSTS_DIR does not exist." >> "$LOG_FILE"
+  exit 1
+fi
+
+# Function to create or update a post
+create_or_update_post() {
+  POST_NAME="$1.md"
+  POST_TITLE="$2"
+  POST_DATE="$3"
+  POST_TAGS="$4"
+  POST_CATEGORIES="$5"
+  POST_IMAGE="$6"
+  POST_IMAGE_ALT="$7"
+  POST_IMAGE_CAPTION="$8"
+  NATION_NAME="$9"
+  NATION_CAPITAL="${10}"
+
+  echo "Creating or updating post with name: $POST_NAME" >> "$LOG_FILE"
+  echo "Image link: $POST_IMAGE" >> "$LOG_FILE"
+  echo "Nation: $NATION_NAME, Capital: $NATION_CAPITAL" >> "$LOG_FILE"
+
+  # Set default values if no input is provided
+  POST_TITLE=${POST_TITLE:-"Default Title"}
+  POST_DATE=${POST_DATE:-$(date +"%Y-%m-%dT%H:%M:%S%:z")}
+  POST_TAGS=${POST_TAGS:-"adventure,foodie,travel,fitness,nature,fun,inspiration"}
+  POST_CATEGORIES=${POST_CATEGORIES:-"adventure,food,health,art,entertainment,science,lifestyle"}
+  POST_IMAGE=${POST_IMAGE:-"img/default.jpeg"}
+  POST_IMAGE_ALT=${POST_IMAGE_ALT:-"Default Alt Text"}
+  POST_IMAGE_CAPTION=${POST_IMAGE_CAPTION:-"Default Caption"}
+
+  # Format tags and categories for TOML
+  formatted_tags=$(echo "$POST_TAGS" | sed 's/ *, */", "/g' | sed 's/^/["/' | sed 's/$/"]/')
+  formatted_categories=$(echo "$POST_CATEGORIES" | sed 's/ *, */", "/g' | sed 's/^/["/' | sed 's/$/"]/')
+
+  # Create or update the post file
+  POST_FILE="$POSTS_DIR/$POST_NAME"
+  cat <<EOF > "$POST_FILE"
++++
+title = "$POST_TITLE"
+date = "$POST_DATE"
+draft = true
+ShowToc = true
+tags = $formatted_tags
+categories = $formatted_categories
+nation = "$NATION_NAME"
+capital = "$NATION_CAPITAL"
+[cover]
+    image = "$POST_IMAGE"
+    alt = "$POST_IMAGE_ALT"
+    caption = "$POST_IMAGE_CAPTION"
++++
+EOF
+
+  echo "Post '$POST_NAME' has been created or updated at $POST_FILE." >> "$LOG_FILE"
+}
+
+# Function to delete a post
+delete_post() {
+  POST_NAME="$1Here's how to adjust the provided scripts to include and utilize the `Nation` model in your Django-to-Hugo integration:
+
+### 1. `blog/admin.py`
+This updated script includes logic to incorporate the `Nation` model data into the process of creating and updating posts.
+
+```python
+import os
+import subprocess
+from django.contrib import admin
+from .models import Post
+from django_api_for_wagtail.models import Nation  # Import the Nation model
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'file_name', 'image_name', 'image_link')
+
+    def run_manage_posts_script(self, request, action, **kwargs):
+        try:
+            script_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'sgb_start', 'manage_posts.sh'))
+            env = os.environ.copy()
+            env['PATH'] = '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:' + env.get('PATH', '')
+
+            # Prepare the arguments based on the action
+            if action in ['add', 'update']:
+                post_name = kwargs.get('post_name')
+                title = kwargs.get('title')
+                date = kwargs.get('date')
+                tags = kwargs.get('tags')
+                categories = kwargs.get('categories')
+                image = kwargs.get('image')
+                image_alt = kwargs.get('image_alt')
+                image_caption = kwargs.get('image_caption')
+                nation_name = kwargs.get('nation_name')
+                nation_capital = kwargs.get('nation_capital')
+
+                result = subprocess.run(
+                    [script_path, action, post_name, title, date, tags, categories, image, image_alt, image_caption, nation_name, nation_capital],
+                    capture_output=True, text=True, check=True, env=env
+                )
+            elif action == 'delete':
+                post_name = kwargs.get('post_name')
+                result = subprocess.run(
+                    [script_path, 'delete', post_name],
+                    capture_output=True, text=True, check=True, env=env
+                )
+
+            if result.returncode == 0:
+                self.message_user(request, "Manage posts script executed successfully")
+            else:
+                self.message_user(request, f"Manage posts script execution failed: {result.stderr}", level='ERROR')
+        except subprocess.CalledProcessError as e:
+            self.message_user(request, f"Manage posts script execution failed: {e.stderr}", level='ERROR')
+        except Exception as e:
+            self.message_user(request, f"Unexpected error: {e}", level='ERROR')
+
+    def add_post_action(self, request, queryset):
+        for post in queryset:
+            nation = Nation.objects.first()  # Modify this to select the correct Nation instance
+            post_name = post.title.replace(' ', '_').lower()
+            title = post.title
+            date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
+            tags = post.tags
+            categories = post.categories
+            image = post.image_link
+            image_alt = post.image_alt
+            image_caption = post.image_caption
+
+            self.run_manage_posts_script(
+                request, 'add',
+                post_name=post_name,
+                title=title,
+                date=date,
+                tags=tags,
+                categories=categories,
+                image=image,
+                image_alt=image_alt,
+                image_caption=image_caption,
+                nation_name=nation.name,
+                nation_capital=nation.capital
+            )
+
+    add_post_action.short_description = "Add a new post"
+
+    def update_post_action(self, request, queryset):
+        for post in queryset:
+            nation = Nation.objects.first()  # Modify this to select the correct Nation instance
+            post_name = post.title.replace(' ', '_').lower()
+            title = post.title
+            date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
+            tags = post.tags
+            categories = post.categories
+            image = post.image_link
+            image_alt = post.image_alt
+            image_caption = post.image_caption
+
+            self.run_manage_posts_script(
+                request, 'update',
+                post_name=post_name,
+                title=title,
+                date=date,
+                tags=tags,
+                categories=categories,
+                image=image,
+                image_alt=image_alt,
+                image_caption=image_caption,
+                nation_name=nation.name,
+                nation_capital=nation.capital
+            )
+
+    update_post_action.short_description = "Update selected posts"
+    actions = ['add_post_action', 'update_post_action', 'delete_selected_posts']
+
+    def delete_model(self, request, obj):
+        self.run_manage_posts_script(request, 'delete', post_name=obj.file_name.replace('.md', ''))
+        obj.delete()
+
+    def delete_selected_posts(self, request, queryset):
+        for post in queryset:
+            self.run_manage_posts_script(request, 'delete', post_name=post.file_name.replace('.md', ''))
+            post.delete()
+        self.message_user(request, "Selected posts have been deleted.")
+
+    delete_selected_posts.short_description = "Delete selected posts"
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions`` 
+
+### 2. `blog/models.py`
+
+This model links the `Post` model to the `Nation` model:
+
+python
+
+Copia codice
+
+`from django.db import models
+from django.utils import timezone
+from django_api_for_wagtail.models import Nation  # Import Nation model
+
+class Post(models.Model):
+    title = models.CharField(max_length=255)
+    file_name = models.CharField(max_length=255, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    tags = models.CharField(max_length=255, default="adventure,foodie,travel,fitness,nature,fun,inspiration")
+    categories = models.CharField(max_length=255, default="adventure,food,health,art,entertainment,science,lifestyle")
+    image_name = models.CharField(max_length=255)
+    image_alt = models.CharField(max_length=255, default="Default Alt Text")
+    image_caption = models.CharField(max_length=255, default="Default Caption")
+    image_link = models.URLField()
+    draft = models.BooleanField(default=True)
+    nation = models.ForeignKey(Nation, on_delete=models.CASCADE)  # Link to Nation model
+
+    def __str__(self):
+        return self.title` 
+
+### 3. `manage_posts.sh`
+
+This script is responsible for creating or updating posts with nation details:
+
+#!/bin/bash
+
+  
+
+# Log file for debugging
+
+LOG_FILE="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/manage_posts.log"
+
+echo  "Script called with action: $1"  >>  "$LOG_FILE"
+
+  
+
+# Directory containing the posts
+
+POSTS_DIR="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts"
+
+echo  "Posts directory: $POSTS_DIR"  >>  "$LOG_FILE"
+
+  
+
+# Check if the posts directory exists
+
+if [ !  -d  "$POSTS_DIR" ]; then
+
+echo  "Directory $POSTS_DIR does not exist."  >>  "$LOG_FILE"
+
+exit  1
+
+fi
+
+  
+
+# Function to create or update a post
+
+create_or_update_post() {
+
+POST_NAME="$1.md"
+
+POST_TITLE="$2"
+
+POST_DATE="$3"
+
+POST_TAGS="$4"
+
+POST_CATEGORIES="$5"
+
+POST_IMAGE="$6"
+
+POST_IMAGE_ALT="$7"
+
+POST_IMAGE_CAPTION="$8"
+
+NATION_NAME="$9"
+
+NATION_CAPITAL="${10}"
+
+  
+
+echo  "Creating or updating post with name: $POST_NAME"  >>  "$LOG_FILE"
+
+echo  "Image link: $POST_IMAGE"  >>  "$LOG_FILE"
+
+echo  "Nation: $NATION_NAME, Capital: $NATION_CAPITAL"  >>  "$LOG_FILE"
+
+  
+
+# Set default values if no input is provided
+
+POST_TITLE=${POST_TITLE:-"Default Title"}
+
+POST_DATE=${POST_DATE:-$(date +"%Y-%m-%dT%H:%M:%S%:z")}
+
+POST_TAGS=${POST_TAGS:-"adventure,foodie,travel,fitness,nature,fun,inspiration"}
+
+POST_CATEGORIES=${POST_CATEGORIES:-"adventure,food,health,art,entertainment,science,lifestyle"}
+
+POST_IMAGE=${POST_IMAGE:-"img/default.jpeg"}
+
+POST_IMAGE_ALT=${POST_IMAGE_ALT:-"Default Alt Text"}
+
+POST_IMAGE_CAPTION=${POST_IMAGE_CAPTION:-"Default Caption"}
+
+  
+
+# Format tags and categories for TOML
+
+formatted_tags=$(echo  "$POST_TAGS"  |  sed  's/ *, */", "/g'  |  sed  's/^/["/'  |  sed  's/$/"]/')
+
+formatted_categories=$(echo  "$POST_CATEGORIES"  |  sed  's/ *, */", "/g'  |  sed  's/^/["/'  |  sed  's/$/"]/')
+
+  
+
+# Create or update the post file
+
+POST_FILE="$POSTS_DIR/$POST_NAME"
+
+cat  <<EOF  >  "$POST_FILE"
+
++++
+
+title = "$POST_TITLE"
+
+date = "$POST_DATE"
+
+draft = true
+
+ShowToc = true
+
+tags = $formatted_tags
+
+categories = $formatted_categories
+
+nation = "$NATION_NAME"
+
+capital = "$NATION_CAPITAL"
+
+[cover]
+
+image = "$POST_IMAGE"
+
+alt = "$POST_IMAGE_ALT"
+
+caption = "$POST_IMAGE_CAPTION"
+
++++
+
+EOF
+
+  
+
+echo  "Post '$POST_NAME' has been created or updated at $POST_FILE."  >>  "$LOG_FILE"
+
+}
+
+  
+
+# Function to delete a post
+
+delete_post() {
+
+POST_NAME="$1.md"
+
+echo  "Deleting post with name: $POST_NAME"  >>  "$LOG_FILE"
+
+if [ -f  "$POSTS_DIR/$POST_NAME" ]; then
+
+rm  "$POSTS_DIR/$POST_NAME"
+
+echo  "Post '$POST_NAME' has been deleted."  >>  "$LOG_FILE"
+
+else
+
+echo  "Post '$POST_NAME' does not exist."  >>  "$LOG_FILE"
+
+fi
+
+}
+
+  
+
+# Main script logic
+
+ACTION="$1"
+
+shift
+
+  
+
+case  "$ACTION"  in
+
+add|update)
+
+create_or_update_post  "$@"
+
+;;
+
+delete)
+
+delete_post  "$1"
+
+;;
+
+*)
+
+echo  "Invalid action. Use 'add', 'update', or 'delete'."  >>  "$LOG_FILE"
+
+exit  1
+
+;;
+
+esac
+
+### 2. `blog/models.py`
+
+The `Post` model is linked to the `Nation` model through a ForeignKey relationship.
+
+python
+
+Copia codice
+
+`from django.db import models
+from django.utils import timezone
+from django_api_for_wagtail.models import Nation  # Import Nation model
+
+class Post(models.Model):
+    title = models.CharField(max_length=255)
+    file_name = models.CharField(max_length=255, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    tags = models.CharField(max_length=255, default="adventure,foodie,travel,fitness,nature,fun,inspiration")
+    categories = models.CharField(max_length=255, default="adventure,food,health,art,entertainment,science,lifestyle")
+    image_name = models.CharField(max_length=255)
+    image_alt = models.CharField(max_length=255, default="Default Alt Text")
+    image_caption = models.CharField(max_length=255, default="Default Caption")
+    image_link = models.URLField()
+    draft = models.BooleanField(default=True)
+    nation = models.ForeignKey(Nation, on_delete=models.CASCADE)  # Link to Nation model
+
+    def __str__(self):
+        return self.title` 
+
+### 3. `manage_posts.sh`
+
+This script now handles the creation, update, and deletion of posts in Hugo, integrating nation details.
+
+bash
+
+Copia codice
+
+`#!/bin/bash
+
+# Log file for debugging
+LOG_FILE="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/manage_posts.log"
+echo "Script called with action: $1" >> "$LOG_FILE"
+
+# Directory containing the posts
+POSTS_DIR="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts"
+echo "Posts directory: $POSTS_DIR" >> "$LOG_FILE"
+
+# Check if the posts directory exists
+if [ ! -d "$POSTS_DIR" ]; then
+  echo "Directory $POSTS_DIR does not exist." >> "$LOG_FILE"
+  exit 1
+fi
+
+# Function to create or update a post
+create_or_update_post() {
+  POST_NAME="$1.md"
+  POST_TITLE="$2"
+  POST_DATE="$3"
+  POST_TAGS="$4"
+  POST_CATEGORIES="$5"
+  POST_IMAGE="$6"
+  POST_IMAGE_ALT="$7"
+  POST_IMAGE_CAPTION="$8"
+  NATION_NAME="$9"
+  NATION_CAPITAL="${10}"
+
+  echo "Creating or updating post with name: $POST_NAME" >> "$LOG_FILE"
+  echo "Image link: $POST_IMAGE" >> "$LOG_FILE"
+  echo "Nation: $NATION_NAME, Capital: $NATION_CAPITAL" >> "$LOG_FILE"
+
+  # Set default values if no input is provided
+  POST_TITLE=${POST_TITLE:-"Default Title"}
+  POST_DATE=${POST_DATE:-$(date +"%Y-%m-%dT%H:%M:%S%:z")}
+  POST_TAGS=${POST_TAGS:-"adventure,foodie,travel,fitness,nature,fun,inspiration"}
+  POST_CATEGORIES=${POST_CATEGORIES:-"adventure,food,health,art,entertainment,science,lifestyle"}
+  POST_IMAGE=${POST_IMAGE:-"img/default.jpeg"}
+  POST_IMAGE_ALT=${POST_IMAGE_ALT:-"Default Alt Text"}
+  POST_IMAGE_CAPTION=${POST_IMAGE_CAPTION:-"Default Caption"}
+
+  # Format tags and categories for TOML
+  formatted_tags=$(echo "$POST_TAGS" | sed 's/ *, */", "/g' | sed 's/^/["/' | sed 's/$/"]/')
+  formatted_categories=$(echo "$POST_CATEGORIES" | sed 's/ *, */", "/g' | sed 's/^/["/' | sed 's/$/"]/')
+
+  # Create or update the post file
+  POST_FILE="$POSTS_DIR/$POST_NAME"
+  cat <<EOF > "$POST_FILE"
++++
+title = "$POST_TITLE"
+date = "$POST_DATE"
+draft = true
+ShowToc = true
+tags = $formatted_tags
+categories = $formatted_categories
+nation = "$NATION_NAME"
+capital = "$NATION_CAPITAL"
+[cover]
+    image = "$POST_IMAGE"
+    alt = "$POST_IMAGE_ALT"
+    caption = "$POST_IMAGE_CAPTION"
++++
+EOF
+
+  echo "Post '$POST_NAME' has been created or updated at $POST_FILE." >> "$LOG_FILE"
+}
+
+# Function to delete a post
+delete_post() {
+  POST_NAME="$1.md"
+  echo "Deleting post with name: $POST_NAME" >> "$LOG_FILE"
+  if [ -f "$POSTS_DIR/$POST_NAME" ]; then
+    rm "$POSTS_DIR/$POST_NAME"
+    echo "Post '$POST_NAME' has been deleted." >> "$LOG_FILE"
+  else
+    echo "Post '$POST_NAME' does not exist." >> "$LOG_FILE"
+  fi
+}
+
+# Main script logic
+ACTION="$1"
+shift
+
+case "$ACTION" in
+  add|update)
+    create_or_update_post "$@"
+    ;;
+  delete)
+    delete_post "$1"
+    ;;
+  *)
+    echo "Invalid action. Use 'add', 'update', or 'delete'." >> "$LOG_FILE"
+    exit 1
+    ;;
+esac` 
+
+With these updates, your Django admin interface will allow you to manage posts in Hugo, including the ability to integrate data fromWith the code updates provided, your Django admin panel now has the capability to manage posts for your Hugo site while integrating data from the `Nation` model in your Django project. Here's how everything works together:
+
+### 1. **`blog/admin.py`**
+
+-   **Purpose**: This script allows you to add, update, and delete posts in Hugo through the Django admin interface.
+-   **Integration with `Nation`**: The `Nation` model's data (like `name` and `capital`) is incorporated into each post when creating or updating it. This is done by selecting a `Nation` instance and passing its data as arguments to the `manage_posts.sh` script.
+
+### 2. **`blog/models.py`**
+
+-   **Purpose**: This script defines the `Post` model, which represents a post in your Django project.
+-   **Integration with `Nation`**: A ForeignKey relationship links the `Post` model to the `Nation` model, allowing each post to be associated with a specific nation.
+
+### 3. **`manage_posts.sh`**
+
+-   **Purpose**: This bash script handles the actual creation, updating, and deletion of posts in Hugo.
+-   **Integration with `Nation`**: The nation data passed from the Django admin panel (such as the nation’s name and capital) is used within the Hugo post’s content.
+
+### How It Works Together:
+
+1.  **Add/Update Post**:
+    
+    -   When you add or update a post in Django admin, you select a `Nation` model instance. The admin action script (`blog/admin.py`) passes the post details, along with the nation’s name and capital, to `manage_posts.sh`.
+    -   The `manage_posts.sh` script creates or updates a corresponding Markdown file in Hugo’s content directory, embedding the nation data within the post.
+2.  **Delete Post**:
+    
+    -   When you delete a post in Django admin, the relevant Markdown file in Hugo is also deleted by the `manage_posts.sh` script.
+
+This integration ensures that the content in your Hugo site is directly tied to and managed by your Django application, allowing for seamless content management.
+
+If you have any more specific needs or further adjustments, feel free to ask!
+
+
 # PYTHON
 
 ## Spiegazione attraverso codice di __init__, __getattribute__ e super ##
@@ -4526,885 +5285,4 @@ print(vehicle_instance.start())  # Output: Toyota vehicle started.
 print(vehicle_instance.brand)  # Output: Toyota
 In the second example, the __init__ method is used to initialize the brand attribute when a Vehicle instance is created. This ensures that the instance has a properly initialized state from the beginning.
 
-#### Ed ora quando posso usare e non usare __getattribute__?###
-If you don't define the __getattribute__ method in a class, Python will use the default behavior for attribute access. The default behavior involves looking up the attribute in the object's dictionary and returning its value if found. If the attribute is not found in the object's dictionary, Python looks for the attribute in the class hierarchy.
-
-Here's what happens if you don't use __getattribute__:
-
-python
-Copy code
-class Vehicle:
-    def __init__(self, brand):
-        self.brand = brand
-
-    def start(self):
-        print(f"{self.brand} vehicle started.")
-
-## Creating an instance without __getattribute__
-vehicle_instance = Vehicle(brand="Toyota")
-
-## Accessing the 'brand' attribute without a custom __getattribute__
-print(vehicle_instance.brand)  # Output: Toyota
-
-### The default behavior is used, and there is no need for a custom __getattribute__ in this case.
-In the example above, we create a Vehicle class with an __init__ method to initialize the brand attribute. When we access the brand attribute, the default attribute access behavior is used, and there is no need for a custom __getattribute__. The attribute is found in the instance's dictionary, and its value is returned.
-
-The __getattribute__ method is a powerful tool for customizing attribute access, and it allows you to intercept attribute access calls and customize the behavior. However, in many cases, you may not need to override it, and the default behavior is sufficient for basic attribute access. Only when you need to customize the attribute access behavior should you consider defining a __getattribute__ method.
-
-
-In the example provided, the __getattribute__ method is used to customize the behavior of accessing the brand attribute in the CarWithSuper class. Specifically, it adds a prefix ("Awesome") to the value of the brand attribute before returning it.
-
-Here's the relevant part of the code:
-
-python
-Copy code
-class CarWithSuper(Car):
-    # ...
-
-    def __getattribute__(self, name):
-        # Modifying __getattribute__ to add a prefix to the brand attribute
-        if name == "brand":
-            return "Awesome " + super().__getattribute__(name)
-        else:
-            return super().__getattribute__(name)
-In this case, the __getattribute__ method is modifying the behavior of accessing the brand attribute. Without this customization, accessing car_with_super.brand would simply return the value of the brand attribute. With the custom __getattribute__, it returns the value with the added prefix.
-
-So, you might need to use __getattribute__ when you want to customize or intercept attribute access calls and modify the behavior based on your specific requirements. It's a powerful tool, but it should be used judiciously, as unnecessary or incorrect use may lead to unexpected behavior and potential issues.
-
-## MIXIN ##
-L'esempio esposto e che di seguito si ripropone risulta anche un ottimo esempio di mixin
-
-Yes, the provided example with Vehicle, Car, and CarWithSuper can be considered an example of mixin-like behavior. Let me break it down:
-
-Vehicle Class:
-
-python
-Copy code
-class Vehicle:
-    def __init__(self, brand):
-        self.brand = brand
-
-    def start(self):
-        print(f"{self.brand} vehicle started.")
-This is the base class representing a generic vehicle. It has an __init__ method to initialize the brand attribute and a start method.
-
-Car Class (Inherits from Vehicle):
-
-python
-Copy code
-class Car(Vehicle):
-    def __init__(self, brand, model):
-        super().__init__(brand)
-        self.model = model
-
-    def start(self):
-        print(f"{self.brand} {self.model} car started.")
-The Car class inherits from Vehicle. It has its own __init__ method but uses super() to call the __init__ method of the parent class (Vehicle). It also has its own start method, overriding the start method of Vehicle.
-
-CarWithSuper Class (Inherits from Car):
-
-python
-Copy code
-class CarWithSuper(Car):
-    def __init__(self, brand, model, color):
-        super().__init__(brand, model)
-        self.color = color
-
-    def start(self):
-        super().start()
-        print(f"The {self.color} car is ready to go.")
-    
-    def __getattribute__(self, name):
-        if name == "brand":
-            return "Awesome " + super().__getattribute__('brand')
-        else:
-            return super().__getattribute__(name)
-The CarWithSuper class inherits from Car and introduces a new attribute (color). It uses super() to call the __init__ method of the parent class (Car). It also overrides the start method, calling the parent's (Car) start method using super() and adding an additional message. Additionally, it modifies __getattribute__ to add a prefix ("Awesome") to the brand attribute.
-
-So, in this example, the classes are organized in a way that exhibits mixin-like behavior. The CarWithSuper class enhances the behavior of the Car class by adding attributes and modifying methods, and it uses super() to maintain the hierarchy and call methods from parent classes. While it may not strictly adhere to the classic definition of a mixin, it shares some characteristics of mixin-like behavior.
-
-### Definizione di mixin ##
-
-
-In object-oriented programming, a mixin is a class that provides a certain functionality to be inherited by a subclass, but is not meant to stand alone. Mixins are used to enhance the functionality of a class without the need for multiple inheritance.
-
-Here are some key characteristics and features of mixins:
-
-Purpose-Specific Functionality: Mixins are designed to provide a specific set of functionalities or behaviors that can be easily added to other classes. They encapsulate a piece of behavior.
-
-Reusability: Mixins promote code reuse. Instead of duplicating code in multiple classes, you can create a mixin and include it in various classes that need that particular behavior.
-
-No Standalone Use: Mixins are not meant to be instantiated or used independently. They lack the complete implementation to be used as standalone classes. They are intended to be combined with other classes.
-
-Flexible Composition: Since a class can inherit from multiple mixins, it allows for flexible composition of functionalities. This is in contrast to languages that do not support multiple inheritance directly.
-
-Avoids Diamond Problem: Mixins can help avoid the "diamond problem" that arises in languages with multiple inheritance, where a class inherits from two classes that have a common ancestor.
-
-Small and Focused: Mixins are typically small and focused on a specific task. This makes them easy to understand, maintain, and reuse.
-
-# STANDARD COMMANDS IN DJANGO INSTALLATION#
-
-1) python3 -m venv venv
-
-# USEFUL PROPERTY AND METHOD IN DJANGO #
-
-## L'uso di Queryset ##
-
-Django querysets have several notable properties and methods that provide flexibility and ease of use when interacting with the database. Here are some key properties and methods of querysets:
-
-Chaining:
-
-Querysets are lazy, meaning they don't hit the database until an action is performed.
-Multiple filters and operations can be chained together to build complex queries.
-Example:
-
-python
-Copy code
-queryset = Model.objects.filter(field1=value1).exclude(field2=value2).order_by('-date_created')
-Slicing:
-
-Querysets can be sliced to retrieve a specific range of objects.
-Example:
-
-python
-Copy code
-queryset = Model.objects.all()
-result_slice = queryset[5:10]  # Retrieve objects 5 through 9
-Count:
-
-The count method returns the number of objects in the queryset without fetching the actual objects.
-Example:
-
-python
-Copy code
-count = queryset.count()
-Distinct:
-
-The distinct method eliminates duplicate rows from the queryset.
-Example:
-
-python
-Copy code
-distinct_values = Model.objects.values('field').distinct()
-Aggregate:
-
-The aggregate method allows for the calculation of aggregate values (e.g., sum, average) on the queryset.
-Example:
-
-python
-Copy code
-from django.db.models import Avg
-average_value = Model.objects.aggregate(avg_value=Avg('numeric_field'))
-Values and ValuesList:
-
-The values method returns a queryset of dictionaries representing the values of specific fields.
-The values_list method returns a queryset of tuples representing the values of specific fields.
-Example:
-
-python
-Copy code
-values_queryset = Model.objects.values('field1', 'field2')
-values_list_queryset = Model.objects.values_list('field1', 'field2')
-Exists:
-
-The exists method checks if there are any records in the queryset.
-Example:
-
-
-queryset_exists = Model.objects.filter(field=value).exists()
-Update and Delete:
-
-The update method modifies multiple records in the database without fetching them.
-The delete method deletes records from the database without fetching them.
-Example:
-
-python
-Copy code
-Model.objects.filter(field=value).update(status='new_status')
-Model.objects.filter(field=value).delete()
-These are just a few of the many properties and methods provided by Django querysets. They offer a powerful and expressive way to interact with the database.
-
-### Esempio in wagtail ###
-
-from datetime import datetime, timedelta, timezone
-from django.shortcuts import render
-from wagtail.core.models import Page
-from your_app.models import RoundPage  # Replace 'your_app' with the actual name of your app
-from path.to.get_deadline_date_for import get_deadline_date_for  # Replace 'path.to' with the actual path
-
-def docs_internship(request):
-    now = datetime.now(timezone.utc)
-    today = get_deadline_date_for(now)
-    five_weeks_ago = today - timedelta(days=7 * 5)
-
-    applicant_round = RoundPage.objects.filter(
-        pingnew__lte=today,
-        internannounce__gt=today,
-    ).first()
-    
-    intern_round = RoundPage.objects.filter(
-        internannounce__lte=today,
-        internends__gt=five_weeks_ago,
-    ).first()
-    
-    return render(request, 'home/docs/internship_guide.html', {
-        'applicant_round': applicant_round,
-        'intern_round': intern_round,
-    })
-
-## # Strumenti avanzati: Creare una pagina wagtail all'interno di un sito Django  ## 
-
-- (link)[https://docs.wagtail.org/en/latest/advanced_topics/add_to_django_project.html]
-- Installazione in Django al pari livello di manage.py: `python3 manage.py startapp blog_wiki_wag`
-- Verifica in Wagtail di requirements.txt della compatibilità delle versioni tra Django e Wagtail. Nel caso specifico Django>=4.2,<4.3 - wagtail>=5.1,<5.2
-- Verifica in Django di requirements.txt: Django==4.2.2
-- Se vi è compatibilità in Wagtal: `pip3 freeze requriments.txt`
-- *** Verifica del motore Database in Wagtail in base.py: *** 
-- `DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-    }`
-- *** Verifica del motore database in Django in settings.py: ***
-- `DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-    }`
-
-- Come si può vedere sopra i due motori DB sono identici
-- Ora creare la subdirectory di progetto wagtail che conterrà tutti i file dell'app wagtail (quella con il quale si effettuato il requirements.txt)
-
- - effettuare il clone del branch da GB del progetto wagtail (vedere git e github per i dettagli)
- - a questo punto lanciare il comando Install the Project:
-
-Navigate to the wagtail-wag directory in your terminal: `pip install -r requirements.txt`
--  Add Wagtail URLs to Django URLs: `path('wagtail/', include('wiki-wag.wagtail_urls')), # nuovo inserimento`
--  Add the required wagtail modules in setting.py: `INSTALLED_APPS = [
-   
-    'wagtail.contrib.forms',
-    'wagtail.contrib.redirects',
-    'wagtail.embeds',
-    'wagtail.sites',
-    'wagtail.users',
-    'wagtail.snippets',
-    'wagtail.documents',
-    'wagtail.images',
-    'wagtail.search',
-    'wagtail.admin',
-    
-    'taggit',
-    'modelcluster',
-  
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'sgq',
-    'wagtail',
-   ]`
-
--  Add'wiki-wag' app in your Django INSTALLED_APPS as well. Add it if it's not present.
-
-INSTALLED_APPS = [
-    # ...
-    'wiki-wag',
-    # ...
-]
-
-- add in Django settings this: 
-  ` MIDDLEWARE = [
-  'django.contrib.sessions.middleware.SessionMiddleware',
-  'django.middleware.common.CommonMiddleware',
-  'django.middleware.csrf.CsrfViewMiddleware',
-  'django.contrib.auth.middleware.AuthenticationMiddleware',
-  'django.contrib.messages.middleware.MessageMiddleware',
-  'django.middleware.clickjacking.XFrameOptionsMiddleware',
-  'django.middleware.security.SecurityMiddleware',
-
-  'wagtail.contrib.redirects.middleware.RedirectMiddleware',
-  ] `
-
-A questo punto dvrebbe apparire un Warning che indica qualcosa di questo genere
-:::caution
-WARNINGS:
-?: (wagtailadmin.W003) The WAGTAILADMIN_BASE_URL setting is not defined
-        HINT: This should be the base URL used to access the Wagtail admin site. Without this, URLs in notification emails will not display correctly
-:::
-
-Proseguire e verificare se in admin panel appaiono gli elementi di inpunt in Admin Panel
-
-## So now update the urls and run makemirgations and migrate ##
-
-from django.contrib import admin
-from django.urls import path, include
-from wagtail import urls as wagtail_urls
-
-urlpatterns = [
-    path('', include('sgq.urls')),  # Include the app-level URLs
-    path('admin/', admin.site.urls),
-    # path('wagtail/', include('wagtail.core.urls')), # nuovo inserimento
-    path('wagtail/', include(wagtail_urls)), # nuovo inserimento
-
-]
-
-
-
-# DJANGO
-
-## Create a Django App from 0 (from [Create Django API App](#create-django-api-app) )
-
-### Step 1: Create a Virtual Environment (Optional but recommended)
-
-Open your terminal and navigate to the directory where you want to create your Django project. Run the following commands:
-
-```python
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 2: Install Django
-
-While in the activated virtual environment, install Django using the following command:
-
-```python
-pip3 install django
-```
-
-Step 3: Create a Django Project
-
-Run the following command to create a new Django project:
-
-```python
-django-admin startproject progetto_api
-```
-
-Replace `myproject` with the desired name for your project.
-
-### Step 4: Navigate to the Project Directory
-
-Change into the project directory:
-
-```python
-cd progetto_api
-```
-
-### Step 5: Create a Django App
-
-Run the following command to create a new Django app:
-
-```python
-python3 manage.py startapp django_api_for_wagtail
-```
-
-### Step 6: Configure Database
-
-Open the `myproject/settings.py` file and configure the app and the database settings. By default, Django uses SQLite for development (if not already configured):
-
-```python
-# myproject/settings.py
-INSTALLED_APPS = [
-    # ...
-    'django_api_for_wagtail',
-    # ...
-]
-
-# .... #
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3",
-    }
-}
-```
-
-### Step 7: Apply Migrations
-
-Run the following commands to apply initial migrations:
-
-```python
-python3 manage.py makemigrations
-python3 manage.py migrate
-```
-
-### Step 8: Create a Superuser (Optional but recommended)
-
-Run the following command to create a superuser account for the Django admin:
-
-```
-bashCopy code
-python manage.py createsuperuser
-```
-
-Follow the prompts to set a username, email, and password.
-
-### Step 9: Run the Development Server
-
-Start the Django development server:
-
-```python3
-python3 manage.py runserver
-```
-
-Visit `http://127.0.0.1:8000/` in your web browser to see the Django welcome page.
-
-### Step 10: Create a Superuser
-
-1. After running the development server return e to your project directory (at manage.py level).
-
-2. Run the following command to create a superuser account:
-
-   ```python
-   python3 manage.py createsuperuser
-   ```
-
-3. Follow the prompts to set a username, email, and password for the superuser account.
-
-### Step 11: Run the Development Server
-
-Ensure that the development server is still running:
-
-```python
-python3 manage.py runserver
-```
-
-### Step 12: Open the Admin Interface
-
-Visit `http://127.0.0.1:8000/admin/` in your web browser. Log in with the superuser credentials you just created.
-
-### Step 13: Verify Admin Interface
-
-Verify that the Django admin interface is working correctly
-
-### Step 14: Initialize a Git Repository
-
-1. Open a new terminal window in your project directory
-
-2. The Git commands to initialize a repository, add files, and make an initial commit should be executed at the root level of your project, where your `manage.py` file is located. The `manage.py` file is typically located at the top level of your Django project, not within the virtual environment (`venv`).
-
-3. Run the following commands to initialize a Git repository, add all files, and make an initial commit:
-
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   ```
-
-### Step 15: Create a GitHub Repository
-
-1. Go to the [GitHub website](https://github.com/) and log in or create a new account.
-2. Click on the "+" icon in the top right corner and select "New repository."
-3. Follow the instructions to create a new repository on GitHub.
-4. git repo name https://github.com/progettazionemauro/django-api
-
-### Step 16: Connect Local Repository to GitHub
-
-1. After creating the GitHub repository follow those instructions.
-
-   - `git remote add origin https://github.com/progettazionemauro/django-api`
-
-   - git branch -M main
-
-     note: The `git branch -M main` command is used to rename the current branch. In Git, it's a way to both rename the current branch and force-update the tracking branches.
-
-     Here's what the command does:
-
-     - `git branch`: This command is used for creating, listing, renaming, and deleting branches in Git. When used without additional options, it lists all the local branches.
-     - `-M main`: This option is used to rename the current branch to "main". The `-M` flag is a shortcut for `--move`, which is used for renaming branches.
-
-     When you create a new Git repository or clone an existing one, the default branch is usually named "master." However, in recent years, there has been a movement in the Git community to use more inclusive and neutral terminology. As a result, many projects are now using "main" instead of "master" as the default branch name.
-
-     The `git branch -M main` command is often used after creating a new repository or when transitioning from "master" to "main" to update the branch name.
-
-     It's important to note that if you're renaming the branch you are currently on, you might need to update the remote repository to reflect the new branch name. 
-
-     
-
-   ```
-   git remote add origin https://github.com/progettazionemauro/django-api
-   git branch -M main
-   git push -u origin main
-   ```
-
-   Make sure to replace "your-username" and "your-repo" with your GitHub username and repository name.
-
-   ### Step 17 bis: problems with git push
-
-   In doing push it can happen to find issues related to pushing for the first time into Github. For example when you created the repo and added readme.md and it is not present into local repo this can generate a misealignment that che lead to generate an error likse that:
-
-   ```bash
-   git push origin main
-   `To https://github.com/progettazionemauro/django-api`
-    `! [rejected]        main -> main (non-fast-forward)`
-   `error: push di alcuni riferimenti su 'https://github.com/progettazionemauro/django-api' non riuscito`
-   `suggerimento: Gli aggiornamenti sono stati rifiutati perché l'ultimo commit del branch`
-   `suggerimento: attuale è rimasto indietro rispetto alla sua controparte remota.`
-   `suggerimento: Integra le modifiche remote (ad es. con 'git pull ...') prima di`
-   `suggerimento: eseguire nuovamente il push.`
-   `suggerimento: Vedi la 'Nota sui fast forward' in 'git push --help' per ulteriori`
-   `suggerimento: dettagli.`
-   ```
-
-   So it this is the case the best option if to do this: 
-
-   In alternativa, puoi anche eseguire il comando:`git push --force` per forzare il push delle tue modifiche, anche se non sono un fast forward. Tuttavia, questa è una soluzione rischiosa perché potrebbe sovrascrivere le modifiche remote che non hai ancora integrato nel tuo branch locale.
-
-   Per capire meglio cosa significa "non-fast-forward", è necessario comprendere il concetto di fast forward. Un fast forward è un tipo di push che aggiorna un branch locale con le ultime modifiche apportate a un branch remoto. Il fast forward è possibile solo se le modifiche apportate ai due branch sono consecutive.
-
-### Step 18: Verify GitHub Repository
-
-Go to your GitHub repository in the web browser and verify that your code has been pushed successfully.
-
-That's it! Now you have a Django project with a superuser account, and your code is version-controlled using Git and hosted on GitHub.
-
-### Step 19: Create Models, Views, and Templates (Optional)
-
-You can now start building your Django app by creating models, views, and templates. Define your models in the `models.py` file, create views in the `views.py` file, and add templates in the `templates` directory.
-
-### Step 20: Create API App (Optional)
-
-If you want to create a separate app for your API, follow the instructions provided in the previous response to create an `api` app and set up serializers, views, and URLs.
-
-That's it! You now have a basic Django project and app set up. Customize it based on your specific requirements and integrate it with your Wagtail project as needed.
-## Working with Django APP
-### Add new database in the app
-To create a new model in your Django `blog` app that holds information about files, images, text, and image links, you can modify your `models.py` file as follows:
-
-```python
-from django.db import models
-
-class Post(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
-    file_name = models.CharField(max_length=255, unique=True)  # Name of the file
-    image_name = models.CharField(max_length=255)  # Name of the image
-    image_link = models.URLField()  # Link to the image
-
-    def __str__(self):
-        return self.title
-```
-
-In this model:
-
-- `title`: Represents the title of the post.
-- `text`: Represents the content of the post (text).
-- `file_name`: Represents the name of the file produced by your autogenerative Python code.
-- `image_name`: Represents the name of the associated image.
-- `image_link`: Represents the link to the image.
-
-You can adjust the field types and lengths according to your requirements.
-
-
-
-```
-
-Once the model is created and migrated, you can register it in the Django admin site to manage it:
-
-```python
-from django.contrib import admin
-from .models import Post
-
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'file_name', 'image_name', 'image_link')
-```
-
-After defining the model, don't forget to run the following commands to create and apply the migrations:
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-With this setup, you'll be able to add, edit, and delete posts with associated file names, image names, and image links through the Django admin interface. You can also access and manipulate this data programmatically through your Django views and templates as needed.
-
-### Step 21: Create a command to populate Django Admin from /content files directory from Hugo:
-
-    bash
-    #!/bin/bash
-
-  
-
-# Directory containing markdown files
-
-markdown_dir="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/"
-
-  
-
-# Output file to store processed file details
-
-output_file="/home/mauro/Scrivania/dJANGO_apI/progetto_api/blog/processed_files.txt"
-
-  
-
-# Check if the directory exists
-
-if [ !  -d  "$markdown_dir" ]; then
-
-echo  "Error: Directory $markdown_dir does not exist."
-
-exit  1
-
-fi
-
-  
-
-# Create or clear the output file
-
->  "$output_file"
-
-  
-
-# Iterate over all markdown files in the directory
-
-for  markdown_file  in  "$markdown_dir"/*.md; do
-
-if [ -f  "$markdown_file" ]; then
-
-# Read contents of the markdown file and escape problematic characters
-
-content=$(cat  "$markdown_file"  |  sed  's/"/\\"/g'  |  sed  "s/'/\\'/g"  |  tr  '\n'  ' ')
-
-  
-
-# Extract title from filename
-
-filename=$(basename  --  "$markdown_file")
-
-title="${filename%.*}"
-
-  
-
-# Construct image_link based on the extracted title
-
-image_link="http://localhost:1313/posts/${title}/"
-
-  
-
-# Print the details (for demonstration purposes)
-
-echo  "Title: $title"
-
-echo  "File Name: $filename"
-
-echo  "Content: $content"
-
-echo  "Image Link: $image_link"
-
-echo  "-------------------------"
-
-  
-
-# Save the data to the Django database using the Django shell
-
-echo  "from blog.models import Post; Post.objects.create(title=\"$title\", text=\"$content\", file_name=\"$filename\", image_name='', image_link=\"$image_link\")"  |  python3  manage.py  shell
-
-  
-
-# Log the details to the output file
-
-echo  "Title: $title"  >>  "$output_file"
-
-echo  "File Name: $filename"  >>  "$output_file"
-
-echo  "Content: $content"  >>  "$output_file"
-
-echo  "Image Link: $image_link"  >>  "$output_file"
-
-echo  "-------------------------"  >>  "$output_file"
-
-else
-
-echo  "Error: $markdown_file is not a valid file."
-
-fi
-
-done
-
-  
-
-echo  "Processing complete. Details stored in $output_file."
-In admin.py:
-
-    python
-      
-
-from  django.contrib  import  admin
-
-from .models  import  CustomFeature
-
-import  os
-
-import  subprocess
-
-from .models  import  Post
-
-  
-
-@admin.register(CustomFeature)
-
-class  CustomFeatureAdmin(admin.ModelAdmin):
-
-list_display  = ('name', 'description')
-
-  
-
-def  run_script(self, request, queryset):
-
-try:
-
-# This line retrieves the directory path of the current Python script (admin.py in this case) using __file__,
-
-# which is a special attribute in Python that represents the current file path.
-
-current_dir  =  os.path.dirname(__file__)
-
-script_path  =  os.path.abspath(os.path.join(current_dir, 'add_page.sh'))
-
-print("Absolute path to script:", script_path) # Print out the absolute path
-
-subprocess.run([script_path], check=True)
-
-self.message_user(request, "Script executed successfully")
-
-except  Exception  as  e:
-
-self.message_user(request, f"Script execution failed: {e}", level='ERROR')
-
-  
-  
-
-run_script.short_description =  "Run add_page.sh"
-
-  
-
-actions  = [run_script]
-
-from .models  import  Post
-
-  
-
-@admin.register(Post)
-
-class  PostAdmin(admin.ModelAdmin):
-
-list_display  = ('title', 'file_name', 'image_name', 'image_link')
-
-  
-
-def  populate_posts(self, request, queryset):
-
-try:
-
-current_dir  =  os.path.dirname(__file__)
-
-script_path  =  os.path.abspath(os.path.join(current_dir, 'populate_posts.sh'))
-
-subprocess.run([script_path], check=True)
-
-self.message_user(request, "Posts populated successfully")
-
-except  Exception  as  e:
-
-self.message_user(request, f"Failed to populate posts: {e}", level='ERROR')
-
-  
-
-populate_posts.short_description =  "Run populate_posts.sh"
-
-actions  = [populate_posts]
-in models.py:
-
-    python
-    from  django.db  import  models
-
-  
-
-# Create your models here. Mauro
-
-class  CustomFeature(models.Model):
-
-name  =  models.CharField(max_length=255, unique=True)
-
-description  =  models.TextField()
-
-  
-
-def  __str__(self):
-
-return  self.name
-
-  
-
-class  Post(models.Model):
-
-title  =  models.CharField(max_length=255)
-
-text  =  models.TextField()
-
-file_name  =  models.CharField(max_length=255, unique=True) # Name of the file
-
-image_name  =  models.CharField(max_length=255) # Name of the image
-
-image_link  =  models.URLField() # Link to the image
-
-  
-
-def  __str__(self):
-
-return  self.title
-
-# ADVANCED BASH COMMANDS & DJANGO
-## Comando per generare pagine in Hugo
-
-     #!/bin/bash
-    
-      
-    
-        # Define paths
-        
-        posts_dir="../sgb_start/content/posts"
-        
-        template_file="./../cheatsheet.md"  # Adjust this path to the location of your cheatsheet.md file
-        
-          
-        
-        # Check if the posts directory exists
-        
-        if [ !  -d  "$posts_dir" ]; then
-        
-        echo  "Error: Hugo posts directory not found!"
-        
-        exit  1
-        
-        fi
-        
-          
-        
-        # Check if the template file exists
-        
-        if [ !  -f  "$template_file" ]; then
-        
-        echo  "Error: Template file not found!"
-        
-        exit  1
-        
-        fi
-        
-          
-        
-        # Define the new file name
-        
-        new_post_file="$posts_dir/il_mio_secondo_post.md"
-        
-          
-        
-        # Check if the new post file already exists
-        
-        if [ -f  "$new_post_file
+#### 
