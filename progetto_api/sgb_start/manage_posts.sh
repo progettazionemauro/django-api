@@ -16,7 +16,7 @@ fi
 
 # Function to create or update a post
 create_or_update_post() {
-  POST_NAME="$1.md"
+  POST_NAME="$1"
   POST_TITLE="$2"
   POST_DATE="$3"
   POST_TAGS="$4"
@@ -27,7 +27,11 @@ create_or_update_post() {
   NATION_NAME="$9"
   NATION_CAPITAL="${10}"
 
-  echo "Creating or updating post with name: $POST_NAME" >> "$LOG_FILE"
+  # Convert the post name to lowercase and add .md extension
+  NORMALIZED_POST_NAME=$(echo "$POST_NAME" | tr '[:upper:]' '[:lower:]')
+  FILE_NAME="${NORMALIZED_POST_NAME}.md"
+
+  echo "Creating or updating post with name: $FILE_NAME" >> "$LOG_FILE"
   echo "Image link: $POST_IMAGE" >> "$LOG_FILE"
   echo "Nation: $NATION_NAME, Capital: $NATION_CAPITAL" >> "$LOG_FILE"
 
@@ -45,7 +49,7 @@ create_or_update_post() {
   formatted_categories=$(echo "$POST_CATEGORIES" | sed 's/ *, */", "/g' | sed 's/^/["/' | sed 's/$/"]/')
 
   # Create or update the post file
-  POST_FILE="$POSTS_DIR/$POST_NAME"
+  POST_FILE="$POSTS_DIR/$FILE_NAME"
   cat <<EOF > "$POST_FILE"
 +++
 title = "$POST_TITLE"
@@ -63,18 +67,26 @@ capital = "$NATION_CAPITAL"
 +++
 EOF
 
-  echo "Post '$POST_NAME' has been created or updated at $POST_FILE." >> "$LOG_FILE"
+  echo "Post '$FILE_NAME' has been created or updated at $POST_FILE." >> "$LOG_FILE"
 }
 
 # Function to delete a post
 delete_post() {
-  POST_NAME="$1.md"
-  echo "Deleting post with name: $POST_NAME" >> "$LOG_FILE"
-  if [ -f "$POSTS_DIR/$POST_NAME" ]; then
-    rm "$POSTS_DIR/$POST_NAME"
-    echo "Post '$POST_NAME' has been deleted." >> "$LOG_FILE"
+  POST_NAME="$1"
+
+  # Convert the post name to lowercase and add .md extension
+  NORMALIZED_POST_NAME=$(echo "$POST_NAME" | tr '[:upper:]' '[:lower:]')
+  FILE_NAME="${NORMALIZED_POST_NAME}.md"
+
+  POST_FILE="$POSTS_DIR/$FILE_NAME"
+
+  echo "Deleting post with name: $FILE_NAME" >> "$LOG_FILE"
+
+  if [ -f "$POST_FILE" ]; then
+    rm "$POST_FILE"
+    echo "Post '$POST_FILE' has been deleted." >> "$LOG_FILE"
   else
-    echo "Post '$POST_NAME' does not exist." >> "$LOG_FILE"
+    echo "Post '$POST_FILE' does not exist." >> "$LOG_FILE"
   fi
 }
 
@@ -94,3 +106,4 @@ case "$ACTION" in
     exit 1
     ;;
 esac
+

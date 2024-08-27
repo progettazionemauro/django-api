@@ -49,7 +49,8 @@ class PostAdmin(admin.ModelAdmin):
     def add_post_action(self, request, queryset):
         for post in queryset:
             nation = Nation.objects.first()  # Replace with logic to select the desired nation
-            post_name = post.title.replace(' ', '_').lower()
+            post.save()  # Ensure save method sets the file_name correctly
+
             title = post.title
             date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
             tags = post.tags
@@ -60,7 +61,7 @@ class PostAdmin(admin.ModelAdmin):
 
             self.run_manage_posts_script(
                 request, 'add',
-                post_name=post_name,
+                post_name=post.file_name.replace('.md', ''),  # Use consistent post_name
                 title=title,
                 date=date,
                 tags=tags,
@@ -77,7 +78,8 @@ class PostAdmin(admin.ModelAdmin):
     def update_post_action(self, request, queryset):
         for post in queryset:
             nation = Nation.objects.first()  # Replace with logic to select the desired nation
-            post_name = post.title.replace(' ', '_').lower()
+            post.save()  # Ensure save method sets the file_name correctly
+
             title = post.title
             date = post.date.strftime('%Y-%m-%dT%H:%M:%S%z')
             tags = post.tags
@@ -88,7 +90,7 @@ class PostAdmin(admin.ModelAdmin):
 
             self.run_manage_posts_script(
                 request, 'update',
-                post_name=post_name,
+                post_name=post.file_name.replace('.md', ''),  # Use consistent post_name
                 title=title,
                 date=date,
                 tags=tags,
