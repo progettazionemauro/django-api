@@ -65,6 +65,7 @@ capital = "$NATION_CAPITAL"
     alt = "$POST_IMAGE_ALT"
     caption = "$POST_IMAGE_CAPTION"
 +++
+{{< django_retrieve >}}
 EOF
 
   echo "Post '$FILE_NAME' has been created or updated at $POST_FILE." >> "$LOG_FILE"

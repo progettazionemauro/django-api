@@ -6,8 +6,15 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Aug 2024 15:04:24 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Aug 2024 17:42:44 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ciperacee</title>
+      <link>http://localhost:1313/posts/ciperacee/</link>
+      <pubDate>Wed, 28 Aug 2024 17:42:44 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ciperacee/</guid>
+      <description> &lt;!DOCTYPE html&gt; Fetch Data with Axios and Vanilla JavaScript Nations and Capitals </description>
+    </item>
     <item>
       <title>asteracee</title>
       <link>http://localhost:1313/posts/asteracee/</link>
