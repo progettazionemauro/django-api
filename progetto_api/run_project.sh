@@ -1,26 +1,41 @@
 #!/bin/bash
 
 # Check if any process is listening on port 8000
-if lsof -i :8000 >/dev/null 2>&1; then
-    echo "Port 8000 is in use."
+pids=$(lsof -ti :8000)
 
-    # Get the PID of the process using port 8000
-    pid=$(lsof -ti :8000)
+if [ -n "$pids" ]; then
+    echo "Port 8000 is in use by the following processes: $pids"
 
-    # Kill the process
-    echo "Killing process with PID $pid"
-    kill -9 "$pid"
+    # Kill all processes using port 8000
+    echo "Killing processes with PIDs: $pids"
+    kill -9 $pids
 
-    echo "Process killed."
+    echo "Processes killed."
 else
     echo "Port 8000 is not in use."
 fi
 
+# Check if Celery is running and kill it if necessary
+celery_pids=$(pgrep -f 'celery')
 
-# Navigate to the Django project directory and run the server
-# cd /progetto_api
+if [ -n "$celery_pids" ]; then
+    echo "Celery is running with the following PIDs: $celery_pids"
+
+    # Kill the Celery processes
+    echo "Killing Celery processes with PIDs: $celery_pids"
+    kill -9 $celery_pids
+
+    echo "Celery processes killed."
+else
+    echo "Celery is not running."
+fi
+
+# Start Django server
 python3 manage.py runserver &
 
-# Navigate to the Hugo project directory and run the server
+# Start Celery worker
+celery -A progetto_api worker --loglevel=info &
+
+# Start Hugo server
 cd ./sgb_start/
 hugo server -D

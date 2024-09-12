@@ -496,3 +496,19 @@ Creating or updating post with name: ciperacee.md
 Image link: https://www.portofinoamp.it/come/didattica/Carexdivulsa.JPG/@@images/36c2c156-2fab-497d-b791-d70f998a009b.jpeg
 Nation: Nigeria, Capital: Lagos
 Post 'ciperacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/ciperacee.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: ericacee.md
+Image link: https://www.portofinoamp.it/come/didattica/Ericacarnea.JPG/@@images/7ffa1f7a-be9e-482c-b445-53ccc00f94dc.jpeg
+Nation: Nigeria, Capital: Lagos
+Post 'ericacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/ericacee.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: ciperacee.md
+Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/ciperacee.md' has been deleted.
+Script called with action: update
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: ericacee.md
+Image link: https://www.portofinoamp.it/come/didattica/Callunavulgaris.JPG/@@images/7f8d14d9-06e1-4bac-8de9-8ac770705268.jpeg
+Nation: Nigeria, Capital: Lagos
+Post 'ericacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/ericacee.md.
