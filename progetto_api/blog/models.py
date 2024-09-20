@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
 from django.utils import timezone
-from django_api_for_wagtail.models import Nation
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -14,7 +13,6 @@ class Post(models.Model):
     image_caption = models.CharField(max_length=255, default="Default Caption")
     image_link = models.URLField()
     draft = models.BooleanField(default=True)
-    nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if not self.file_name:
@@ -23,25 +21,16 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-
-# Nuovo modello per gestire la configurazione delle tabelle dinamiche
-class TableConfiguration(models.Model):
-    table_name = models.CharField(max_length=255, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+class maglia(models.Model):
+    tessuto = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.table_name
+        return self.tessuto
+from django.db import models
 
-
-class FieldConfiguration(models.Model):
-    table = models.ForeignKey(TableConfiguration, related_name='fields', on_delete=models.CASCADE)
-    field_name = models.CharField(max_length=255)
-    field_type = models.CharField(max_length=50, choices=[
-        ('CharField', 'Stringa'),
-        ('IntegerField', 'Numero Intero'),
-        ('DateField', 'Data'),
-    ])
+class piante_grasse(models.Model):
+    specie = models.CharField(max_length=255)
+    sottospecie = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.field_name} ({self.get_field_type_display()})"
+        return self.specie

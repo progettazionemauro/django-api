@@ -24,8 +24,7 @@ INSTALLED_APPS = [
     'django_api_for_wagtail',
     'blog',
     'corsheaders',
-    'celery',  # Aggiungi Celery
-]
+    ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -71,12 +70,7 @@ DATABASES = {
     }
 }
 
-# Celery Configuration Options
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # URL di Redis come broker
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # URL di Redis come backend
-CELERY_ACCEPT_CONTENT = ['json']  # Formati di contenuto accettati
-CELERY_TASK_SERIALIZER = 'json'  # Serializzazione in JSON
-CELERY_RESULT_SERIALIZER = 'json'
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>My New Hugo Site</title>
-    <link>http://localhost:38475/</link>
+    <link>http://localhost:43275/</link>
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 12 Sep 2024 14:28:33 +0000</lastBuildDate>
-    <atom:link href="http://localhost:38475/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:43275/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ericacee</title>
-      <link>http://localhost:38475/posts/ericacee/</link>
+      <link>http://localhost:43275/posts/ericacee/</link>
       <pubDate>Thu, 12 Sep 2024 14:28:33 +0000</pubDate>
-      <guid>http://localhost:38475/posts/ericacee/</guid>
+      <guid>http://localhost:43275/posts/ericacee/</guid>
       <description>&lt;!DOCTYPE html&gt;
 &lt;html lang=&#34;en&#34;&gt;
 &lt;head&gt;
@@ -62,58 +62,58 @@
     </item>
     <item>
       <title>asteracee</title>
-      <link>http://localhost:38475/posts/asteracee/</link>
+      <link>http://localhost:43275/posts/asteracee/</link>
       <pubDate>Mon, 12 Aug 2024 15:04:24 +0000</pubDate>
-      <guid>http://localhost:38475/posts/asteracee/</guid>
+      <guid>http://localhost:43275/posts/asteracee/</guid>
       <description></description>
     </item>
     <item>
       <title>pimpinella</title>
-      <link>http://localhost:38475/posts/pimpinella/</link>
+      <link>http://localhost:43275/posts/pimpinella/</link>
       <pubDate>Wed, 07 Aug 2024 15:58:33 +0000</pubDate>
-      <guid>http://localhost:38475/posts/pimpinella/</guid>
+      <guid>http://localhost:43275/posts/pimpinella/</guid>
       <description></description>
     </item>
     <item>
       <title>piripicchio</title>
-      <link>http://localhost:38475/posts/piripicchio/</link>
+      <link>http://localhost:43275/posts/piripicchio/</link>
       <pubDate>Wed, 07 Aug 2024 15:32:47 +0000</pubDate>
-      <guid>http://localhost:38475/posts/piripicchio/</guid>
+      <guid>http://localhost:43275/posts/piripicchio/</guid>
       <description></description>
     </item>
     <item>
       <title>My Vue Content</title>
-      <link>http://localhost:38475/django_retrieve/django_retrieve/</link>
+      <link>http://localhost:43275/django_retrieve/django_retrieve/</link>
       <pubDate>Sat, 20 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38475/django_retrieve/django_retrieve/</guid>
+      <guid>http://localhost:43275/django_retrieve/django_retrieve/</guid>
       <description></description>
     </item>
     <item>
       <title>My Vue Content</title>
-      <link>http://localhost:38475/vue_retrieve/vue_retrieve/</link>
+      <link>http://localhost:43275/vue_retrieve/vue_retrieve/</link>
       <pubDate>Sat, 20 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38475/vue_retrieve/vue_retrieve/</guid>
+      <guid>http://localhost:43275/vue_retrieve/vue_retrieve/</guid>
       <description></description>
     </item>
     <item>
       <title>Data From Endpoint</title>
-      <link>http://localhost:38475/data_from_json/data_json/</link>
+      <link>http://localhost:43275/data_from_json/data_json/</link>
       <pubDate>Wed, 27 Mar 2024 18:13:13 +0100</pubDate>
-      <guid>http://localhost:38475/data_from_json/data_json/</guid>
+      <guid>http://localhost:43275/data_from_json/data_json/</guid>
       <description></description>
     </item>
     <item>
       <title>Data_json</title>
-      <link>http://localhost:38475/data_from_endpoint/data_from_endpoint/</link>
+      <link>http://localhost:43275/data_from_endpoint/data_from_endpoint/</link>
       <pubDate>Wed, 27 Mar 2024 18:13:13 +0100</pubDate>
-      <guid>http://localhost:38475/data_from_endpoint/data_from_endpoint/</guid>
+      <guid>http://localhost:43275/data_from_endpoint/data_from_endpoint/</guid>
       <description></description>
     </item>
     <item>
       <title>ABOUT</title>
-      <link>http://localhost:38475/about_map/about/</link>
+      <link>http://localhost:43275/about_map/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38475/about_map/about/</guid>
+      <guid>http://localhost:43275/about_map/about/</guid>
       <description>&lt;p&gt;Sto verificando la mappa&lt;/p&gt;
 &lt;div id=&#34;map&#34;&gt;
     &lt;link rel=&#34;stylesheet&#34; href=&#34;https://unpkg.com/leaflet@1.7.1/dist/leaflet.css&#34; crossorigin=&#34;&#34;/&gt;
@@ -121,14 +121,14 @@
     &lt;script&gt;
      let markers = [{&#34;latitude&#34;:48.8584,&#34;longitude&#34;:2.2945,&#34;name&#34;:&#34;Eiffel Tower&#34;},{&#34;latitude&#34;:41.8902,&#34;longitude&#34;:12.4922,&#34;name&#34;:&#34;Colosseum&#34;},{&#34;latitude&#34;:41.4036,&#34;longitude&#34;:2.1744,&#34;name&#34;:&#34;Sagrada Família&#34;},{&#34;latitude&#34;:52.5163,&#34;longitude&#34;:13.3777,&#34;name&#34;:&#34;Brandenburg Gate&#34;},{&#34;latitude&#34;:37.9715,&#34;longitude&#34;:23.7257,&#34;name&#34;:&#34;Acropolis&#34;},{&#34;latitude&#34;:55.9486,&#34;longitude&#34;:-3.1999,&#34;name&#34;:&#34;Edinburgh Castle&#34;},{&#34;latitude&#34;:50.09,&#34;longitude&#34;:14.3983,&#34;name&#34;:&#34;Prague Castle&#34;},{&#34;latitude&#34;:52.3584,&#34;longitude&#34;:4.8811,&#34;name&#34;:&#34;Van Gogh Museum&#34;},{&#34;latitude&#34;:48.1845,&#34;longitude&#34;:16.3122,&#34;name&#34;:&#34;Schönbrunn Palace&#34;},{&#34;latitude&#34;:51.2089,&#34;longitude&#34;:3.2243,&#34;name&#34;:&#34;Bruges Belfry&#34;}];
     &lt;/script&gt;
-    &lt;script src=&#34;http://localhost:38475/js/map.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;http://localhost:43275/js/map.js&#34;&gt;&lt;/script&gt;
     &lt;/div&gt;</description>
     </item>
     <item>
       <title>ABOUT</title>
-      <link>http://localhost:38475/store_locator/about/</link>
+      <link>http://localhost:43275/store_locator/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38475/store_locator/about/</guid>
+      <guid>http://localhost:43275/store_locator/about/</guid>
       <description>&lt;p&gt;Sto verificando la mappa&lt;/p&gt;</description>
     </item>
   </channel>
