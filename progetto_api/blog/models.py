@@ -21,12 +21,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-class maglia(models.Model):
-    tessuto = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.tessuto
-from django.db import models
 
 class piante_grasse(models.Model):
     specie = models.CharField(max_length=255)
@@ -34,3 +28,81 @@ class piante_grasse(models.Model):
 
     def __str__(self):
         return self.specie
+
+class piante(models.Model):
+    specie = models.CharField(max_length=255)
+    famiglia = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.specie
+from django.db import models
+
+class piantegrasse(models.Model):
+    specie = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.specie
+from django.db import models
+
+class animali(models.Model):
+    famiglia = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.famiglia
+from django.db import models
+
+class mari(models.Model):
+    tipi = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.tipi
+from django.db import models
+
+class auto(models.Model):
+    tipo = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.tipo
+from django.db import models
+
+class camion(models.Model):
+    tipo = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.tipo
+from django.db import models
+
+class birre(models.Model):
+    marche = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.marche
+from django.db import models
+
+class bibite(models.Model):
+    marca = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.marca
+from django.db import models
+
+class profumi(models.Model):
+    marca = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.marca
+from django.db import models
+
+class citta(models.Model):
+    nazione = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nazione
+from django.db import models
+
+class ringhiere(models.Model):
+    tipologia = models.CharField(max_length=255)
+    marca = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.marca

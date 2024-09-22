@@ -1,11 +1,12 @@
 from django.contrib import admin
-from .models import Post, paglia
+from .models import Post
 from django.shortcuts import render, redirect
 from django.urls import path
 from django import forms
 import subprocess
 import importlib
 from django.apps import apps  # To check if the model is already registered
+from django.db import models  # Import models from django.db
 
 # Form for configuring the new table
 class FieldConfigurationForm(forms.Form):
@@ -62,6 +63,40 @@ class PostAdmin(admin.ModelAdmin):
         subprocess.run(['python3', 'manage.py', 'makemigrations', 'blog'])
         subprocess.run(['python3', 'manage.py', 'migrate'])
 
-@admin.register(paglia)
-class PagliaAdmin(admin.ModelAdmin):
-    list_display = ('specie',)
+    def register_model_in_admin(self, model_name):
+        """Dynamically register the newly created model in the admin."""
+        try:
+            # Import the newly created model dynamically
+            new_model = getattr(importlib.import_module("blog.models"), model_name)
+
+            # Check if the model is already registered
+            if not admin.site.is_registered(new_model):
+                admin.site.register(new_model)
+                print(f"Model {model_name} successfully registered in admin panel.")
+            else:
+                print(f"Model {model_name} is already registered.")
+        except Exception as e:
+            print(f"Error registering model {model_name}: {str(e)}")
+
+# Function to discover models dynamically
+def discover_and_register_models():
+    models_module = importlib.import_module('blog.models')
+    
+    # Iterate over attributes in models.py to find models dynamically
+    for attr_name in dir(models_module):
+        attr = getattr(models_module, attr_name)
+        if isinstance(attr, type) and issubclass(attr, models.Model):
+            register_dynamic_model_in_admin(attr_name)
+
+# Register dynamic models in admin
+def register_dynamic_model_in_admin(model_name):
+    try:
+        model = getattr(importlib.import_module('blog.models'), model_name)
+        admin_class = type(f'{model_name}Admin', (admin.ModelAdmin,), {'list_display': [field.name for field in model._meta.fields]})
+        admin.site.register(model, admin_class)
+        print(f"Successfully registered model {model_name}")
+    except Exception as e:
+        print(f"Failed to register model {model_name}: {str(e)}")
+
+# Ensure models are discovered and registered
+discover_and_register_models()
