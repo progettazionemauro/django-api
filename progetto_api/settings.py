@@ -61,7 +61,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
 ]
 
-ROOT_URLCONF = "progetto_api.urls"
+ROOT_URLCONF = "urls"
 
 TEMPLATES = [
     {
@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "progetto_api.wsgi.application"
+WSGI_APPLICATION = "wsgi.application"
 
 
 # Database

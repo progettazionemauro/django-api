@@ -532,3 +532,59 @@ Script called with action: delete
 Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
 Deleting post with name: piante_grasse.md
 Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/piante_grasse.md' has been deleted.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: caryophyllaceae.md
+Image link: https://res.cloudinary.com/piante-spontanee-it/image/upload/c_fill,dpr_auto,f_auto,h_500,q_auto,w_500/v1/piante-spontanee/dianthus-seguieri/dianthus-seguieri-943.jpg
+Nation: Nigeria, Capital: Lagos
+Post 'caryophyllaceae.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/caryophyllaceae.md.
+Script called with action: update
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: caryophyllaceae.md
+Image link: https://i.etsystatic.com/15567684/r/il/94c68e/3683242446/il_794xN.3683242446_hq6m.jpg
+Nation: Nigeria, Capital: Lagos
+Post 'caryophyllaceae.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/caryophyllaceae.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: aceracee.md
+Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/aceracee.md' does not exist.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: aceracee.md
+Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/aceracee.md' does not exist.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: aceracee.md
+Image link: https://www.portofinoamp.it/come/didattica/acanthusmollis.JPG/@@images/8c6508a7-6630-4596-b2cf-17ff2fe71c50.jpeg
+Nation: Default Nation, Capital: Default Capital
+Post 'aceracee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/aceracee.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: amarantacee.md
+Image link: https://www.portofinoamp.it/come/didattica/Amaranthusdeflexuslib.JPG/@@images/41bee952-7a7a-4e05-b3b5-4eaebabcd250.jpeg
+Nation: Default Nation, Capital: Default Capital
+Post 'amarantacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/amarantacee.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: aceracee.md
+Image link: https://www.portofinoamp.it/come/didattica/acanthusmollis.JPG/@@images/8c6508a7-6630-4596-b2cf-17ff2fe71c50.jpeg
+Nation: Default Nation, Capital: Default Capital
+Post 'aceracee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/aceracee.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: anacardiacee.md
+Image link: https://www.portofinoamp.it/come/didattica/Pistacialentiscussmartinoge.JPG/@@images/634fb917-d5f8-4559-ad56-71980d862666.jpeg
+Nation: Default Nation, Capital: Default Capital
+Post 'anacardiacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/anacardiacee.md.
+Script called with action: update
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: anacardiacee.md
+Image link: https://www.portofinoamp.it/come/didattica/Pistacialentiscus.JPG/@@images/3a0e7a87-1e75-4284-8fdf-291df872a22c.jpeg
+Nation: Default Nation, Capital: Default Capital
+Post 'anacardiacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/anacardiacee.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: amarantacee.md
+Image link: https://www.portofinoamp.it/come/didattica/Amaranthusdeflexuslib.JPG/@@images/41bee952-7a7a-4e05-b3b5-4eaebabcd250.jpeg
+Nation: Default Nation, Capital: Default Capital
+Post 'amarantacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/amarantacee.md.

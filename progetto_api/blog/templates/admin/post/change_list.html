@@ -1,7 +1,22 @@
 {% extends "admin/change_list.html" %}
 {% load static %}
 
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
+{% endblock %}
+
+{% block result_list %}
+    <tbody>
+        {% for result in cl.result_list %}
+            <tr class="{% if result.status == 'urgent' %}row-color{% endif %}">
+                {{ result }} <!-- You can adjust this line based on what content you want to display -->
+            </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}
+
 {% block object-tools %}
     <a href="{% url 'admin:create_table' %}" class="button">Create Table</a>
     {{ block.super }}
 {% endblock %}
+

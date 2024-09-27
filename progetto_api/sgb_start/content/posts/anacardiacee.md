@@ -1,12 +1,15 @@
 +++
-title = "piripicchio"
-date = "2024-08-07T15:32:47+0000"
+title = "Anacardiacee"
+date = "2024-09-27T17:22:09+0000"
 draft = true
 ShowToc = true
 tags = ["adventure", "foodie", "travel", "fitness", "nature", "fun", "inspiration"]
 categories = ["adventure", "food", "health", "art", "entertainment", "science", "lifestyle"]
+nation = "Default Nation"
+capital = "Default Capital"
 [cover]
-    image = "https://arpapollini.weebly.com/uploads/9/6/2/6/9626584/4246660_orig.jpg"
+    image = "https://www.portofinoamp.it/come/didattica/Pistacialentiscus.JPG/@@images/3a0e7a87-1e75-4284-8fdf-291df872a22c.jpeg"
     alt = "Default Alt Text"
     caption = "Default Caption"
 +++
+{{< django_retrieve >}}

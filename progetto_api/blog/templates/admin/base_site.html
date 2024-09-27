@@ -1,8 +1,13 @@
 {% extends "admin/base_site.html" %}
+{% load static %}
 
-{% block content %}
-    <div>
-        <a href="{% url 'admin:create_table' %}" class="button">Create New Table</a>
-    </div>
+<style>
+    body {
+        background-color: yellow; /* Temporary check */
+    }
+</style>
+
+{% block extrahead %}
     {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/custom_admin.css' %}">
 {% endblock %}
