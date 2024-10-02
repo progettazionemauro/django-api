@@ -1,0 +1,30 @@
+
+
+/* Cambia il colore di background delle righe solo nel pannello centrale */
+/* Applica uno sfondo giallo e un bordo alla riga con la classe 'highlight' */
+tr.highlight {
+    background-color: #fff3cd;  /* Colore di sfondo giallo chiaro */
+    border: 5px solid #b5cfff;  /* Bordo giallo più scuro */
+    font-weight: bold;  /* Testo in grassetto */
+    color: #333;  /* Colore del testo */
+}
+
+/* Cambia il colore delle righe pari e dispari */
+#result_list tbody tr:nth-child(odd) {
+    background-color: #f0f8ff; /* Colore di sfondo per le righe dispari */
+}
+
+#result_list tbody tr:nth-child(even) {
+    background-color: #fae6ef; /* Colore di sfondo per le righe pari */
+}
+
+/* Cambia il colore di background delle righe selezionate nel pannello centrale */
+#result_list tbody tr.selected {
+    background-color: #ec355d !important; /* Colore per righe selezionate nel pannello centrale */
+}
+
+/* Cambia il colore di background per l'intestazione della tabella */
+#result_list thead th {
+    background-color: #58b446;
+    color: white !important;
+}

@@ -588,3 +588,13 @@ Creating or updating post with name: amarantacee.md
 Image link: https://www.portofinoamp.it/come/didattica/Amaranthusdeflexuslib.JPG/@@images/41bee952-7a7a-4e05-b3b5-4eaebabcd250.jpeg
 Nation: Default Nation, Capital: Default Capital
 Post 'amarantacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/amarantacee.md.
+Script called with action: add
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Creating or updating post with name: apiacee.md
+Image link: https://www.portofinoamp.it/come/didattica/aegopodiumpodagraria.JPG/@@images/6a253353-dbb1-4023-a5c4-7d1ae3037936.jpeg
+Nation: Default Nation, Capital: Default Capital
+Post 'apiacee.md' has been created or updated at /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/apiacee.md.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts
+Deleting post with name: amarantacee.md
+Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts/amarantacee.md' has been deleted.

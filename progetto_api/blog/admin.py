@@ -134,6 +134,11 @@ class CommonActionsMixin:
 @admin.register(Post)
 class PostAdmin(CommonActionsMixin, admin.ModelAdmin):
     list_display = ('title', 'file_name', 'image_name', 'image_link')
+    
+    class Media:
+        css = {
+            'all': ('admin/css/custom_admin.css',)
+        }
 
 
 # Helper function to dynamically discover and register models
