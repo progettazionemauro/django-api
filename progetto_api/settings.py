@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -157,9 +159,13 @@ CORS_ALLOW_ALL_ORIGINS = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "progetto_api/static",
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+print(f"BASE_DIR: {BASE_DIR}")
+print(f"STATICFILES_DIRS: {STATICFILES_DIRS}")
+print(f"STATIC_ROOT: {STATIC_ROOT}")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
