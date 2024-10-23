@@ -17,7 +17,7 @@
     <!-- Fetch JSON data from the provided endpoint with cache-busting parameter -->
     {{ $timestamp := now.UnixNano }}
     {{ $url := printf "http://127.0.0.1:8000/django_api_for_wagtail/nations/?format=json&cache_bust=%d" $timestamp }}
-    {{ $json := getJSON $url }}
+    {{ $json := resources.Get $url | transform.Unmarshal }}
     
     <div class="container">
         <!-- Search dropdowns -->

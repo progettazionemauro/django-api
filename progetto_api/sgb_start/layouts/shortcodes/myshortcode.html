@@ -18,7 +18,8 @@
     </style>
 </head>
 <body>
-    {{ $jsonData := getJSON "data/json_file/RandomData.json" }}
+    {{ $jsonData := resources.Get "data/json_file/RandomData.json" | transform.Unmarshal }}
+
     <table class="my-table">
         <tr>
             <th>Name</th>

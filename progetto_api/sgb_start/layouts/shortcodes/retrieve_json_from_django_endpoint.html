@@ -6,10 +6,10 @@
 
 
 <div id="nation-list">
-  {{ range (getJSON $url) }}
+  {{ $response := resources.Get $url | transform.Unmarshal }}
+  {{ range $response }}
     <div class="nation">
       <span class="title">{{ .title }}</span> - <span class="body">{{ .body }}</span>
     </div>
   {{ end }}
 </div>
-

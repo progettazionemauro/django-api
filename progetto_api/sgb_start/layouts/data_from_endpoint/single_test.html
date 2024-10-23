@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{ $response := getJSON $url }}
+                    {{ $response := resources.Get $url | transform.Unmarshal }}
                     {{ range $response.results }}
                     <tr>
                         <td>{{ .gender }}</td>

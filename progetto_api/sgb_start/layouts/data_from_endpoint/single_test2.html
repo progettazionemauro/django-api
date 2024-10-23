@@ -41,7 +41,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{ range (getJSON $url) }}
+                    {{ $response := resources.Get $url | transform.Unmarshal }}
+                    {{ range $response.results }}
                     <tr>
                         <td>{{ .title }}</td>
                         <td>{{ .body }}</td>
@@ -64,7 +65,8 @@
             // Populate dropdown options
             var titles = [];
             var bodies = [];
-            {{ range (getJSON $url) }}
+            {{ $response := resources.Get $url | transform.Unmarshal }}
+            {{ range $response }}
                 titles.push("{{ .title }}");
                 bodies.push("{{ .body }}");
             {{ end }}
