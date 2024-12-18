@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{ block "head" . }}
+        {{ partial "head_from_store.html" . }}
+    {{ end }}
+</head>
+<body class="text-center store-locator">
+    <div class="cover-container d-flex w-100 h-100 py-3 mx-auto flex-column">
+        {{ block "header" . }}
+            {{ partial "header_from_endpoint.html" . }}
+        {{ end }}
+        <main role="main" class="inner cover">
+            {{ block "main" . }}
+                <!-- content of the respective page -->
+            {{ end }}
+        </main>
+        {{ block "footer" . }}
+            {{ partial "footer.html" . }}
+        {{ end }}
+    </div>
+    {{ partial "js.html" . }}
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table from JSON</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    {{ $jsonData := resources.Get "data/json_file/RandomData.json" | transform.Unmarshal }}
+
+    <div class="table-responsive">
+        <!-- Search dropdowns -->
+        <div class="row mb-3">
+            <div class="col">
+                <select id="searchID" class="form-select">
+                    <option value="">All IDs</option>
+                    {{ range $index, $data := $jsonData }}
+                        <option value="{{ $data.ID }}">{{ $data.ID }}</option>
+                    {{ end }}
+                </select>
+            </div>
+            <div class="col">
+                <select id="searchBio" class="form-select">
+                    <option value="">All Bios</option>
+                    {{ range $index, $data := $jsonData }}
+                        <option value="{{ $data.Bio }}">{{ $data.Bio }}</option>
+                    {{ end }}
+                </select>
+            </div>
+            <div class="col">
+                <select id="searchVersion" class="form-select">
+                    <option value="">All Versions</option>
+                    {{ range $index, $data := $jsonData }}
+                        <option value="{{ $data.Version }}">{{ $data.Version }}</option>
+                    {{ end }}
+                </select>
+            </div>
+        </div>
+        <table id="myTable" class="table table-hover custom-table"> <!-- Added ID for JavaScript interaction -->
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bio</th>
+                    <th>Version</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $index, $data := $jsonData }}
+                <tr>
+                    <td>{{ $data.ID }}</td>
+                    <td>{{ $data.Bio }}</td>
+                    <td>{{ $data.Version }}</td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var table = document.getElementById('myTable');
+            var searchID = document.getElementById('searchID');
+            var searchBio = document.getElementById('searchBio');
+            var searchVersion = document.getElementById('searchVersion');
+            
+            searchID.addEventListener('change', function () {
+                searchTable(0, searchID.value.toLowerCase());
+            });
+            
+            searchBio.addEventListener('change', function () {
+                searchTable(1, searchBio.value.toLowerCase());
+            });
+            
+            searchVersion.addEventListener('change', function () {
+                searchTable(2, searchVersion.value.toLowerCase());
+            });
+            
+            function searchTable(columnIndex, filter) {
+                var rows = table.getElementsByTagName('tr');
+                for (var i = 0; i < rows.length; i++) {
+                    var row = rows[i];
+                    var cells = row.getElementsByTagName('td');
+                    if (cells.length > columnIndex) {
+                        var cell = cells[columnIndex];
+                        if (filter === "" || cell.innerText.toLowerCase() === filter) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                }
+                
+                // Update dropdown options based on the current filter selection
+                updateDropdownOptions(searchID, columnIndex, filter);
+                updateDropdownOptions(searchBio, columnIndex, filter);
+                updateDropdownOptions(searchVersion, columnIndex, filter);
+            }
+            
+            function updateDropdownOptions(selectElement, columnIndex, filter) {
+                // Show or hide options based on the current filter selection
+                var options = selectElement.getElementsByTagName('option');
+                for (var i = 0; i < options.length; i++) {
+                    var option = options[i];
+                    if (option.value === filter || filter === "") {
+                        option.style.display = '';
+                    } else {
+                        option.style.display = 'none';
+                    }
+                }
+                
+                // If the filter is not empty and the selected option is not "All", select the "All" option
+                if (filter !== "" && selectElement.selectedIndex !== 0) {
+                    selectElement.selectedIndex = 0;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -5,7 +5,8 @@ LOG_FILE="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/manage_posts.l
 echo "Script called with action: $1" >> "$LOG_FILE"
 
 # Directory containing the posts
-POSTS_DIR="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/posts"
+POSTS_DIR="/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti"
+
 echo "Posts directory: $POSTS_DIR" >> "$LOG_FILE"
 
 # Check if the posts directory exists

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table from JSON</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Apply alternating row colors */
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    {{ $url := "https://jsonplaceholder.typicode.com/todos/" }} 
+
+    <div class="container">
+        <!-- Search dropdowns -->
+        <div class="row mb-3">
+            <div class="col">
+                <select id="searchTitle" class="form-select">
+                    <option value="">All Titles</option>
+                </select>
+                <input type="text" id="inputTitle" class="form-control" placeholder="Search Title...">
+            </div>
+            <div class="col">
+                <select id="searchBody" class="form-select">
+                    <option value="">All Bodies</option>
+                </select>
+                <input type="text" id="inputBody" class="form-control" placeholder="Search Body...">
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="myTable" class="table table-hover custom-table"> <!-- Added ID for JavaScript interaction -->
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Body</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ $response := resources.Get $url | transform.Unmarshal }}
+                    {{ range $response.results }}
+                    <tr>
+                        <td>{{ .title }}</td>
+                        <td>{{ .body }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var table = document.getElementById('myTable');
+            var searchTitle = document.getElementById('searchTitle');
+            var inputTitle = document.getElementById('inputTitle');
+            var searchBody = document.getElementById('searchBody');
+            var inputBody = document.getElementById('inputBody');
+            
+            // Populate dropdown options
+            var titles = [];
+            var bodies = [];
+            {{ $response := resources.Get $url | transform.Unmarshal }}
+            {{ range $response }}
+                titles.push("{{ .title }}");
+                bodies.push("{{ .body }}");
+            {{ end }}
+            titles = [...new Set(titles)]; // Remove duplicates
+            bodies = [...new Set(bodies)]; // Remove duplicates
+            titles.forEach(function(title) {
+                var option = document.createElement('option');
+                option.text = title;
+                option.value = title;
+                searchTitle.add(option);
+            });
+            bodies.forEach(function(body) {
+                var option = document.createElement('option');
+                option.text = body;
+                option.value = body;
+                searchBody.add(option);
+            });
+            
+            // Add event listeners for search inputs
+            inputTitle.addEventListener('input', function () {
+                searchTable(0, inputTitle.value.toLowerCase());
+            });
+            inputBody.addEventListener('input', function () {
+                searchTable(1, inputBody.value.toLowerCase());
+            });
+            // Add event listeners for dropdowns
+            searchTitle.addEventListener('change', function () {
+                searchTable(0, searchTitle.value.toLowerCase());
+            });
+            searchBody.addEventListener('change', function () {
+                searchTable(1, searchBody.value.toLowerCase());
+            });
+            
+            function searchTable(columnIndex, filter) {
+                var rows = table.getElementsByTagName('tr');
+                for (var i = 0; i < rows.length; i++) {
+                    var row = rows[i];
+                    var cells = row.getElementsByTagName('td');
+                    if (cells.length > columnIndex) {
+                        var cell = cells[columnIndex];
+                        if (filter === "" || cell.innerText.toLowerCase().indexOf(filter) > -1) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

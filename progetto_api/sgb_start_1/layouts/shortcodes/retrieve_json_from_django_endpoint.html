@@ -1,0 +1,15 @@
+{{/* layouts/shortcodes/nationlist.html */}}
+
+ {{/* $url := "http://127.0.0.1:8085/django_api_for_wagtail/nations" */}} 
+
+{{ $url := "https://jsonplaceholder.typicode.com/todos/" }} 
+
+
+<div id="nation-list">
+  {{ $response := resources.Get $url | transform.Unmarshal }}
+  {{ range $response }}
+    <div class="nation">
+      <span class="title">{{ .title }}</span> - <span class="body">{{ .body }}</span>
+    </div>
+  {{ end }}
+</div>

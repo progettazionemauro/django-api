@@ -1,0 +1,19 @@
+<!doctype html>
+
+    {{ partial "meta.html" . }}
+    {{ block "header" . }}{{ end }}
+
+<body>
+   
+    <main class="pb7" role="main">
+        {{ block "main" . }}{{ end }}
+
+        <p><a href="{{ .Site.BaseURL }}">back to the homepage</a></p>
+      </main>
+    
+
+ 
+    
+</body>
+
+</html>

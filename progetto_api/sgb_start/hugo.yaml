@@ -7,8 +7,11 @@ theme: ["PaperMod"]
 params:
   params:
   homeInfoParams:
-    Title: "Benvenuti to My Website!"
-    Content: "This is a sample content for the homepage."
+    Title: "Benve to My Website!"
+    Content: |
+      Questa è la home page del sito. Qui puoi navigare nelle sezioni disponibili:
+      - [Vai alla sezione principale](/contenuti/)
+      - [Esplora altre categorie](/categories/)
   socialIcons:
     - name: "kofi"
       url: "https://kofi.com"
@@ -21,6 +24,11 @@ params:
 
 menu:
   main:
+  main:
+    - identifier: Contenuti
+      name: Contenuti
+      url: /contenuti/
+      weight: 10
     - identifier: Search
       name: Search
       url: search

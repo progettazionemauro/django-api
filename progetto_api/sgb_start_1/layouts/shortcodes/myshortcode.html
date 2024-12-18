@@ -1,0 +1,43 @@
+{{/* Inside your HTML shortcode file, e.g., layouts/shortcodes/retrieve_json_from_file.html */}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table from JSON</title>
+    <style>
+        /* Additional CSS styles specific to this shortcode */
+        /* You can define additional styles here if needed */
+        .even {
+            background-color: #df2f2f; /* Light gray */
+        }
+        .odd {
+            background-color: #ffffff; /* White */
+        }
+        /* You can add more styles here as needed */
+    </style>
+</head>
+<body>
+    {{ $jsonData := resources.Get "data/json_file/RandomData.json" | transform.Unmarshal }}
+
+    <table class="my-table">
+        <tr>
+            <th>Name</th>
+            <th>Language</th>
+            <th>ID</th>
+            <th>Bio</th>
+            <th>Version</th>
+        </tr>
+        {{ range $index, $data := $jsonData }}
+        <tr class="{{ if eq (mod $index 2) 0 }}even{{ else }}odd{{ end }}">
+            <td>{{ $data.name }}</td>
+            <td>{{ $data.language }}</td>
+            <td>{{ $data.id }}</td>
+            <td>{{ $data.bio }}</td>
+            <td>{{ $data.version }}</td>
+        </tr>
+        {{ end }}
+    </table>
+</body>
+</html>
+
