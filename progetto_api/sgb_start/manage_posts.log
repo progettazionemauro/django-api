@@ -14,3 +14,15 @@ Script called with action: delete
 Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti
 Deleting post with name: crepis_neglecta_l.md
 Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti/crepis_neglecta_l.md' has been deleted.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti
+Deleting post with name: crepis_neglecta_l.md
+Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti/crepis_neglecta_l.md' does not exist.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti
+Deleting post with name: crepis_neglecta_l.md
+Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti/crepis_neglecta_l.md' does not exist.
+Script called with action: delete
+Posts directory: /home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti
+Deleting post with name: crepis_neglecta_l.md
+Post '/home/mauro/Scrivania/dJANGO_apI/progetto_api/sgb_start/content/contenuti/crepis_neglecta_l.md' does not exist.

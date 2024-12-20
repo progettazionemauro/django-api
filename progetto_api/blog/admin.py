@@ -1,17 +1,19 @@
 import os
 import subprocess
 from django.contrib import admin
-from .models import Post
+from blog.models import Post  # Use absolute import
 from django_api_for_wagtail.models import Nation  # Import the Nation model
 
 # Common actions to be inherited by all models
 class CommonActionsMixin:
     def run_manage_posts_script(self, request, action, **kwargs):
         try:
+            # Percorso dello script Bash
             script_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'sgb_start', 'manage_posts.sh'))
             env = os.environ.copy()
             env['PATH'] = '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:' + env.get('PATH', '')
 
+            # Parametri dello script
             if action in ['add', 'update']:
                 result = subprocess.run(
                     [script_path, action] + list(kwargs.values()),
@@ -24,6 +26,7 @@ class CommonActionsMixin:
                     capture_output=True, text=True, check=True, env=env
                 )
 
+            # Risultati dello script
             if result.returncode == 0:
                 self.message_user(request, "Manage posts script executed successfully")
             else:
@@ -40,6 +43,7 @@ class CommonActionsMixin:
                 nation = Nation.objects.first()  # Replace with logic to select the desired nation
                 post.save()  # Ensure save method sets the file_name correctly
 
+                # Chiamata allo script per aggiungere post a Hugo
                 self.run_manage_posts_script(
                     request, 'add',
                     post_name=post.file_name.replace('.md', ''),
@@ -65,6 +69,7 @@ class CommonActionsMixin:
                 nation = Nation.objects.first()  # Replace with logic to select the desired nation
                 post.save()  # Ensure save method sets the file_name correctly
 
+                # Chiamata allo script per aggiornare post in Hugo
                 self.run_manage_posts_script(
                     request, 'update',
                     post_name=post.file_name.replace('.md', ''),
@@ -83,38 +88,19 @@ class CommonActionsMixin:
 
     update_post_action.short_description = "Update Selected Posts"
 
-    # Create Table Action
-    def create_table_action(self, request, queryset):
-        try:
-            # Define the path to your bash script for table creation
-            script_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'create_table_and_run.sh'))
-
-            # Run the table creation script
-            result = subprocess.run([script_path], capture_output=True, text=True, check=True)
-
-            if result.returncode == 0:
-                self.message_user(request, "Table created successfully.")
-                # Discover and register new models
-                discover_and_register_models()
-            else:
-                self.message_user(request, f"Failed to create table: {result.stderr}", level='ERROR')
-
-        except subprocess.CalledProcessError as e:
-            self.message_user(request, f"Table creation script execution failed: {e.stderr}", level='ERROR')
-        except Exception as e:
-            self.message_user(request, f"Unexpected error: {e}", level='ERROR')
-
-    create_table_action.short_description = "Create a New Table"
-
     # Delete Selected Posts Action
     def delete_selected_posts(self, request, queryset):
         for post in queryset:
-            if hasattr(post, 'file_name'):
-                # If the model has a 'file_name' attribute, run the script with it
-                self.run_manage_posts_script(request, 'delete', post_name=post.file_name.replace('.md', ''))
-            else:
-                # If 'file_name' is not available, just delete the post
+            try:
+                if hasattr(post, 'file_name') and post.file_name:
+                    # Esegui lo script per cancellare il post in Hugo
+                    self.run_manage_posts_script(request, 'delete', post_name=post.file_name.replace('.md', ''))
+
+                # Cancella il post anche dal database Django
                 post.delete()
+            except Exception as e:
+                self.message_user(request, f"Error deleting post '{post.title}': {e}", level='ERROR')
+
         self.message_user(request, "Selected posts have been deleted.")
 
     delete_selected_posts.short_description = "Delete Selected Posts"
@@ -127,7 +113,7 @@ class CommonActionsMixin:
         return actions
 
     # Add all actions to the admin panel
-    actions = ['add_post_action', 'update_post_action', 'delete_selected_posts', 'create_table_action']
+    actions = ['add_post_action', 'update_post_action', 'delete_selected_posts']
 
 
 # Register PostAdmin with the Post model
@@ -169,4 +155,3 @@ def register_dynamic_model_in_admin(model):
 
 # Discover and register all models dynamically at the startup of Django Admin
 discover_and_register_models()
-    

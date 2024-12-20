@@ -2,101 +2,101 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:43429/tags/adventure/</loc>
+    <loc>http://localhost:34583/tags/adventure/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/categories/adventure/</loc>
+    <loc>http://localhost:34583/categories/adventure/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/categories/art/</loc>
+    <loc>http://localhost:34583/categories/art/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/categories/</loc>
+    <loc>http://localhost:34583/categories/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/contenuti/</loc>
+    <loc>http://localhost:34583/contenuti/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/categories/entertainment/</loc>
+    <loc>http://localhost:34583/categories/entertainment/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/tags/fitness/</loc>
+    <loc>http://localhost:34583/tags/fitness/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/categories/food/</loc>
+    <loc>http://localhost:34583/categories/food/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/tags/foodie/</loc>
+    <loc>http://localhost:34583/tags/foodie/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/tags/fun/</loc>
+    <loc>http://localhost:34583/tags/fun/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/categories/health/</loc>
+    <loc>http://localhost:34583/categories/health/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/tags/inspiration/</loc>
+    <loc>http://localhost:34583/tags/inspiration/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/categories/lifestyle/</loc>
+    <loc>http://localhost:34583/categories/lifestyle/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/</loc>
+    <loc>http://localhost:34583/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/tags/nature/</loc>
+    <loc>http://localhost:34583/tags/nature/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/contenuti/radichiella_di_dioscoride/</loc>
+    <loc>http://localhost:34583/contenuti/radichiella_di_dioscoride/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/categories/science/</loc>
+    <loc>http://localhost:34583/categories/science/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/tags/</loc>
+    <loc>http://localhost:34583/tags/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/tags/travel/</loc>
+    <loc>http://localhost:34583/tags/travel/</loc>
     <lastmod>2024-12-18T09:36:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/django_retrieve/</loc>
+    <loc>http://localhost:34583/django_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/django_retrieve/django_retrieve/</loc>
+    <loc>http://localhost:34583/django_retrieve/django_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/vue_retrieve/vue_retrieve/</loc>
+    <loc>http://localhost:34583/vue_retrieve/vue_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/vue_retrieve/</loc>
+    <loc>http://localhost:34583/vue_retrieve/</loc>
     <lastmod>2024-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/data_from_json/data_json/</loc>
+    <loc>http://localhost:34583/data_from_json/data_json/</loc>
     <lastmod>2024-03-27T18:13:13+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/data_from_endpoint/</loc>
+    <loc>http://localhost:34583/data_from_endpoint/</loc>
     <lastmod>2024-03-27T18:13:13+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/data_from_json/</loc>
+    <loc>http://localhost:34583/data_from_json/</loc>
     <lastmod>2024-03-27T18:13:13+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/data_from_endpoint/data_from_endpoint/</loc>
+    <loc>http://localhost:34583/data_from_endpoint/data_from_endpoint/</loc>
     <lastmod>2024-03-27T18:13:13+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/contenuti/dir/</loc>
+    <loc>http://localhost:34583/contenuti/dir/</loc>
     <lastmod>2024-03-21T19:30:34+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/archives/</loc>
+    <loc>http://localhost:34583/archives/</loc>
     <lastmod>2024-03-18T10:30:18+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:43429/about_map/about/</loc>
+    <loc>http://localhost:34583/about_map/about/</loc>
   </url><url>
-    <loc>http://localhost:43429/store_locator/about/</loc>
+    <loc>http://localhost:34583/store_locator/about/</loc>
   </url><url>
-    <loc>http://localhost:43429/about_map/</loc>
+    <loc>http://localhost:34583/about_map/</loc>
   </url><url>
-    <loc>http://localhost:43429/search/</loc>
+    <loc>http://localhost:34583/search/</loc>
   </url><url>
-    <loc>http://localhost:43429/store_locator/</loc>
+    <loc>http://localhost:34583/store_locator/</loc>
   </url>
 </urlset>
