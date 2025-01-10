@@ -5286,3 +5286,6 @@ print(vehicle_instance.brand)  # Output: Toyota
 In the second example, the __init__ method is used to initialize the brand attribute when a Vehicle instance is created. This ensures that the instance has a properly initialized state from the beginning.
 
 #### 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTk3MzMxNzQ3XX0=
+-->
